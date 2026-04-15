@@ -1,5 +1,5 @@
 
-import { Component, onMounted, onWillUnmount, useState } from "@odoo/owl";
+import { Component, onMounted, onWillUnmount, useState } from "@expense_tracker/owl";
 
 export class Time extends Component {
     static template = "expense_tracker.time";

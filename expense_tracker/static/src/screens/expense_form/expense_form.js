@@ -1,5 +1,4 @@
-import { Component, useState, onWillStart, onWillUpdateProps, onMounted, onPatched, useEffect, useRef } from '@odoo/owl';
-import { registry } from "@web/core/registry";
+import { Component, useState, onWillStart, onWillUpdateProps, onMounted, onPatched, useEffect, useRef, registry } from '@expense_tracker/owl';
 import { useModel } from "../../model/model";
 import { ExpenseTrackerModel } from "../../model/expense_tracker_model";
 import { FormViewStatic } from '../../components/formview_static/formview_static';
@@ -102,4 +101,4 @@ class ExpenseForm extends Component {
     }
 }
 
-registry.category("screens").add("ExpenseForm", ExpenseForm);
+// registry.category("screens").add("ExpenseForm", ExpenseForm);

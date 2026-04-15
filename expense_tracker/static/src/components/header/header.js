@@ -1,6 +1,6 @@
 
-import { Component, useState } from "@odoo/owl";
-import { Time } from "../time/time";
+import { Component } from "@expense_tracker/owl";
+import { Time } from "@expense_tracker/components/time/time";
 
 export class Header extends Component {
     static template = "expense_tracker.header";

@@ -1,6 +1,6 @@
 import { after, expect, test, describe, mountOnFixture } from "@odoo/hoot";
 import { MainComponentsContainer } from "@web/core/main_components_container";
-import { Component, xml, useSubEnv } from "@odoo/owl";
+import { Component, xml } from "@expense_tracker/owl";
 import { patch } from "@web/core/utils/patch";
 import {
     defineModels,
@@ -12,9 +12,8 @@ import {
 
 import { rpc } from "./../src/core/rpc.js";
 import { DB } from "./../src/core/db.js";
-import { EventBus } from "@odoo/owl";
-import { getTemplate } from "@web/core/templates";
-import { ORM } from "@web/core/orm_service";
+import { EventBus } from "@expense_tracker/owl";
+import { getTemplate } from "@expense_tracker/core/templates";
 
 import { Dashboard } from "./../src/screens/expense_dashboard/expense_dashboard";
 
@@ -122,8 +121,9 @@ test("dashboard can be rendered", async () => {
         static components = { Dashboard };
         setup() {
             super.setup();
-            const orm = new ORM();
-            useSubEnv({ orm, rpc });
+            // const orm = new ORM();
+            // useSubEnv({ orm, rpc }); // TODO: MSH: Remove ORM from dependency as we want to developer standalone app
+            // useSubEnv({ rpc }); // useSubEnv is removed in owl3
         }
     }
     await mountWithCleanup(MyComponent, {});

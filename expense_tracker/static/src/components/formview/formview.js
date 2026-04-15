@@ -1,4 +1,4 @@
-import { Component, useRef, useState, onMounted } from '@odoo/owl';
+import { Component, useRef, useState, onMounted } from '@expense_tracker/owl';
 
 export class FormView extends Component {
     static template = "expense_tracker.FormView";

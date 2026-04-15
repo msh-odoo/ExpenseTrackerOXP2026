@@ -20,16 +20,10 @@
         #     'expense_tracker/static/src/backend/**/*',
         # ],
         'expense_tracker.assets_expense': [
-            ('include', 'web.assets_backend'),
+            # ('include', 'web.assets_backend'),
             'expense_tracker/static/lib/module_loader.js',
             'expense_tracker/static/lib/owl.js',
             'expense_tracker/static/lib/odoo_module.js',
-            # 'expense_tracker/static/src/main.js',
-            # 'expense_tracker/static/src/expense_tracker.js',
-            # 'expense_tracker/static/src/core/rpc.js',
-            # 'expense_tracker/static/src/core/db.js',
-            # 'expense_tracker/static/src/core/templates.js',
-            # 'expense_tracker/static/src/core/template_inheritance.js',
             'expense_tracker/static/src/**/*',
         ],
         # Assets for test framework and setup

@@ -1,5 +1,4 @@
-import { Component, useState, onWillStart } from '@odoo/owl';
-import { registry } from "@web/core/registry";
+import { Component, useState, onWillStart, registry } from '@expense_tracker/owl';
 import { useModel } from "../../model/model";
 import { ExpenseTrackerModel } from "../../model/expense_tracker_model";
 import { FormView } from '../../components/formview/formview';
@@ -58,4 +57,4 @@ class ExpenseCategoryForm extends Component {
     }
 }
 
-registry.category("screens").add("ExpenseCategoryForm", ExpenseCategoryForm);
+// registry.category("screens").add("ExpenseCategoryForm", ExpenseCategoryForm);

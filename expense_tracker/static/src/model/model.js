@@ -1,4 +1,4 @@
-import { EventBus, useComponent } from "@odoo/owl";
+import { EventBus, useComponent } from "@expense_tracker/owl";
 
 export class Model {
     /**

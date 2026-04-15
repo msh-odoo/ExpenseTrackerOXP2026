@@ -1,6 +1,5 @@
 
-import { Component, onWillStart, onWillUpdateProps, useState, useComponent } from "@odoo/owl";
-import { registry } from "@web/core/registry";
+import { Component, onWillStart, onWillUpdateProps, useState, registry } from "@expense_tracker/owl";
 import { PersonalExpenseList } from "../expense_list/expense_list";
 import { useModel } from "../../model/model";
 import { ExpenseTrackerModel } from "../../model/expense_tracker_model";
@@ -36,4 +35,4 @@ export class Dashboard extends Component {
 
 Dashboard.components = { PersonalExpenseList }
 
-registry.category("screens").add("Dashboard", Dashboard);
+// registry.category("screens").add("Dashboard", Dashboard);
