@@ -34,10 +34,8 @@ function parseHash() {
 // configuration: https://github.com/odoo/owl/blob/master/doc/reference/app.md#configuration
 
 owl.whenReady(async () => {
-    const bus = new EventBus();
-    const db = new DB();
-    const datetime = new Date();
-    const env = { bus, db, rpc, datetime };
+    const db = new DB(); // TODO: MSH: Convert it to plugin
+    const env = { db, rpc };
 
     // fr_FR translations
     const hash = parseHash();
@@ -59,7 +57,6 @@ owl.whenReady(async () => {
 
     // await startServices(env);
     const app = new App({
-        env,
         getTemplate,
         // dev: env.debug || session.test_mode,
         warnIfNoStaticProps: true, // !session.test_mode,

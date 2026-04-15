@@ -1,14 +1,16 @@
 
-import { Component } from "@expense_tracker/owl";
+import { Component, proxy, plugin } from "@expense_tracker/owl";
 import { Time } from "@expense_tracker/components/time/time";
+import { BusPlugin } from "@expense_tracker/plugins/bus_plugin";
 
 export class Header extends Component {
     static template = "expense_tracker.header";
     static components = { Time };
 
     setup() {
-        this.state = useState({ activeMenuItem: "home" });
-        this.env.bus.addEventListener("change_active_menu", this.changeActiveMenu.bind(this));
+        const busPlugin = plugin(BusPlugin);
+        this.state = proxy({ activeMenuItem: "home" });
+        busPlugin.bus.addEventListener("change_active_menu", this.changeActiveMenu.bind(this));
     }
 
     onClickLogo() {

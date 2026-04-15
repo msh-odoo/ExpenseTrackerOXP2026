@@ -1,13 +1,16 @@
 
-import { Component, onMounted, onWillUnmount, useState } from "@expense_tracker/owl";
+import { Component, onMounted, onWillUnmount, proxy, plugin } from "@expense_tracker/owl";
+import { BusPlugin } from "@expense_tracker/plugins/bus_plugin";
 
 export class Time extends Component {
     static template = "expense_tracker.time";
 
     setup() {
         const currentDate = new Date();
-        const result = this.interval(currentDate, this.env.datetime);
-        this.state = useState({ time: {days: result.days, hours: result.hours, minutes: result.minutes, seconds: result.seconds} });
+        const busPlugin = plugin(BusPlugin);
+        const datetime = new Date();
+        const result = this.interval(currentDate, datetime);
+        this.state = proxy({ time: {days: result.days, hours: result.hours, minutes: result.minutes, seconds: result.seconds} });
 
         let intervalId;
         onMounted(() => {

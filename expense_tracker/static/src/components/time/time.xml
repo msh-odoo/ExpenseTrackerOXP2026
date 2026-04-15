@@ -3,10 +3,10 @@
 
     <t t-name="expense_tracker.time">
         <div class="o_time">
-            <span t-out="state.time.days"></span>:
-            <span t-out="state.time.hours"></span>:
-            <span t-out="state.time.minutes"></span>:
-            <span t-out="state.time.seconds"></span>
+            <span t-out="this.state.time.days"></span>:
+            <span t-out="this.state.time.hours"></span>:
+            <span t-out="this.state.time.minutes"></span>:
+            <span t-out="this.state.time.seconds"></span>
         </div>
     </t>
 </templates>
