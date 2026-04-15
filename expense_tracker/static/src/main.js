@@ -1,5 +1,5 @@
 import { App, EventBus } from "@expense_tracker/owl";
-// import { browser } from "@web/core/browser/browser";
+import { browser } from "@web/core/browser/browser";
 import { rpc } from "@expense_tracker/core/rpc";
 import { DB } from "@expense_tracker/core/db";
 import { getTemplate } from "@expense_tracker/core/templates";
@@ -96,5 +96,5 @@ function logError(ev) {
     console.error(errorMessage);
 }
 
-window.addEventListener("error", (ev) => {logError(ev)});
-window.addEventListener("unhandledrejection", (ev) => {logError(ev)});
+browser.addEventListener("error", (ev) => {logError(ev)});
+browser.addEventListener("unhandledrejection", (ev) => {logError(ev)});
