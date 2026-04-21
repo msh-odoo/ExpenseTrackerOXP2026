@@ -1,5 +1,6 @@
 
-import { Component, onWillStart, onWillUpdateProps, useState, registry } from "@expense_tracker/owl";
+import { Component, onWillStart, onWillUpdateProps, proxy } from "@expense_tracker/owl";
+import { screensRegistry } from "../registries";
 import { PersonalExpenseList } from "../expense_list/expense_list";
 import { useModel } from "../../model/model";
 import { ExpenseTrackerModel } from "../../model/expense_tracker_model";
@@ -9,13 +10,16 @@ export class Dashboard extends Component {
 
     setup() {
         super.setup();
-        this.model = useModel(ExpenseTrackerModel, this.modelParams);
-        this.state = useState({ expenses: [] });
+        // TODO: MSH: Adapt following code
+        // this.model = useModel(ExpenseTrackerModel, this.modelParams);
+        this.state = proxy({ expenses: [] });
         onWillStart(async () => {
-            const res = await this.model.load_expenses(this.props);
-            this.state.expenses = res;
+            // TODO: MSH: Adapt following code
+            // const res = await this.model.load_expenses(this.props);
+            // this.state.expenses = res;
         });
-        onWillUpdateProps((nextProps) => this.state.expenses = this.model.load_expenses(nextProps));
+        // TODO: MSH: Adapt following code
+        // onWillUpdateProps((nextProps) => this.state.expenses = this.model.load_expenses(nextProps));
     }
 
     get modelParams() {
@@ -35,4 +39,4 @@ export class Dashboard extends Component {
 
 Dashboard.components = { PersonalExpenseList }
 
-// registry.category("screens").add("Dashboard", Dashboard);
+screensRegistry.add("Dashboard", Dashboard);

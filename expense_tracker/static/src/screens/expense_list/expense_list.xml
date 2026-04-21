@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates xml:space="preserve">
     <t t-name="expense_tracker.PersonalExpenseList">
-        <div t-att-class="props.class" class="rounded-6 shadow p-4 o_content_modal_rounded_shades height-container expense_list">
-            <div class="mb-4 d-flex justify-content-between" t-if="!props.ignoreCreate">
+        <div t-att-class="this.props.class" class="rounded-6 shadow p-4 o_content_modal_rounded_shades height-container expense_list">
+            <div class="mb-4 d-flex justify-content-between" t-if="!this.props.ignoreCreate">
                 <h2 class="text-white">
                     Personal Expenses
                 </h2>
                 <div>
-                    <button type="button" class="btn btn-primary me-2" t-on-click="_onCreateExpense">
+                    <button type="button" class="btn btn-primary me-2" t-on-click="this._onCreateExpense">
                         <span class="fs-3">Create Expense</span>
                     </button>
-                    <button t-if="state.selectedCheckboxes.length" type="button" class="btn btn-primary" t-on-click="deleteExpense">
+                    <button t-if="this.state.selectedCheckboxes.length" type="button" class="btn btn-primary" t-on-click="this.deleteExpense">
                         <span class="fs-3">Delete Expense</span>
                     </button>
                 </div>
             </div>
-            <t t-if="!props.class">
+            <t t-if="!this.props.class">
                 <hr/>
             </t>
             <table class="table table-dark table-hover mb-0">
                 <thead>
                     <tr class="table-success">
-                        <th t-if="!props.ignoreCreate"></th>
+                        <th t-if="!this.props.ignoreCreate"></th>
                         <th>Description</th>
                         <th>Date</th>
                         <th>Amount</th>
@@ -29,21 +29,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <t t-foreach="state.expenses" t-as="expense" t-key="expense.id">
-                        <tr t-att-data-id="expense.id" t-on-click="_onClickExpenseRow" class="cursor-pointer">
-                            <td t-if="!props.ignoreCreate"><t><input type="checkbox" class="form-check-input" t-att-data-id="expense.id" t-on-click="_onCheckboxChange"/></t></td>
-                            <td><t t-esc="expense.name"/></td>
-                            <td><t t-esc="expense.date"/></td>
-                            <td><t t-esc="expense.amount"/></td>
-                            <td><t t-esc="expense.category_id[1]"/></td>
+                    <t t-foreach="this.state.expenses" t-as="expense" t-key="expense.id">
+                        <tr t-att-data-id="expense.id" t-on-click="this._onClickExpenseRow" class="cursor-pointer">
+                            <td t-if="!this.props.ignoreCreate"><t><input type="checkbox" class="form-check-input" t-att-data-id="expense.id" t-on-click="this._onCheckboxChange"/></t></td>
+                            <td><t t-out="expense.name"/></td>
+                            <td><t t-out="expense.date"/></td>
+                            <td><t t-out="expense.amount"/></td>
+                            <td><t t-out="expense.category_id[1]"/></td>
                         </tr>
                     </t>
                 </tbody>
                 <tfoot>
                     <tr class="table-dark">
-                        <td t-attf-colspan="{{!props.ignoreCreate and 3 or 2}}"></td>
+                        <td t-attf-colspan="{{!this.props.ignoreCreate and 3 or 2}}"></td>
                         <td>
-                            <b>Total Amount: <t t-esc="totalAmount"/></b>
+                            <b>Total Amount: <t t-out="this.totalAmount"/></b>
                         </td>
                         <td></td>
                         <td></td>

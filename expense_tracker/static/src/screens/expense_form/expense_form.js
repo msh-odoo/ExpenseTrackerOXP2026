@@ -1,4 +1,5 @@
-import { Component, useState, onWillStart, onWillUpdateProps, onMounted, onPatched, useEffect, useRef, registry } from '@expense_tracker/owl';
+import { Component, useState, onWillStart, onWillUpdateProps, onMounted, onPatched, useEffect, useRef } from '@expense_tracker/owl';
+import { screensRegistry } from '../registries';
 import { useModel } from "../../model/model";
 import { ExpenseTrackerModel } from "../../model/expense_tracker_model";
 import { FormViewStatic } from '../../components/formview_static/formview_static';
@@ -101,4 +102,4 @@ class ExpenseForm extends Component {
     }
 }
 
-// registry.category("screens").add("ExpenseForm", ExpenseForm);
+screensRegistry.add("ExpenseForm", ExpenseForm);

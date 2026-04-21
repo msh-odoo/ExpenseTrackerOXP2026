@@ -1,14 +1,17 @@
-import { Component, useState, onWillStart, onWillUpdateProps, registry } from '@expense_tracker/owl';
+import { Component, onWillStart, onWillUpdateProps, props, proxy } from '@expense_tracker/owl';
 import { useModel } from "../../model/model";
+import { screensRegistry } from "../registries";
 import { ExpenseTrackerModel } from "../../model/expense_tracker_model";
 
 
 export class PersonalExpenseList extends Component {
     static template = 'expense_tracker.PersonalExpenseList';
+    props = props();
 
     setup() {
-        this.model = useModel(ExpenseTrackerModel, this.modelParams);
-        this.state = useState({ expenses: [] , selectedCheckboxes: []});
+        // TODO: MSH: Adapt following code
+        // this.model = useModel(ExpenseTrackerModel, this.modelParams);
+        this.state = proxy({ expenses: [] , selectedCheckboxes: []});
         this.modelName = "personal.expense";
         this.checkboxInteraction = false;
         const options = {
@@ -18,12 +21,14 @@ export class PersonalExpenseList extends Component {
             this.state.expenses = this.props.expenses;
         } else {
             onWillStart(async () => {
-                const res = await this.model.load_expenses(options);
-                this.state.expenses = res;
+                // TODO: MSH: Adapt following code
+                // const res = await this.model.load_expenses(options);
+                // this.state.expenses = res;
             });
         }
-        onWillUpdateProps((nextProps) => this.state.expenses = this.model.load_expenses(options));
-        this.env.bus.addEventListener("delete_record", this._deleteRecord.bind(this));
+        // TODO: MSH: Adapt following code
+        // onWillUpdateProps((nextProps) => this.state.expenses = this.model.load_expenses(options));
+        // this.env.bus.addEventListener("delete_record", this._deleteRecord.bind(this));
     }
 
     get totalAmount() {
@@ -69,4 +74,4 @@ export class PersonalExpenseList extends Component {
     }
 }
 
-// registry.category("screens").add("ExpenseList", PersonalExpenseList);
+screensRegistry.add("ExpenseList", PersonalExpenseList);

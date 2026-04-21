@@ -1,5 +1,6 @@
 import { Container } from "@expense_tracker/components/container/container";
-import { Component, registry, proxy, plugin, providePlugins } from "@expense_tracker/owl";
+import { Component, proxy, plugin, providePlugins } from "@expense_tracker/owl";
+import { screensRegistry } from "@expense_tracker/screens/registries";
 import { Dashboard } from "@expense_tracker/screens/expense_dashboard/expense_dashboard";
 import { Header } from "@expense_tracker/components/header/header";
 import { rpc } from "@expense_tracker/core/rpc";
@@ -8,7 +9,7 @@ import { BusPlugin } from "@expense_tracker/plugins/bus_plugin";
 export class ExpenseTracker extends Component {
     static template = "expense_tracker.root";
     // static components = { Header, Container };
-    static components = { Header };
+    static components = { Header, Container };
 
     setup() {
         super.setup();
@@ -37,8 +38,7 @@ export class ExpenseTracker extends Component {
      */
     onChangeScreen(ev) {
         debugger;
-        const screenRegistry = registry.category("screens");
-        const screen = screenRegistry.get(ev.detail.screen_name)
+        const screen = screensRegistry.get(ev.detail.screen_name)
         this.mainScreen.name = ev.detail.screen_name;
         this.mainScreen.component = screen;
         this.mainScreenProps = { ...ev.detail };
