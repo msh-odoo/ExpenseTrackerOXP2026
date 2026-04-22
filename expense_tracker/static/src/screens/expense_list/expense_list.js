@@ -1,4 +1,4 @@
-import { Component, onWillStart, onWillUpdateProps, props, proxy } from '@expense_tracker/owl';
+import { Component, onWillStart, props, proxy } from '@expense_tracker/owl';
 import { useModel } from "../../model/model";
 import { screensRegistry } from "../registries";
 import { ExpenseTrackerModel } from "../../model/expense_tracker_model";
@@ -26,7 +26,7 @@ export class PersonalExpenseList extends Component {
                 // this.state.expenses = res;
             });
         }
-        // TODO: MSH: Adapt following code
+        // TODO: MSH: onWillUpdateProps is removed, should be managed with signal and computed combination
         // onWillUpdateProps((nextProps) => this.state.expenses = this.model.load_expenses(options));
         // this.env.bus.addEventListener("delete_record", this._deleteRecord.bind(this));
     }

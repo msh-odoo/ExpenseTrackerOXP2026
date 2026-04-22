@@ -1,6 +1,6 @@
 import { after, expect, test, describe, mountOnFixture } from "@odoo/hoot";
 import { MainComponentsContainer } from "@web/core/main_components_container";
-import { Component, xml } from "@expense_tracker/owl";
+import { Component, props, xml } from "@expense_tracker/owl";
 import { patch } from "@web/core/utils/patch";
 import {
     defineModels,
@@ -116,7 +116,8 @@ test("dashboard can be rendered", async () => {
         ];
     });
     class MyComponent extends Component {
-        static props = {};
+        props = props();
+        // static props = {};
         static template = xml`<Dashboard />`;
         static components = { Dashboard };
         setup() {

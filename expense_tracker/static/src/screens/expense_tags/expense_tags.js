@@ -1,4 +1,4 @@
-import { Component, useState, onWillStart, onWillUpdateProps, onPatched, useRef } from '@expense_tracker/owl';
+import { Component, useState, onWillStart, onPatched, useRef } from '@expense_tracker/owl';
 import { screensRegistry } from '../registries';
 import { useModel } from "../../model/model";
 import { ExpenseTrackerModel } from "../../model/expense_tracker_model";
@@ -22,9 +22,10 @@ export class TagsList extends Component {
             this.state.tags = res;
         });
 
-        onWillUpdateProps((nextProps) => {
-            this.state.tags = this.model.load_tags(nextProps);
-        });
+        // TODO: MSH: onWillUpdateProps is removed, should be managed with signal and computed combination
+        // onWillUpdateProps((nextProps) => {
+        //     this.state.tags = this.model.load_tags(nextProps);
+        // });
 
         onPatched(() => {
             if (this.state.lastAddedTagId !== null) {

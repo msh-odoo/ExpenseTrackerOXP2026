@@ -1,4 +1,4 @@
-import { Component, useState, onWillStart, onWillUpdateProps, onMounted, onPatched, useEffect, useRef } from '@expense_tracker/owl';
+import { Component, useState, onWillStart, onMounted, onPatched, useEffect, useRef } from '@expense_tracker/owl';
 import { screensRegistry } from '../registries';
 import { useModel } from "../../model/model";
 import { ExpenseTrackerModel } from "../../model/expense_tracker_model";
@@ -24,11 +24,12 @@ class ExpenseForm extends Component {
                 res = await this.model.load_expense_form_data(options);
             this.state.data = res;
         });
-        onWillUpdateProps((nextProps) => {
-            if (nextProps.id) {
-                this.state.data = this.model.load_expense_form_data(options);
-            }
-        });
+        // TODO: MSH: onWillUpdateProps is removed, should be managed with signal and computed combination
+        // onWillUpdateProps((nextProps) => {
+        //     if (nextProps.id) {
+        //         this.state.data = this.model.load_expense_form_data(options);
+        //     }
+        // });
 
         onMounted(() => {
             this.form.el.querySelector("input.form-control").focus();

@@ -1,4 +1,4 @@
-import { Component, useState, onWillStart, onWillUpdateProps } from '@expense_tracker/owl';
+import { Component, useState, onWillStart } from '@expense_tracker/owl';
 import { screensRegistry } from '../registries';
 import { useModel } from "../../model/model";
 import { ExpenseTrackerModel } from "../../model/expense_tracker_model";
@@ -15,7 +15,8 @@ export class ExpenseCategoriesList extends Component {
             const res = await this.model.load_categories(this.props);
             this.state.categories = res;
         });
-        onWillUpdateProps((nextProps) => this.state.categories = this.model.load_categories(nextProps));
+        // TODO: MSH: onWillUpdateProps is removed, should be managed with signal and computed combination
+        // onWillUpdateProps((nextProps) => this.state.categories = this.model.load_categories(nextProps));
     }
 
     _onClickAddCategory(ev) {

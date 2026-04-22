@@ -1,5 +1,5 @@
 
-import { Component, onWillStart, onWillUpdateProps, proxy } from "@expense_tracker/owl";
+import { Component, onWillStart, proxy } from "@expense_tracker/owl";
 import { screensRegistry } from "../registries";
 import { PersonalExpenseList } from "../expense_list/expense_list";
 import { useModel } from "../../model/model";
@@ -18,7 +18,7 @@ export class Dashboard extends Component {
             // const res = await this.model.load_expenses(this.props);
             // this.state.expenses = res;
         });
-        // TODO: MSH: Adapt following code
+        // TODO: MSH: onWillUpdateProps is removed, should be managed with signal and computed combination
         // onWillUpdateProps((nextProps) => this.state.expenses = this.model.load_expenses(nextProps));
     }
 
