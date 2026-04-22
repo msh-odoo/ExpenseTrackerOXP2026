@@ -29,8 +29,8 @@
                         <t t-foreach="state.categories" t-as="category" t-key="category.id">
                             <tr t-att-data-id="category.id" t-on-click="_onClickCategory" class="cursor-pointer">
                                 <td><t><input type="checkbox" class="form-check-input cursor-pointer" t-if="!props.ignoreCreate" t-att-data-id="category.id" t-on-click="_onCategorySelection"/></t></td>
-                                <td><t t-esc="category.name"/></td>
-                                <td><t t-esc="category.description"/></td>
+                                <td><t t-out="category.name"/></td>
+                                <td><t t-out="category.description"/></td>
                             </tr>
                         </t>
                     </tbody>

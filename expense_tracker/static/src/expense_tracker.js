@@ -37,7 +37,6 @@ export class ExpenseTracker extends Component {
      * @param {Event} ev 
      */
     onChangeScreen(ev) {
-        debugger;
         const screen = screensRegistry.get(ev.detail.screen_name)
         this.mainScreen.name = ev.detail.screen_name;
         this.mainScreen.component = screen;

@@ -22,8 +22,8 @@
                     <tbody>
                         <t t-foreach="state.tags" t-as="tag" t-key="tag.id">
                             <tr t-att-id="'tag-' + tag.id">
-                                <td><t t-esc="tag.name"/></td>
-                                <td><t t-esc="tag.color"/></td>
+                                <td><t t-out="tag.name"/></td>
+                                <td><t t-out="tag.color"/></td>
                             </tr>
                         </t>
                         <t t-if="state.isAddingNewTag">

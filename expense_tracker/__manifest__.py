@@ -21,6 +21,18 @@
         # ],
         'expense_tracker.assets_expense': [
             # ('include', 'web.assets_backend'),
+            'web/static/src/scss/functions.scss',
+            'web/static/src/scss/utils.scss',
+            ('include', 'web._assets_primary_variables'),
+            ('include', 'web._assets_secondary_variables'),
+
+            ('include', 'web._assets_helpers'),
+            ('include', 'web._assets_frontend_helpers'),
+            'web/static/src/scss/pre_variables.scss',
+            'web/static/lib/bootstrap/scss/_variables.scss',
+            'web/static/lib/bootstrap/scss/_variables-dark.scss',
+            'web/static/lib/bootstrap/scss/_maps.scss',
+            ('include', 'web._assets_bootstrap_frontend'),
             'expense_tracker/static/lib/module_loader.js',
             'expense_tracker/static/lib/owl.js',
             'expense_tracker/static/lib/odoo_module.js',
@@ -31,8 +43,6 @@
             'web/static/src/module_loader.js',
 
             'expense_tracker/static/lib/**/*',
-            # 'web/static/lib/owl/owl.js',
-            'web/static/lib/owl/odoo_module.js',
 
             'web/static/lib/hoot/**/*',
             'web/static/lib/hoot-dom/**/*',
