@@ -1,23 +1,19 @@
-import { EventBus, useComponent } from "@expense_tracker/owl";
+import { Plugin } from "@expense_tracker/owl";
+import { BusPlugin } from "../plugins/bus_plugin";
+import { ORMPlugin } from "../plugins/orm_plugin";
+import { rpc } from "@expense_tracker/core/rpc";
 
-export class Model {
-    /**
-     * @param {Object} env
-     * @param {Object} options
-     */
-    constructor(env, params, options) {
-        this.env = env;
-        this.orm = options.orm;
-        this.rpc = options.rpc;
-        this.bus = new EventBus();
-        this.setup(params, options);
-    }
-
+export class Model extends Plugin {
     /**
      * @param {Object} params
      * @param {Object} options
      */
-    setup(/* params, options */) {}
+    setup(params, options) {
+        this.rpc = rpc;
+        this.bus = plugin(BusPlugin).bus;
+        this.orm = plugin(ORMPlugin);
+        this.setup(params, options);
+    }
 
     /**
      * @param {SearchParams} searchParams
@@ -62,7 +58,6 @@ export class Model {
  * @returns {InstanceType<T>}
  */
 export function useModel(ModelClass, params = {}, options = {}) {
-    const component = useComponent();
-    const model = new ModelClass(component.env, params, { orm: component.env.orm, rpc: component.env.rpc });
+    const model = new ModelClass(params);
     return model;
 }

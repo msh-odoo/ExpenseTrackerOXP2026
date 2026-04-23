@@ -29,12 +29,12 @@
                         <t t-if="this.state.isAddingNewTag">
                             <tr>
                                 <td>
-                                    <input type="text" t-model="this.state.newTag.name" placeholder="Tag Name"
+                                    <input type="text" t-model="this.newName" placeholder="Tag Name"
                                            class="form-control text-white"
                                            t-on-focusout="this._onFieldFocusOut"/>
                                 </td>
                                 <td>
-                                    <input type="number" t-model="this.state.newTag.color" placeholder="Tag Color"
+                                    <input type="number" t-model="this.newColor" placeholder="Tag Color"
                                            class="form-control text-white"
                                            t-on-focusout="this._onFieldFocusOut"/>
                                 </td>

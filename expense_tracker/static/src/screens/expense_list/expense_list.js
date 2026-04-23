@@ -1,4 +1,4 @@
-import { Component, onWillStart, props, proxy } from '@expense_tracker/owl';
+import { Component, onWillStart, props, proxy, plugin, providePlugins } from '@expense_tracker/owl';
 import { useModel } from "../../model/model";
 import { BusPlugin } from "@expense_tracker/plugins/bus_plugin";
 import { screensRegistry } from "../registries";
@@ -11,7 +11,7 @@ export class PersonalExpenseList extends Component {
 
     setup() {
         // TODO: MSH: Adapt following code
-        // this.model = useModel(ExpenseTrackerModel, this.modelParams);
+        this.model = useModel(ExpenseTrackerModel, this.modelParams);
         this.state = proxy({ expenses: [] , selectedCheckboxes: []});
         this.modelName = "personal.expense";
         this.checkboxInteraction = false;

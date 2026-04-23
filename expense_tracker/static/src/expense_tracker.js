@@ -21,7 +21,7 @@ export class ExpenseTracker extends Component {
         providePlugins([BusPlugin]);
         const busPlugin = plugin(BusPlugin);
         busPlugin.bus.addEventListener("change_screen", this.onChangeScreen.bind(this));
-        busPlugin.bus.addEventListener("add_dialog", this.onAddDialog.bind(this));
+        // busPlugin.bus.addEventListener("add_dialog", this.onAddDialog.bind(this));
         this.mainScreenProps = {};
     }
 

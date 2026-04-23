@@ -8,10 +8,12 @@ export class TagsList extends Component {
 
     setup() {
         this.model = useModel(ExpenseTrackerModel, this.modelParams);
+        this.newName = signal('');
+        this.newColor = signal('');
         this.state = proxy({
             tags: [],
             isAddingNewTag: false,
-            newTag: { name: '', color: '' },
+            newTag: { name: this.newName, color: this.newColor },
             lastAddedTagId: null // Track the last added tag ID
         });
         this.modelName = "expense.tag";

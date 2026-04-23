@@ -11,7 +11,7 @@
                     <label class="fs-2 col-sm-3 col-form-label"><t t-out="this.fieldInfo.string"/></label>
                     <div class="col-sm-9">
                         <input type="text" class="form-control text-white"
-                            t-model = "this.state.data[recordKey]"
+                            t-model="this.signals[recordKey]"
                             t-att-value="this.state.data[recordKey]" required="true"/>
                     </div>
                 </div>

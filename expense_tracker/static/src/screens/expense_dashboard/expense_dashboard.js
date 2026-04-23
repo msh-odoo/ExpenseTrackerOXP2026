@@ -1,5 +1,5 @@
 
-import { Component, onWillStart, proxy, providePlugins } from "@expense_tracker/owl";
+import { Component, onWillStart, proxy, plugin, providePlugins } from "@expense_tracker/owl";
 import { screensRegistry } from "../registries";
 import { PersonalExpenseList } from "../expense_list/expense_list";
 import { BusPlugin } from "@expense_tracker/plugins/bus_plugin";
@@ -12,7 +12,7 @@ export class Dashboard extends Component {
     setup() {
         super.setup();
         // TODO: MSH: Adapt following code
-        // this.model = useModel(ExpenseTrackerModel, this.modelParams);
+        this.model = useModel(ExpenseTrackerModel, this.modelParams);
         this.state = proxy({ expenses: [] });
         providePlugins([BusPlugin]);
         this.busPlugin = plugin(BusPlugin);
