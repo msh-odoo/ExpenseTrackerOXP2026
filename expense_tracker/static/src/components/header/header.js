@@ -8,9 +8,9 @@ export class Header extends Component {
     static components = { Time };
 
     setup() {
-        const busPlugin = plugin(BusPlugin);
+        this.busPlugin = plugin(BusPlugin);
         this.state = proxy({ activeMenuItem: "home" });
-        busPlugin.bus.addEventListener("change_active_menu", this.changeActiveMenu.bind(this));
+        this.busPlugin.bus.addEventListener("change_active_menu", this.changeActiveMenu.bind(this));
     }
 
     onClickLogo() {
@@ -21,7 +21,7 @@ export class Header extends Component {
         const menuName = ev.currentTarget.getAttribute('data-name');
         this.state.activeMenuItem = menuName;
         const screenName = ev.currentTarget.getAttribute('data-screen');
-        this.env.bus.trigger('change_screen', { 'screen_name': screenName, ignoreCreate: false });
+        this.busPlugin.bus.trigger('change_screen', { 'screen_name': screenName, ignoreCreate: false });
     }
 
     changeActiveMenu(ev) {

@@ -31,7 +31,9 @@
                 <tbody>
                     <t t-foreach="this.state.expenses" t-as="expense" t-key="expense.id">
                         <tr t-att-data-id="expense.id" t-on-click="this._onClickExpenseRow" class="cursor-pointer">
-                            <td t-if="!this.props.ignoreCreate"><t><input type="checkbox" class="form-check-input" t-att-data-id="expense.id" t-on-click="this._onCheckboxChange"/></t></td>
+                            <td t-if="!this.props.ignoreCreate">
+                                <input type="checkbox" class="form-check-input" t-att-data-id="expense.id" t-on-click="this._onCheckboxChange"/>
+                            </td>
                             <td><t t-out="expense.name"/></td>
                             <td><t t-out="expense.date"/></td>
                             <td><t t-out="expense.amount"/></td>

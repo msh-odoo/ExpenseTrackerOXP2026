@@ -2,11 +2,11 @@
 <templates xml:space="preserve">
     <t t-name="expense_tracker.TagsList">
         <div class="rounded-6 shadow p-4 o_content_modal_rounded_shades height-container" t-ref="formElement">
-            <div class="mb-4 d-flex justify-content-between" t-if="!props.ignoreCreate">
+            <div class="mb-4 d-flex justify-content-between" t-if="!this.props.ignoreCreate">
                 <h2 class="text-white mt-2">
                     Tags
                 </h2>
-                <button type="button" class="btn btn-primary mx-1" t-on-click="_onCreateTags">
+                <button type="button" class="btn btn-primary mx-1" t-on-click="this._onCreateTags">
                     <span class="fs-3">Add New Tag</span>
                 </button>
             </div>
@@ -20,26 +20,26 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <t t-foreach="state.tags" t-as="tag" t-key="tag.id">
+                        <t t-foreach="this.state.tags" t-as="tag" t-key="tag.id">
                             <tr t-att-id="'tag-' + tag.id">
                                 <td><t t-out="tag.name"/></td>
                                 <td><t t-out="tag.color"/></td>
                             </tr>
                         </t>
-                        <t t-if="state.isAddingNewTag">
+                        <t t-if="this.state.isAddingNewTag">
                             <tr>
                                 <td>
-                                    <input type="text" t-model="state.newTag.name" placeholder="Tag Name"
+                                    <input type="text" t-model="this.state.newTag.name" placeholder="Tag Name"
                                            class="form-control text-white"
-                                           t-on-focusout="_onFieldFocusOut"/>
+                                           t-on-focusout="this._onFieldFocusOut"/>
                                 </td>
                                 <td>
-                                    <input type="number" t-model="state.newTag.color" placeholder="Tag Color"
+                                    <input type="number" t-model="this.state.newTag.color" placeholder="Tag Color"
                                            class="form-control text-white"
-                                           t-on-focusout="_onFieldFocusOut"/>
+                                           t-on-focusout="this._onFieldFocusOut"/>
                                 </td>
                             </tr>
-                            <button type="button" t-on-click="_onCancelNewTag" class="btn btn-secondary mt-2">Cancel</button>
+                            <button type="button" t-on-click="this._onCancelNewTag" class="btn btn-secondary mt-2">Cancel</button>
                         </t>
                     </tbody>
                 </table>

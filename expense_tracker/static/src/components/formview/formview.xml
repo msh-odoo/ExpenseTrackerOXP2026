@@ -6,17 +6,17 @@
             <t t-slot="title"></t>
             <hr />
             <div class="m-auto mt-4" style="width:70%">
-                <div class="mb-3 row d-flex align-items-center" t-foreach="record" t-as="recordKey" t-key="recordKey">
-                    <t t-set="fieldInfo" t-value="props.data.record_fields[recordKey]"/>
-                    <label class="fs-2 col-sm-3 col-form-label"><t t-out="fieldInfo.string"/></label>
+                <div class="mb-3 row d-flex align-items-center" t-foreach="this.record" t-as="recordKey" t-key="recordKey">
+                    <t t-set="fieldInfo" t-value="this.props.data.record_fields[recordKey]"/>
+                    <label class="fs-2 col-sm-3 col-form-label"><t t-out="this.fieldInfo.string"/></label>
                     <div class="col-sm-9">
                         <input type="text" class="form-control text-white"
-                            t-model = "state.data[recordKey]"
-                            t-att-value="state.data[recordKey]" required="true"/>
+                            t-model = "this.state.data[recordKey]"
+                            t-att-value="this.state.data[recordKey]" required="true"/>
                     </div>
                 </div>
                 <div>
-                    <button class="btn btn-primary" t-on-click="() => props.newCategory(state.data)"><span class="fs-3">Save</span></button>
+                    <button class="btn btn-primary" t-on-click="() => this.props.newCategory(this.state.data)"><span class="fs-3">Save</span></button>
                 </div>
             </div>
         </div>

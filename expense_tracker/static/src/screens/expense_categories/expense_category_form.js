@@ -1,5 +1,7 @@
-import { Component, useState, onWillStart, registry } from '@expense_tracker/owl';
+import { Component, proxy, providePlugins, onWillStart } from '@expense_tracker/owl';
 import { useModel } from "../../model/model";
+import { screensRegistry } from '../registries';
+import { BusPlugin } from "@expense_tracker/plugins/bus_plugin";
 import { ExpenseTrackerModel } from "../../model/expense_tracker_model";
 import { FormView } from '../../components/formview/formview';
 
@@ -9,7 +11,7 @@ class ExpenseCategoryForm extends Component {
 
     setup() {
         this.model = useModel(ExpenseTrackerModel, this.modelParams);
-        this.state = useState({
+        this.state = proxy({
             data: {
                 record: { name: '', icon: '', description: '' },
                 record_fields: {
@@ -21,6 +23,8 @@ class ExpenseCategoryForm extends Component {
         });
         this.title = "Category";
         this.modelName = "expense.category";
+        providePlugins([BusPlugin]);
+        this.busPlugin = plugin(BusPlugin);
 
         onWillStart(async () => {
             if (this.props.id) {
@@ -53,8 +57,8 @@ class ExpenseCategoryForm extends Component {
                 description: newCategory.description
             }])
         }
-        this.env.bus.trigger('change_screen', { 'screen_name': 'CategoriesList' });
+        this.busPlugin.bus.trigger('change_screen', { 'screen_name': 'CategoriesList' });
     }
 }
 
-// registry.category("screens").add("ExpenseCategoryForm", ExpenseCategoryForm);
+screensRegistry.add("ExpenseCategoryForm", ExpenseCategoryForm);

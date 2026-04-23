@@ -20,19 +20,23 @@
         #     'expense_tracker/static/src/backend/**/*',
         # ],
         'expense_tracker.assets_expense': [
-            # ('include', 'web.assets_backend'),
             'web/static/src/scss/functions.scss',
             'web/static/src/scss/utils.scss',
             ('include', 'web._assets_primary_variables'),
             ('include', 'web._assets_secondary_variables'),
 
+            # Odoo scss variables and mixins
             ('include', 'web._assets_helpers'),
             ('include', 'web._assets_frontend_helpers'),
             'web/static/src/scss/pre_variables.scss',
             'web/static/lib/bootstrap/scss/_variables.scss',
             'web/static/lib/bootstrap/scss/_variables-dark.scss',
             'web/static/lib/bootstrap/scss/_maps.scss',
+            # Bootstrap frontend styles (buttons, form controls, dropdowns, modals, ...)
             ('include', 'web._assets_bootstrap_frontend'),
+            # Odoo icons and fonts
+            ('include', 'web.icons_fonts'),
+
             'expense_tracker/static/lib/module_loader.js',
             'expense_tracker/static/lib/owl.js',
             'expense_tracker/static/lib/odoo_module.js',

@@ -1,6 +1,7 @@
-import { Component, useState, onWillStart, onMounted, onPatched, useEffect, useRef } from '@expense_tracker/owl';
+import { Component, proxy, onWillStart, onMounted, onPatched, useEffect, useRef } from '@expense_tracker/owl';
 import { screensRegistry } from '../registries';
 import { useModel } from "../../model/model";
+import { BusPlugin } from "@expense_tracker/plugins/bus_plugin";
 import { ExpenseTrackerModel } from "../../model/expense_tracker_model";
 import { FormViewStatic } from '../../components/formview_static/formview_static';
 
@@ -9,11 +10,13 @@ class ExpenseForm extends Component {
     static components = { FormViewStatic }
     setup() {
         this.model = useModel(ExpenseTrackerModel, this.modelParams);
-        this.state = useState({ data: {}, isValidForm: true });
+        this.state = proxy({ data: {}, isValidForm: true });
         this.title = "Expense";
         this.modelName = "personal.expense";
         this.footer = useRef("footer");
         this.form = useRef("form");
+        providePlugins([BusPlugin]);
+        this.busPlugin = plugin(BusPlugin);
         const options = {
             model: this.modelName,
             id: this.props.id,
@@ -85,12 +88,12 @@ class ExpenseForm extends Component {
         };
         if (this.state.data.record) {
             this._updateExpense(newExpense).then(() => {
-                this.env.bus.trigger('change_screen', { 'screen_name': 'ExpenseList' });
+                this.busPlugin.bus.trigger('change_screen', { 'screen_name': 'ExpenseList' });
             });
         } else {
             if (this.state.isValidForm) {
                 this._createExpense(newExpense).then(() => {
-                    this.env.bus.trigger('change_screen', { 'screen_name': 'ExpenseList' });
+                    this.busPlugin.bus.trigger('change_screen', { 'screen_name': 'ExpenseList' });
                 });
             }
         }

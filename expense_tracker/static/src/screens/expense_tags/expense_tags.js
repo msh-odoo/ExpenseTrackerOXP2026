@@ -1,4 +1,4 @@
-import { Component, useState, onWillStart, onPatched, useRef } from '@expense_tracker/owl';
+import { Component, proxy, onWillStart, onPatched, useRef } from '@expense_tracker/owl';
 import { screensRegistry } from '../registries';
 import { useModel } from "../../model/model";
 import { ExpenseTrackerModel } from "../../model/expense_tracker_model";
@@ -8,7 +8,7 @@ export class TagsList extends Component {
 
     setup() {
         this.model = useModel(ExpenseTrackerModel, this.modelParams);
-        this.state = useState({
+        this.state = proxy({
             tags: [],
             isAddingNewTag: false,
             newTag: { name: '', color: '' },

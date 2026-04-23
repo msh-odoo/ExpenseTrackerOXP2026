@@ -2,15 +2,15 @@
 <templates xml:space="preserve">
     <t t-name="expense_tracker.CategoriesList">
         <div class="rounded-6 shadow p-4 o_content_modal_rounded_shades height-container overflow-auto">
-            <div class="mb-4 d-flex justify-content-between" t-if="!props.ignoreCreate">
+            <div class="mb-4 d-flex justify-content-between" t-if="!this.props.ignoreCreate">
                 <h2 class="text-white mt-2">
                     Categories
                 </h2>
                 <div>
-                    <button type="button" class="btn btn-primary mx-1 me-2" t-on-click="_onClickAddCategory">
+                    <button type="button" class="btn btn-primary mx-1 me-2" t-on-click="this._onClickAddCategory">
                         <span class="fs-3">Create New Category</span>
                     </button>
-                    <button t-if="state.selectedCategories.length" type="button" class="btn btn-primary" t-on-click="deleteCategory">
+                    <button t-if="this.state.selectedCategories.length" type="button" class="btn btn-primary" t-on-click="this.deleteCategory">
                         <span class="fs-3">Delete Category</span>
                     </button>
                 </div>
@@ -26,11 +26,17 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <t t-foreach="state.categories" t-as="category" t-key="category.id">
-                            <tr t-att-data-id="category.id" t-on-click="_onClickCategory" class="cursor-pointer">
-                                <td><t><input type="checkbox" class="form-check-input cursor-pointer" t-if="!props.ignoreCreate" t-att-data-id="category.id" t-on-click="_onCategorySelection"/></t></td>
-                                <td><t t-out="category.name"/></td>
-                                <td><t t-out="category.description"/></td>
+                        <t t-foreach="this.state.categories" t-as="category" t-key="category.id">
+                            <tr t-att-data-id="category.id" t-on-click="this._onClickCategory" class="cursor-pointer">
+                                <td>
+                                    <input t-if="!this.props.ignoreCreate" type="checkbox" class="form-check-input cursor-pointer" t-att-data-id="category.id" t-on-click="this._onCategorySelection"/>
+                                </td>
+                                <td>
+                                    <t t-out="category.name"/>
+                                </td>
+                                <td>
+                                    <t t-out="category.description"/>
+                                </td>
                             </tr>
                         </t>
                     </tbody>

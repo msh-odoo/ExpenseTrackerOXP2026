@@ -1,5 +1,6 @@
 import { Component, onWillStart, props, proxy } from '@expense_tracker/owl';
 import { useModel } from "../../model/model";
+import { BusPlugin } from "@expense_tracker/plugins/bus_plugin";
 import { screensRegistry } from "../registries";
 import { ExpenseTrackerModel } from "../../model/expense_tracker_model";
 
@@ -26,9 +27,12 @@ export class PersonalExpenseList extends Component {
                 // this.state.expenses = res;
             });
         }
+        providePlugins([BusPlugin]);
+        this.busPlugin = plugin(BusPlugin);
+
         // TODO: MSH: onWillUpdateProps is removed, should be managed with signal and computed combination
         // onWillUpdateProps((nextProps) => this.state.expenses = this.model.load_expenses(options));
-        // this.env.bus.addEventListener("delete_record", this._deleteRecord.bind(this));
+        this.busPlugin.bus.addEventListener("delete_record", this._deleteRecord.bind(this));
     }
 
     get totalAmount() {
@@ -36,12 +40,12 @@ export class PersonalExpenseList extends Component {
     }
 
     _onCreateExpense(ev) {
-        this.env.bus.trigger('change_screen', { 'screen_name': 'ExpenseForm', model: "personal.expense", isNew: true, });
+        this.busPlugin.bus.trigger('change_screen', { 'screen_name': 'ExpenseForm', model: "personal.expense", isNew: true, });
     }
 
     _onClickExpenseRow(ev) {
         if(!this.checkboxInteraction && this.state.selectedCheckboxes.length === 0) {
-            this.env.bus.trigger('change_screen', { 'screen_name': 'ExpenseForm', model: "personal.expense", id: ev.currentTarget.getAttribute("data-id") });
+            this.busPlugin.bus.trigger('change_screen', { 'screen_name': 'ExpenseForm', model: "personal.expense", id: ev.currentTarget.getAttribute("data-id") });
         }
         this.checkboxInteraction = false;
     }
@@ -58,7 +62,7 @@ export class PersonalExpenseList extends Component {
     }
     deleteExpense(ev) {
         const recordIds = [...this.state.selectedCheckboxes];
-        this.env.bus.trigger('delete_record', { model:"personal.expense", ids: recordIds })
+        this.busPlugin.bus.trigger('delete_record', { model:"personal.expense", ids: recordIds })
     }
     async _deleteRecord(ev) {
         try {

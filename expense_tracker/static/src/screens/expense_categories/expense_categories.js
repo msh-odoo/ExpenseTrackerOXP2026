@@ -1,15 +1,19 @@
-import { Component, useState, onWillStart } from '@expense_tracker/owl';
+import { Component, proxy, onWillStart, providePlugins } from '@expense_tracker/owl';
 import { screensRegistry } from '../registries';
 import { useModel } from "../../model/model";
+import { BusPlugin } from "@expense_tracker/plugins/bus_plugin";
 import { ExpenseTrackerModel } from "../../model/expense_tracker_model";
 
 export class ExpenseCategoriesList extends Component {
     static template = "expense_tracker.CategoriesList";
     setup() {
         this.model = useModel(ExpenseTrackerModel, this.modelParams);
-        this.state = useState({ categories: [], selectedCategories: [] });
+        this.state = proxy({ categories: [], selectedCategories: [] });
         this.modelName = "expense.category";
         this.checkboxInteraction = false;
+        providePlugins([BusPlugin]);
+        this.busPlugin = plugin(BusPlugin);
+
 
         onWillStart(async () => {
             const res = await this.model.load_categories(this.props);
@@ -20,12 +24,12 @@ export class ExpenseCategoriesList extends Component {
     }
 
     _onClickAddCategory(ev) {
-        this.env.bus.trigger('change_screen', { 'screen_name': 'ExpenseCategoryForm', "model": "expense.category", isNew: true });
+        this.busPlugin.bus.trigger('change_screen', { 'screen_name': 'ExpenseCategoryForm', "model": "expense.category", isNew: true });
     }
 
     _onClickCategory(ev) {
         if (!this.checkboxInteraction && this.state.selectedCategories.length === 0) {
-            this.env.bus.trigger('change_screen', { 'screen_name': 'ExpenseCategoryForm', "model": "expense.category", id: ev.currentTarget.getAttribute("data-id") });
+            this.busPlugin.bus.trigger('change_screen', { 'screen_name': 'ExpenseCategoryForm', "model": "expense.category", id: ev.currentTarget.getAttribute("data-id") });
         }
         this.checkboxInteraction = false;
     }
