@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates xml:space="preserve">
     <t t-name="expense_tracker.TagsList">
-        <div class="rounded-6 shadow p-4 o_content_modal_rounded_shades height-container" t-ref="formElement">
+        <div class="rounded-6 shadow p-4 o_content_modal_rounded_shades height-container" t-ref="this.formElement">
             <div class="mb-4 d-flex justify-content-between" t-if="!this.props.ignoreCreate">
                 <h2 class="text-white mt-2">
                     Tags

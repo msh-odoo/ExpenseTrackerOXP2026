@@ -10,7 +10,7 @@
                     <hr />
                 </t>
                 <t t-set-slot="content">
-                    <div t-attf-class="{{!this.state.isValidForm and 'o_invalid' or ''}} m-auto mt-4" t-ref="form" style="width:70%">
+                    <div t-attf-class="{{!this.state.isValidForm and 'o_invalid' or ''}} m-auto mt-4" t-ref="this.form" style="width:70%">
                         <div t-if="!this.state.isValidForm" class="alert alert-danger">
                             Please enter right data!
                         </div>
@@ -45,7 +45,7 @@
                             </div>
                         </div>
                         <t t-set-slot="footer">
-                            <div class="w-100" t-ref="footer">
+                            <div class="w-100" t-ref="this.footer">
                                 <button type="button" class="btn btn-primary" t-on-click="_onClickSubmitForm">
                                     <span class="fs-3">Save</span>
                                 </button>

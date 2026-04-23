@@ -1,4 +1,4 @@
-import { Component, proxy, onWillStart, onPatched, useRef } from '@expense_tracker/owl';
+import { Component, proxy, onWillStart, onPatched, signal } from '@expense_tracker/owl';
 import { screensRegistry } from '../registries';
 import { useModel } from "../../model/model";
 import { ExpenseTrackerModel } from "../../model/expense_tracker_model";
@@ -15,7 +15,7 @@ export class TagsList extends Component {
             lastAddedTagId: null // Track the last added tag ID
         });
         this.modelName = "expense.tag";
-        this.formEl = useRef("formElement");
+        this.formElement = signal(null);
 
         onWillStart(async () => {
             const res = await this.model.load_tags(this.props);
