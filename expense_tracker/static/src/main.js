@@ -4,6 +4,8 @@ import { rpc } from "@expense_tracker/core/rpc";
 import { DB } from "@expense_tracker/core/db";
 import { getTemplate } from "@expense_tracker/core/templates";
 import { ExpenseTracker } from "@expense_tracker/expense_tracker";
+import { BusPlugin } from "./plugins/bus_plugin";
+import { ORMPlugin } from "./plugins/orm_plugin";
 
 
 function cast(value) {
@@ -58,6 +60,7 @@ owl.whenReady(async () => {
     // await startServices(env);
     const app = new App({
         getTemplate,
+        plugins: [BusPlugin, ORMPlugin],
         // dev: env.debug || session.test_mode,
         warnIfNoStaticProps: true, // !session.test_mode,
         name: ExpenseTracker.constructor.name,

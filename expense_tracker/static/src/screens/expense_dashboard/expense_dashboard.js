@@ -3,6 +3,8 @@ import { Component, onWillStart, proxy, plugin, providePlugins } from "@expense_
 import { screensRegistry } from "../registries";
 import { PersonalExpenseList } from "../expense_list/expense_list";
 import { BusPlugin } from "@expense_tracker/plugins/bus_plugin";
+import { ORMPlugin } from "@expense_tracker/plugins/orm_plugin";
+import { ExpenseTrackerModelPlugin } from "../../model/expense_tracker_model";
 import { useModel } from "../../model/model";
 import { ExpenseTrackerModel } from "../../model/expense_tracker_model";
 
@@ -11,15 +13,13 @@ export class Dashboard extends Component {
 
     setup() {
         super.setup();
-        // TODO: MSH: Adapt following code
         this.model = useModel(ExpenseTrackerModel, this.modelParams);
         this.state = proxy({ expenses: [] });
-        providePlugins([BusPlugin]);
+        // providePlugins([BusPlugin, ORMPlugin]); // Not needed, we passed plugins to App so ORM and Bus will be available to whole App and it's decendants
         this.busPlugin = plugin(BusPlugin);
         onWillStart(async () => {
-            // TODO: MSH: Adapt following code
-            // const res = await this.model.load_expenses(this.props);
-            // this.state.expenses = res;
+            const res = await this.model.load_expenses(this.props);
+            this.state.expenses = res;
         });
         // TODO: MSH: onWillUpdateProps is removed, should be managed with signal and computed combination
         // onWillUpdateProps((nextProps) => this.state.expenses = this.model.load_expenses(nextProps));

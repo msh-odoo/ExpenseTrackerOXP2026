@@ -10,7 +10,6 @@ export class PersonalExpenseList extends Component {
     props = props();
 
     setup() {
-        // TODO: MSH: Adapt following code
         this.model = useModel(ExpenseTrackerModel, this.modelParams);
         this.state = proxy({ expenses: [] , selectedCheckboxes: []});
         this.modelName = "personal.expense";
@@ -22,9 +21,9 @@ export class PersonalExpenseList extends Component {
             this.state.expenses = this.props.expenses;
         } else {
             onWillStart(async () => {
-                // TODO: MSH: Adapt following code
-                // const res = await this.model.load_expenses(options);
-                // this.state.expenses = res;
+                const res = await this.model.load_expenses(options);
+                debugger;
+                this.state.expenses = res;
             });
         }
         providePlugins([BusPlugin]);

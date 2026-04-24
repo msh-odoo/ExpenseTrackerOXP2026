@@ -1,19 +1,27 @@
-import { Plugin } from "@expense_tracker/owl";
-import { BusPlugin } from "../plugins/bus_plugin";
-import { ORMPlugin } from "../plugins/orm_plugin";
+import { plugin } from "@expense_tracker/owl";
 import { rpc } from "@expense_tracker/core/rpc";
+import { ORMPlugin } from "../plugins/orm_plugin";
+import { BusPlugin } from "../plugins/bus_plugin";
 
-export class Model extends Plugin {
+export class Model {
+    /**
+     * @param {Object} env
+     * @param {Object} options
+     */
+    constructor(params, options) {
+        // this.rpc = options.rpc;
+        // this.bus = new EventBus();
+        this.orm = options.orm;
+        this.rpc = options.rpc;
+        this.bus = options.bus;
+        this.setup(params, options);
+    }
+
     /**
      * @param {Object} params
      * @param {Object} options
      */
-    setup(params, options) {
-        this.rpc = rpc;
-        this.bus = plugin(BusPlugin).bus;
-        this.orm = plugin(ORMPlugin);
-        this.setup(params, options);
-    }
+    setup(/* params, options */) {}
 
     /**
      * @param {SearchParams} searchParams
@@ -58,6 +66,9 @@ export class Model extends Plugin {
  * @returns {InstanceType<T>}
  */
 export function useModel(ModelClass, params = {}, options = {}) {
-    const model = new ModelClass(params);
+    // useModel should design like webclient, it will have list of plugins like we have currently services, then we will use 
+    const ormPlugin = plugin(ORMPlugin);
+    const busPlugin = plugin(BusPlugin);
+    const model = new ModelClass(params, { rpc, orm: ormPlugin, bus: busPlugin.bus });
     return model;
 }
