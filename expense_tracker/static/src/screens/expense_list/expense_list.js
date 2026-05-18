@@ -25,7 +25,6 @@ export class PersonalExpenseList extends Component {
                 this.state.expenses = res;
             });
         }
-        providePlugins([BusPlugin]);
         this.busPlugin = plugin(BusPlugin);
 
         // TODO: MSH: onWillUpdateProps is removed, should be managed with signal and computed combination
@@ -37,7 +36,7 @@ export class PersonalExpenseList extends Component {
         return this.state.expenses.reduce((sum, expense) => sum + expense.amount, 0);
     }
 
-    _onCreateExpense(ev) {
+    onCreateExpense(ev) {
         this.busPlugin.bus.trigger('change_screen', { 'screen_name': 'ExpenseForm', model: "personal.expense", isNew: true, });
     }
 

@@ -21,6 +21,7 @@ export class Header extends Component {
         const menuName = ev.currentTarget.getAttribute('data-name');
         this.state.activeMenuItem = menuName;
         const screenName = ev.currentTarget.getAttribute('data-screen');
+        debugger;
         this.busPlugin.bus.trigger('change_screen', { 'screen_name': screenName, ignoreCreate: false });
     }
 

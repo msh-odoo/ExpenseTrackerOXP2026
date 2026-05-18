@@ -7,7 +7,7 @@
                     Personal Expenses
                 </h2>
                 <div>
-                    <button type="button" class="btn btn-primary me-2" t-on-click="this._onCreateExpense">
+                    <button type="button" class="btn btn-primary me-2" t-on-click="this.onCreateExpense">
                         <span class="fs-3">Create Expense</span>
                     </button>
                     <button t-if="this.state.selectedCheckboxes.length" type="button" class="btn btn-primary" t-on-click="this.deleteExpense">
