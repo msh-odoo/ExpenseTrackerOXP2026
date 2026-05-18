@@ -1,11 +1,14 @@
-import { Component, proxy, onWillStart, providePlugins } from '@expense_tracker/owl';
-import { screensRegistry } from '../registries';
+import { Component, proxy, props, onWillStart, plugin, providePlugins } from '@expense_tracker/owl';
+import { screensRegistry } from '@expense_tracker/registries';
 import { useModel } from "../../model/model";
+
 import { BusPlugin } from "@expense_tracker/plugins/bus_plugin";
 import { ExpenseTrackerModel } from "../../model/expense_tracker_model";
 
 export class ExpenseCategoriesList extends Component {
     static template = "expense_tracker.CategoriesList";
+    props = props();
+
     setup() {
         this.model = useModel(ExpenseTrackerModel, this.modelParams);
         this.state = proxy({ categories: [], selectedCategories: [] });

@@ -1,6 +1,6 @@
 
 import { Component, onWillStart, proxy, plugin, providePlugins } from "@expense_tracker/owl";
-import { screensRegistry } from "../registries";
+import { screensRegistry } from "@expense_tracker/registries";
 import { PersonalExpenseList } from "../expense_list/expense_list";
 import { BusPlugin } from "@expense_tracker/plugins/bus_plugin";
 import { ORMPlugin } from "@expense_tracker/plugins/orm_plugin";

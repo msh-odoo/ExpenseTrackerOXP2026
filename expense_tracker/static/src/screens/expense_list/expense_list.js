@@ -1,7 +1,7 @@
 import { Component, onWillStart, props, proxy, plugin, providePlugins } from '@expense_tracker/owl';
 import { useModel } from "../../model/model";
 import { BusPlugin } from "@expense_tracker/plugins/bus_plugin";
-import { screensRegistry } from "../registries";
+import { screensRegistry } from "@expense_tracker/registries";
 import { ExpenseTrackerModel } from "../../model/expense_tracker_model";
 
 
@@ -22,7 +22,6 @@ export class PersonalExpenseList extends Component {
         } else {
             onWillStart(async () => {
                 const res = await this.model.load_expenses(options);
-                debugger;
                 this.state.expenses = res;
             });
         }

@@ -1,6 +1,6 @@
 import { Component, proxy, providePlugins, onWillStart } from '@expense_tracker/owl';
 import { useModel } from "../../model/model";
-import { screensRegistry } from '../registries';
+import { screensRegistry } from '@expense_tracker/registries';
 import { BusPlugin } from "@expense_tracker/plugins/bus_plugin";
 import { ExpenseTrackerModel } from "../../model/expense_tracker_model";
 import { FormView } from '../../components/formview/formview';

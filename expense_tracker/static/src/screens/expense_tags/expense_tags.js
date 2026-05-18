@@ -1,10 +1,11 @@
-import { Component, proxy, onWillStart, onPatched, signal } from '@expense_tracker/owl';
-import { screensRegistry } from '../registries';
+import { Component, proxy, props, onWillStart, onPatched, signal } from '@expense_tracker/owl';
+import { screensRegistry } from '@expense_tracker/registries';
 import { useModel } from "../../model/model";
 import { ExpenseTrackerModel } from "../../model/expense_tracker_model";
 
 export class TagsList extends Component {
     static template = 'expense_tracker.TagsList';
+    props = props();
 
     setup() {
         this.model = useModel(ExpenseTrackerModel, this.modelParams);

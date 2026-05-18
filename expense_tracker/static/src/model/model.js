@@ -9,8 +9,6 @@ export class Model {
      * @param {Object} options
      */
     constructor(params, options) {
-        // this.rpc = options.rpc;
-        // this.bus = new EventBus();
         this.orm = options.orm;
         this.rpc = options.rpc;
         this.bus = options.bus;
@@ -55,7 +53,6 @@ export class Model {
         this.bus.trigger("update");
     }
 }
-// Model.services = [];
 
 /**
  * @template {typeof Model} T
@@ -66,7 +63,6 @@ export class Model {
  * @returns {InstanceType<T>}
  */
 export function useModel(ModelClass, params = {}, options = {}) {
-    // useModel should design like webclient, it will have list of plugins like we have currently services, then we will use 
     const ormPlugin = plugin(ORMPlugin);
     const busPlugin = plugin(BusPlugin);
     const model = new ModelClass(params, { rpc, orm: ormPlugin, bus: busPlugin.bus });
