@@ -1,4 +1,4 @@
-import { Component, proxy, onWillStart, onMounted, onPatched, useEffect, signal } from '@expense_tracker/owl';
+import { Component, proxy, onWillStart, onMounted, onPatched, useEffect, signal, plugin } from '@expense_tracker/owl';
 import { screensRegistry } from '@expense_tracker/registries';
 import { useModel } from "../../model/model";
 import { BusPlugin } from "@expense_tracker/plugins/bus_plugin";
@@ -15,7 +15,7 @@ class ExpenseForm extends Component {
         this.modelName = "personal.expense";
         this.footer = signal(null);
         this.form = signal(null);
-        providePlugins([BusPlugin]);
+        // providePlugins([BusPlugin]);
         this.busPlugin = plugin(BusPlugin);
         const options = {
             model: this.modelName,

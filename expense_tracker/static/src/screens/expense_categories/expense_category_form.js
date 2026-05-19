@@ -1,4 +1,4 @@
-import { Component, proxy, providePlugins, onWillStart } from '@expense_tracker/owl';
+import { Component, proxy, providePlugins, plugin, onWillStart } from '@expense_tracker/owl';
 import { useModel } from "../../model/model";
 import { screensRegistry } from '@expense_tracker/registries';
 import { BusPlugin } from "@expense_tracker/plugins/bus_plugin";
@@ -23,7 +23,7 @@ class ExpenseCategoryForm extends Component {
         });
         this.title = "Category";
         this.modelName = "expense.category";
-        providePlugins([BusPlugin]);
+        // providePlugins([BusPlugin]);
         this.busPlugin = plugin(BusPlugin);
 
         onWillStart(async () => {

@@ -14,7 +14,7 @@ export class ExpenseCategoriesList extends Component {
         this.state = proxy({ categories: [], selectedCategories: [] });
         this.modelName = "expense.category";
         this.checkboxInteraction = false;
-        providePlugins([BusPlugin]);
+        // providePlugins([BusPlugin]);
         this.busPlugin = plugin(BusPlugin);
 
 

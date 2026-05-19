@@ -18,7 +18,7 @@ export class ExpenseTracker extends Component {
         // useSubEnv({ orm, rpc });
         // useSubEnv({ rpc }); // useSubEnv is removed in owl3
         this.mainScreen = proxy({ name: 'Dashboard', component: Dashboard });
-        providePlugins([BusPlugin]);
+        // providePlugins([BusPlugin]); // Not needed as we have passed plugins from App
         const busPlugin = plugin(BusPlugin);
         busPlugin.bus.addEventListener("change_screen", this.onChangeScreen.bind(this));
         // busPlugin.bus.addEventListener("add_dialog", this.onAddDialog.bind(this));
