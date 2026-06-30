@@ -63,7 +63,7 @@ owl.whenReady(async () => {
         getTemplate,
         plugins: [BusPlugin, ORMPlugin, HotkeyPlugin],
         // dev: env.debug || session.test_mode,
-        warnIfNoStaticProps: true, // !session.test_mode,
+        // warnIfNoStaticProps: true, // !session.test_mode,
         name: ExpenseTracker.constructor.name,
         // translatableAttributes: ["data-tooltip"],
         translateFn,

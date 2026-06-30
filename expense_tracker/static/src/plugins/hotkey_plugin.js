@@ -81,7 +81,6 @@ export class HotkeyPlugin extends Plugin {
     setup() {
         // const self = this;
         this.hotkeyResource = new Resource({ name: "shortcuts" });
-        debugger;
         window.addEventListener("keydown", this.onKeydown.bind(this));
         // addListeners(window);
 

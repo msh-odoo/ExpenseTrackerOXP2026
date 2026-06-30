@@ -2,6 +2,7 @@ import { Component, proxy, providePlugins, plugin, onWillStart } from '@expense_
 import { useModel } from "../../model/model";
 import { screensRegistry } from '@expense_tracker/registries';
 import { BusPlugin } from "@expense_tracker/plugins/bus_plugin";
+import { ScreenManagerPlugin } from "@expense_tracker/plugins/screen_manager_plugin";
 import { ExpenseTrackerModel } from "../../model/expense_tracker_model";
 import { FormView } from '../../components/formview/formview';
 
@@ -25,6 +26,7 @@ class ExpenseCategoryForm extends Component {
         this.modelName = "expense.category";
         // providePlugins([BusPlugin]);
         this.busPlugin = plugin(BusPlugin);
+        this.sm = plugin(ScreenManagerPlugin);
 
         onWillStart(async () => {
             if (this.props.id) {
@@ -57,7 +59,8 @@ class ExpenseCategoryForm extends Component {
                 description: newCategory.description
             }])
         }
-        this.busPlugin.bus.trigger('change_screen', { 'screen_name': 'CategoriesList' });
+        this.sm.changeScreen({ screen_name: 'CategoriesList', props: {}});
+        // this.busPlugin.bus.trigger('change_screen', { 'screen_name': 'CategoriesList' });
     }
 }
 

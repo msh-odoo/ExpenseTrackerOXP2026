@@ -3,6 +3,7 @@ import { screensRegistry } from '@expense_tracker/registries';
 import { useModel } from "../../model/model";
 
 import { BusPlugin } from "@expense_tracker/plugins/bus_plugin";
+import { ScreenManagerPlugin } from "@expense_tracker/plugins/screen_manager_plugin";
 import { ExpenseTrackerModel } from "../../model/expense_tracker_model";
 
 export class ExpenseCategoriesList extends Component {
@@ -16,6 +17,7 @@ export class ExpenseCategoriesList extends Component {
         this.checkboxInteraction = false;
         // providePlugins([BusPlugin]);
         this.busPlugin = plugin(BusPlugin);
+        this.sm = plugin(ScreenManagerPlugin);
 
 
         onWillStart(async () => {
@@ -27,12 +29,13 @@ export class ExpenseCategoriesList extends Component {
     }
 
     _onClickAddCategory(ev) {
-        this.busPlugin.bus.trigger('change_screen', { 'screen_name': 'ExpenseCategoryForm', "model": "expense.category", isNew: true });
+        this.sm.changeScreen({ screen_name: 'ExpenseCategoryForm', props: { model: "expense.category", isNew: true }});
+        // this.busPlugin.bus.trigger('change_screen', { 'screen_name': 'ExpenseCategoryForm', "model": "expense.category", isNew: true });
     }
 
     _onClickCategory(ev) {
         if (!this.checkboxInteraction && this.state.selectedCategories.length === 0) {
-            this.busPlugin.bus.trigger('change_screen', { 'screen_name': 'ExpenseCategoryForm', "model": "expense.category", id: ev.currentTarget.getAttribute("data-id") });
+            this.sm.changeScreen({ screen_name: 'ExpenseCategoryForm', props: { model: "expense.category", id: ev.currentTarget.getAttribute("data-id") }});
         }
         this.checkboxInteraction = false;
     }

@@ -5,10 +5,10 @@ import { Dashboard } from "@expense_tracker/screens/expense_dashboard/expense_da
 import { Header } from "@expense_tracker/components/header/header";
 import { rpc } from "@expense_tracker/core/rpc";
 import { BusPlugin } from "@expense_tracker/plugins/bus_plugin";
+import { ScreenManagerPlugin } from "@expense_tracker/plugins/screen_manager_plugin";
 
 export class ExpenseTracker extends Component {
     static template = "expense_tracker.root";
-    // static components = { Header, Container };
     static components = { Header, Container };
 
     setup() {
@@ -17,29 +17,11 @@ export class ExpenseTracker extends Component {
         // Use of useSubEnv to pass orm to this component as well as all it's children
         // useSubEnv({ orm, rpc });
         // useSubEnv({ rpc }); // useSubEnv is removed in owl3
-        this.mainScreen = proxy({ name: 'Dashboard', component: Dashboard });
         // providePlugins([BusPlugin]); // Not needed as we have passed plugins from App
-        const busPlugin = plugin(BusPlugin);
-        busPlugin.bus.addEventListener("change_screen", this.onChangeScreen.bind(this));
+        providePlugins([ScreenManagerPlugin]);
+        this.sm = plugin(ScreenManagerPlugin);
+        this.sm.initCurrentScreen({ name: "Dashboard", component: Dashboard });
         // busPlugin.bus.addEventListener("add_dialog", this.onAddDialog.bind(this));
-        this.mainScreenProps = {};
     }
 
-    /**
-     * Used to give the `state.mobileSearchBarIsShown` value to main screen props
-     */
-    get mainScreenPropsFielded() {
-        return Object.assign({}, this.mainScreenProps);
-    }
-
-    /**
-     * Called when main screen is changed
-     * @param {Event} ev 
-     */
-    onChangeScreen(ev) {
-        const screen = screensRegistry.get(ev.detail.screen_name)
-        this.mainScreen.name = ev.detail.screen_name;
-        this.mainScreen.component = screen;
-        this.mainScreenProps = { ...ev.detail };
-    }
 }

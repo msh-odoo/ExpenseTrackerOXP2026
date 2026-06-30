@@ -6,7 +6,7 @@
     'author': 'Mohammed Shekha',
     'depends': ['base'],
     'data': [
-        'security/ir.model.access.csv',
+        'security/ir.access.csv',
         'data/expense_payment_method_data.xml',
         'views/expense_views.xml',
         'views/expense_tracker_templates.xml',

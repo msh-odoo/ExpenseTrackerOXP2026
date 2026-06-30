@@ -1,6 +1,7 @@
 import { Component, onWillStart, props, proxy, plugin, providePlugins } from '@expense_tracker/owl';
 import { useModel } from "../../model/model";
 import { BusPlugin } from "@expense_tracker/plugins/bus_plugin";
+import { ScreenManagerPlugin } from "@expense_tracker/plugins/screen_manager_plugin";
 import { screensRegistry } from "@expense_tracker/registries";
 import { ExpenseTrackerModel } from "../../model/expense_tracker_model";
 
@@ -8,6 +9,8 @@ import { ExpenseTrackerModel } from "../../model/expense_tracker_model";
 export class PersonalExpenseList extends Component {
     static template = 'expense_tracker.PersonalExpenseList';
     props = props();
+    busPlugin = plugin(BusPlugin);
+    sm = plugin(ScreenManagerPlugin);
 
     setup() {
         this.model = useModel(ExpenseTrackerModel, this.modelParams);
@@ -25,7 +28,6 @@ export class PersonalExpenseList extends Component {
                 this.state.expenses = res;
             });
         }
-        this.busPlugin = plugin(BusPlugin);
 
         // TODO: MSH: onWillUpdateProps is removed, should be managed with signal and computed combination
         // onWillUpdateProps((nextProps) => this.state.expenses = this.model.load_expenses(options));
@@ -37,12 +39,14 @@ export class PersonalExpenseList extends Component {
     }
 
     onCreateExpense(ev) {
-        this.busPlugin.bus.trigger('change_screen', { 'screen_name': 'ExpenseForm', model: "personal.expense", isNew: true, });
+        this.sm.changeScreen({ screen_name: 'ExpenseForm', props: { model: "personal.expense", isNew: true }});
+        // this.busPlugin.bus.trigger('change_screen', { 'screen_name': 'ExpenseForm', model: "personal.expense", isNew: true, });
     }
 
     _onClickExpenseRow(ev) {
         if(!this.checkboxInteraction && this.state.selectedCheckboxes.length === 0) {
-            this.busPlugin.bus.trigger('change_screen', { 'screen_name': 'ExpenseForm', model: "personal.expense", id: ev.currentTarget.getAttribute("data-id") });
+            this.sm.changeScreen({ screen_name: 'ExpenseForm', props: { model: "personal.expense", id: ev.currentTarget.getAttribute("data-id") }});
+            // this.busPlugin.bus.trigger('change_screen', { 'screen_name': 'ExpenseForm', model: "personal.expense", id: ev.currentTarget.getAttribute("data-id") });
         }
         this.checkboxInteraction = false;
     }
