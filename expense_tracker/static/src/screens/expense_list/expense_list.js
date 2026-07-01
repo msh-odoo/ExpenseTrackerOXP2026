@@ -1,4 +1,4 @@
-import { Component, onWillStart, props, proxy, plugin, providePlugins } from '@expense_tracker/owl';
+import { Component, onWillStart, props, computed, proxy, plugin, providePlugins } from '@expense_tracker/owl';
 import { useModel } from "../../model/model";
 import { BusPlugin } from "@expense_tracker/plugins/bus_plugin";
 import { ScreenManagerPlugin } from "@expense_tracker/plugins/screen_manager_plugin";
@@ -11,9 +11,13 @@ export class PersonalExpenseList extends Component {
     props = props();
     busPlugin = plugin(BusPlugin);
     sm = plugin(ScreenManagerPlugin);
+    hasSelection = computed(() => {
+        return this.state.selectedCheckboxes.length;
+    });
 
     setup() {
         this.model = useModel(ExpenseTrackerModel, this.modelParams);
+        // TODO: MSH: Convert it to signal.Array for both values, we will use selectedCheckboxes in computed
         this.state = proxy({ expenses: [] , selectedCheckboxes: []});
         this.modelName = "personal.expense";
         this.checkboxInteraction = false;

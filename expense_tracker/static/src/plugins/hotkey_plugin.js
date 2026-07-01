@@ -109,7 +109,6 @@ export class HotkeyPlugin extends Plugin {
         }
 
         const hotkey = getActiveHotkey(event);
-        debugger;
         if (!hotkey) {
             return;
         }
@@ -200,9 +199,7 @@ export class HotkeyPlugin extends Plugin {
         // better example would be where we have to store list of items only, because resource is ordered collection of items
         const items = this.hotkeyResource.items();
         const hotkey = items.find(item => item.key === key);
-        debugger;
         if (hotkey) {
-            debugger;
             hotkey.action();
             return true;
         }

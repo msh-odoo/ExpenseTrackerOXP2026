@@ -10,7 +10,7 @@
                     <button type="button" class="btn btn-primary me-2" t-on-click="this.onCreateExpense">
                         <span class="fs-3">Create Expense</span>
                     </button>
-                    <button t-if="this.state.selectedCheckboxes.length" type="button" class="btn btn-primary" t-on-click="this.deleteExpense">
+                    <button t-if="this.hasSelection()" type="button" class="btn btn-primary" t-on-click="this.deleteExpense">
                         <span class="fs-3">Delete Expense</span>
                     </button>
                 </div>

@@ -1,14 +1,15 @@
 import { Plugin, signal } from "@expense_tracker/owl";
+import { screensRegistry } from "@expense_tracker/registries";
 // import { Dashboard } from "@expense_tracker/screens/expense_dashboard/expense_dashboard";
 
 export class ScreenManagerPlugin extends Plugin {
     currentScreenName = signal("");
-    currentScreenComponent = signal("");
+    currentScreenComponent = signal(null);
     currentScreenProps = {};
 
     initCurrentScreen(config) {
-        this.currentScreenName = config.name;
-        this.currentScreenComponent = config.component;
+        this.currentScreenName.set(config.name);
+        this.currentScreenComponent.set(config.component);
     }
 
     /**
@@ -23,10 +24,9 @@ export class ScreenManagerPlugin extends Plugin {
      * @param {Event} ev 
      */
     changeScreen(config) {
-        debugger;
         const screen = screensRegistry.get(config.screen_name)
-        this.currentScreenName = config.screen_name;
-        this.currentScreenComponent = screen;
+        this.currentScreenName.set(config.screen_name);
+        this.currentScreenComponent.set(screen);
         this.currentScreenProps = { ...config.props };
     }
 }
