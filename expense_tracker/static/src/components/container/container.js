@@ -10,12 +10,4 @@ export class Container extends Component {
         tname: t.string(),
         component: t.function(),
     }, { mainScreenProps: {} });
-    // static props = {
-    //     mainScreenProps: { type: Object, optional: true },
-    //     tname: { type: String },
-    //     component: { type: Function }
-    // };
-    // static defaultProps = {
-    //     mainScreenProps: {},
-    // };
 }

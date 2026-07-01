@@ -1,27 +1,47 @@
 
-import { Component, onMounted, onWillUnmount, proxy, plugin } from "@expense_tracker/owl";
+import { Component, computed, onMounted, onWillUnmount, proxy, plugin, signal } from "@expense_tracker/owl";
 import { BusPlugin } from "@expense_tracker/plugins/bus_plugin";
 
 export class Time extends Component {
     static template = "expense_tracker.time";
 
     setup() {
-        const currentDate = new Date();
+        // const currentDate = new Date();
         const busPlugin = plugin(BusPlugin);
-        const datetime = new Date();
-        const result = this.interval(currentDate, datetime);
-        this.state = proxy({ time: {days: result.days, hours: result.hours, minutes: result.minutes, seconds: result.seconds} });
+
+        const start = new Date();
+        this.elapsedSeconds = signal(Math.floor((Date.now() - start) / 1000));
+
+        this.time = computed(() => {
+            let delta = this.elapsedSeconds();
+            const days = Math.floor(delta / 86400); delta -= days * 86400;
+            const hours = Math.floor(delta / 3600) % 24; delta -= hours * 3600;
+            const minutes = Math.floor(delta / 60) % 60; delta -= minutes * 60;
+            const seconds = Math.floor(delta) % 60;
+            return { days, hours, minutes, seconds };
+        });
 
         let intervalId;
         onMounted(() => {
             intervalId = setInterval(() => {
-                this.updateTime();
+                this.elapsedSeconds.set(this.elapsedSeconds() + 1);
             }, 1000);
         });
+        onWillUnmount(() => clearInterval(intervalId));
+        // const datetime = new Date();
+        // const result = this.interval(currentDate, datetime);
+        // this.state = proxy({ time: {days: result.days, hours: result.hours, minutes: result.minutes, seconds: result.seconds} });
 
-        onWillUnmount(() => {
-            clearInterval(intervalId);
-        });
+        // let intervalId;
+        // onMounted(() => {
+        //     intervalId = setInterval(() => {
+        //         this.updateTime();
+        //     }, 1000);
+        // });
+
+        // onWillUnmount(() => {
+        //     clearInterval(intervalId);
+        // });
     }
 
     interval(date1, date2) {

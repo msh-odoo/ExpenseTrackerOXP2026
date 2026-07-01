@@ -92,13 +92,11 @@ class ExpenseForm extends Component {
         if (this.state.data.record) {
             this._updateExpense(newExpense).then(() => {
                 this.sm.changeScreen({ screen_name: 'ExpenseList', props: {}});
-                // this.busPlugin.bus.trigger('change_screen', { 'screen_name': 'ExpenseList' });
             });
         } else {
             if (this.state.isValidForm) {
                 this._createExpense(newExpense).then(() => {
                     this.sm.changeScreen({ screen_name: 'ExpenseList', props: {}});
-                    // this.busPlugin.bus.trigger('change_screen', { 'screen_name': 'ExpenseList' });
                 });
             }
         }

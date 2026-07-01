@@ -34,13 +34,11 @@ export class Dashboard extends Component {
 
     _onQuickCreateExpense() {
         this.sm.changeScreen({ screen_name: 'ExpenseForm', props: { model: "personal.expense", isNew: true }});
-        // this.busPlugin.bus.trigger('change_screen', { 'screen_name': 'ExpenseForm', model: "personal.expense", isNew: true });
         this.busPlugin.bus.trigger('change_active_menu', 'expenses' );
     }
 
     _onQuickCreateCategory() {
         this.sm.changeScreen({ screen_name: 'ExpenseCategoryForm', props: { model: "expense.category", isNew: true }});
-        // this.busPlugin.bus.trigger('change_screen', { 'screen_name': 'ExpenseCategoryForm', model: "expense.category", isNew: true });
         this.busPlugin.bus.trigger('change_active_menu', 'categories' );
     }
 }

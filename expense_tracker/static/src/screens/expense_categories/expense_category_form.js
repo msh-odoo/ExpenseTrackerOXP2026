@@ -60,7 +60,6 @@ class ExpenseCategoryForm extends Component {
             }])
         }
         this.sm.changeScreen({ screen_name: 'CategoriesList', props: {}});
-        // this.busPlugin.bus.trigger('change_screen', { 'screen_name': 'CategoriesList' });
     }
 }
 

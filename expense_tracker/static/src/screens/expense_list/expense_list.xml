@@ -45,7 +45,7 @@
                     <tr class="table-dark">
                         <td t-attf-colspan="{{!this.props.ignoreCreate and 3 or 2}}"></td>
                         <td>
-                            <b>Total Amount: <t t-out="this.totalAmount"/></b>
+                            <b>Total Amount: <t t-out="this.totalAmount()"/></b>
                         </td>
                         <td></td>
                         <td></td>

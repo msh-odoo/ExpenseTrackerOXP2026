@@ -30,7 +30,6 @@ export class ExpenseCategoriesList extends Component {
 
     _onClickAddCategory(ev) {
         this.sm.changeScreen({ screen_name: 'ExpenseCategoryForm', props: { model: "expense.category", isNew: true }});
-        // this.busPlugin.bus.trigger('change_screen', { 'screen_name': 'ExpenseCategoryForm', "model": "expense.category", isNew: true });
     }
 
     _onClickCategory(ev) {

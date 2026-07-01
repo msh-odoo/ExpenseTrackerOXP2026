@@ -14,6 +14,9 @@ export class PersonalExpenseList extends Component {
     hasSelection = computed(() => {
         return this.state.selectedCheckboxes.length;
     });
+    totalAmount = computed(() => {
+        return this.state.expenses.reduce((sum, expense) => sum + expense.amount, 0);
+    });
 
     setup() {
         this.model = useModel(ExpenseTrackerModel, this.modelParams);
@@ -38,19 +41,13 @@ export class PersonalExpenseList extends Component {
         this.busPlugin.bus.addEventListener("delete_record", this._deleteRecord.bind(this));
     }
 
-    get totalAmount() {
-        return this.state.expenses.reduce((sum, expense) => sum + expense.amount, 0);
-    }
-
     onCreateExpense(ev) {
         this.sm.changeScreen({ screen_name: 'ExpenseForm', props: { model: "personal.expense", isNew: true }});
-        // this.busPlugin.bus.trigger('change_screen', { 'screen_name': 'ExpenseForm', model: "personal.expense", isNew: true, });
     }
 
     _onClickExpenseRow(ev) {
         if(!this.checkboxInteraction && this.state.selectedCheckboxes.length === 0) {
             this.sm.changeScreen({ screen_name: 'ExpenseForm', props: { model: "personal.expense", id: ev.currentTarget.getAttribute("data-id") }});
-            // this.busPlugin.bus.trigger('change_screen', { 'screen_name': 'ExpenseForm', model: "personal.expense", id: ev.currentTarget.getAttribute("data-id") });
         }
         this.checkboxInteraction = false;
     }
