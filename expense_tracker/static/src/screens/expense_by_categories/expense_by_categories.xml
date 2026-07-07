@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="expense_tracker.ExpensesByCategory">
+        <div>
+            <select class="form-select o_expense_category" t-on-change="this._onCategoryChange">
+                <option class="text-dark" value="all">All Categories</option>
+                <t t-if="this.categories">
+                    <t t-foreach="this.categories" t-as="category" t-key="category.id">
+                        <option class="text-dark" t-att-value="category.id"><t t-out="category.name"/></option>
+                    </t>
+                </t>
+            </select>
+        </div>
+        <PersonalExpenseList class="'expense-by-categories'" expenses="this.state.expenses" ignoreCreate="true" />
+    </t>
+</templates>

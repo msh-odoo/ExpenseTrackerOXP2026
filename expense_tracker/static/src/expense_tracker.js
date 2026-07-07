@@ -12,11 +12,6 @@ export class ExpenseTracker extends Component {
 
     setup() {
         super.setup();
-        // const orm = new ORM(); // TODO: MSH: Remove ORM from dependency as we want to developer standalone app
-        // Use of useSubEnv to pass orm to this component as well as all it's children
-        // useSubEnv({ orm, rpc });
-        // useSubEnv({ rpc }); // useSubEnv is removed in owl3
-        // providePlugins([BusPlugin]); // Not needed as we have passed plugins from App
         providePlugins([ScreenManagerPlugin]);
         this.sm = plugin(ScreenManagerPlugin);
         this.sm.initCurrentScreen({ name: "Dashboard", component: Dashboard });

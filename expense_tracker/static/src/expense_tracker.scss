@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    
 }
 
 .expense_tracker_app {
@@ -80,9 +81,9 @@
     }
 }
 
-.form-control:focus {
-    color: $o-black !important;
-}
+// .form-control:focus {
+//     color: $o-black !important;
+// }
 
 .o_content_modal_rounded_shades {
     background-color: #333;

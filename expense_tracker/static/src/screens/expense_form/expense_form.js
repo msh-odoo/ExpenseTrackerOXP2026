@@ -1,4 +1,4 @@
-import { Component, computed, props, proxy, onWillStart, onMounted, onPatched, useEffect, signal, plugin, t } from '@expense_tracker/owl';
+import { Component, computed, props, proxy, onWillStart, onMounted, onPatched, useEffect, signal, plugin, t, useListener } from '@expense_tracker/owl';
 import { screensRegistry } from '@expense_tracker/registries';
 import { useModel } from "../../model/model";
 import { BusPlugin } from "@expense_tracker/plugins/bus_plugin";
@@ -21,7 +21,7 @@ class ExpenseForm extends Component {
         this.title = "Expense";
         this.modelName = "personal.expense";
         this.footer = signal(null);
-        this.form = signal(null);
+        this.form = signal.ref(HTMLElement);
         const options = {
             model: this.modelName,
             id: this.props.id && this.props.id(),
@@ -39,7 +39,10 @@ class ExpenseForm extends Component {
             }
         });
 
+        useListener(this.form, "click", this._onBounceEffect.bind(this));
+
         onMounted(() => {
+            // debugger;
             this.form().querySelector("input.form-control").focus();
         });
 
@@ -47,14 +50,13 @@ class ExpenseForm extends Component {
             this.form().querySelector("input.form-control").focus();
         });
 
-        useEffect(() => {
-            if (!this.form()) {
-                return;
-            }
-            const boundedBounceEffect = this._onBounceEffect.bind(this);
-            this.form().addEventListener("click", boundedBounceEffect);
-            return () => this.form.removeEventListener("click", boundedBounceEffect);
-        });
+        // useEffect(() => {
+        //     if (!this.form()) {
+        //         return;
+        //     }
+        //     useListener(this.form(), "click", this._onBounceEffect.bind(this), {});
+        //     return () => {};
+        // });
     }
 
     /**

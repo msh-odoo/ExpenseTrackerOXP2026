@@ -1,4 +1,4 @@
-import { Component, onWillStart, props, computed, proxy, plugin, providePlugins } from '@expense_tracker/owl';
+import { Component, onWillStart, props, computed, proxy, plugin, providePlugins, signal, t, useEffect } from '@expense_tracker/owl';
 import { useModel } from "../../model/model";
 import { BusPlugin } from "@expense_tracker/plugins/bus_plugin";
 import { ScreenManagerPlugin } from "@expense_tracker/plugins/screen_manager_plugin";
@@ -8,7 +8,11 @@ import { ExpenseTrackerModel } from "../../model/expense_tracker_model";
 
 export class PersonalExpenseList extends Component {
     static template = 'expense_tracker.PersonalExpenseList';
-    props = props();
+    props = props({
+        expenses: t.signal(t.array().optional()),
+        ignoreCreate: t.boolean().optional(),
+        class: t.string().optional(),
+    });
     busPlugin = plugin(BusPlugin);
     sm = plugin(ScreenManagerPlugin);
     hasSelection = computed(() => {
@@ -21,6 +25,7 @@ export class PersonalExpenseList extends Component {
     setup() {
         this.model = useModel(ExpenseTrackerModel, this.modelParams);
         // TODO: MSH: Convert it to signal.Array for both values, we will use selectedCheckboxes in computed
+        const expenses = signal.Array([])
         this.state = proxy({ expenses: [] , selectedCheckboxes: []});
         this.modelName = "personal.expense";
         this.checkboxInteraction = false;
@@ -28,7 +33,9 @@ export class PersonalExpenseList extends Component {
             model: this.modelName,
         };
         if (this.props.expenses) {
-            this.state.expenses = this.props.expenses;
+            useEffect(() => {
+                this.state.expenses = this.props.expenses; // subscribe to changes
+            });
         } else {
             onWillStart(async () => {
                 const res = await this.model.load_expenses(options);

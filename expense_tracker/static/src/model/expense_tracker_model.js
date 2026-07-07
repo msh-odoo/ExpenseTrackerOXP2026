@@ -75,6 +75,24 @@ export class ExpenseTrackerModel extends Model {
     }
 
     /**
+     * @param {Integer} categoryId
+     */
+    async load_category_expenses(categoryId) {
+        if (!categoryId) {
+            return [];
+        }
+        const domain = [];
+        if (categoryId !== 'all') {
+            domain.push(["category_id", "=", categoryId]);
+        }
+        return await this.orm.searchRead("personal.expense",
+            domain,
+            ["name", "user_id", "date", "amount", "category_id", "icon", "payment_method_id", "tag_ids"],
+            { limit: 20 },
+        );
+    }
+
+    /**
      * @override
      */
     hasData() {

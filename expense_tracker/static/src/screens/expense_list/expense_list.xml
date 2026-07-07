@@ -43,7 +43,7 @@
                 </tbody>
                 <tfoot>
                     <tr class="table-dark">
-                        <td t-attf-colspan="{{!this.props.ignoreCreate and 3 or 2}}"></td>
+                        <td t-attf-colspan="{{!this.props.ignoreCreate and 2 or 1}}"></td>
                         <td>
                             <b>Total Amount: <t t-out="this.totalAmount()"/></b>
                         </td>

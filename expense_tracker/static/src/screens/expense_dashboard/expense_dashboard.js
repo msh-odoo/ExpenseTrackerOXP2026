@@ -18,13 +18,13 @@ export class Dashboard extends Component {
         super.setup();
         this.model = useModel(ExpenseTrackerModel, this.modelParams);
         this.state = proxy({ expenses: [] });
-        // providePlugins([BusPlugin, ORMPlugin]); // Not needed, we passed plugins to App so ORM and Bus will be available to whole App and it's decendants
         
         onWillStart(async () => {
             const res = await this.model.load_expenses(this.props);
             this.state.expenses = res;
         });
         // TODO: MSH: onWillUpdateProps is removed, should be managed with signal and computed combination
+        // Maybe we just need to define props as signal and it will be done, like we did for PersonalExpenseList where we used signal props + useEffect
         // onWillUpdateProps((nextProps) => this.state.expenses = this.model.load_expenses(nextProps));
     }
 
@@ -41,6 +41,12 @@ export class Dashboard extends Component {
         this.sm.changeScreen({ screen_name: 'ExpenseCategoryForm', props: { model: "expense.category", isNew: true }});
         this.busPlugin.bus.trigger('change_active_menu', 'categories' );
     }
+
+    _onExpensesByCategory() {
+        this.sm.changeScreen({ screen_name: 'ExpensesByCategory', props: { model: "personal.expense" }});
+        this.busPlugin.bus.trigger('change_active_menu', 'reports' );
+    }
+
 }
 
 Dashboard.components = { PersonalExpenseList }
