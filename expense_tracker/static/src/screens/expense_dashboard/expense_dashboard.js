@@ -1,5 +1,5 @@
 
-import { Component, onWillStart, proxy, plugin, providePlugins } from "@expense_tracker/owl";
+import { Component, effect, ErrorBoundary, onWillStart, proxy, plugin, providePlugins, signal } from "@expense_tracker/owl";
 import { screensRegistry } from "@expense_tracker/registries";
 import { PersonalExpenseList } from "../expense_list/expense_list";
 import { BusPlugin } from "@expense_tracker/plugins/bus_plugin";
@@ -11,16 +11,27 @@ import { ScreenManagerPlugin } from "@expense_tracker/plugins/screen_manager_plu
 
 export class Dashboard extends Component {
     static template = "expense_tracker.Dashboard";
+    static components = { ErrorBoundary, PersonalExpenseList };
     busPlugin = plugin(BusPlugin);
     sm = plugin(ScreenManagerPlugin);
+    error = signal(null);
 
     setup() {
         super.setup();
         this.model = useModel(ExpenseTrackerModel, this.modelParams);
         this.state = proxy({ expenses: [] });
-        
+
+        // Show full error in console
+        effect(() => {
+            const e = this.error();
+            if (e) console.error("widget failed:", e);
+        });
+
         onWillStart(async () => {
-            const res = await this.model.load_expenses(this.props);
+            const res = await this.model.load_expenses(this.props)
+                .catch((error) => {
+                    this.error.set(error);
+                });
             this.state.expenses = res;
         });
         // TODO: MSH: onWillUpdateProps is removed, should be managed with signal and computed combination
@@ -49,6 +60,6 @@ export class Dashboard extends Component {
 
 }
 
-Dashboard.components = { PersonalExpenseList }
+// Dashboard.components = { PersonalExpenseList }
 
 screensRegistry.add("Dashboard", Dashboard);
