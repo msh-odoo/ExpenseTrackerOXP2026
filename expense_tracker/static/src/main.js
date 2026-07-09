@@ -48,23 +48,49 @@ owl.whenReady(async () => {
     const translations = {};
     if (hash.lang) {
         const terms = {
+            "Home": "Accueil",
+            "Expenses": "Dépenses",
+            "Categories": "Catégories",
+            "Tags": "Étiquettes",
+            "Error:": "Erreur:",
+            "Retry": "Réessayer",
+            "Dashboard": "Tableau de bord",
+            "Quick Access": "Accès rapide",
+            "New Expense": "Nouvelle dépense",
+            "New Category": "Nouvelle catégorie",
+            "Expenses by Category": "Dépenses par catégorie",
+            "Personal Expenses": "Dépenses personnelles",
+            "Create Expense": "Créer une dépense",
+            "Delete Expense": "Supprimer la dépense",
+            "Expense Tracker": "Suivi des dépenses",
+            "Personal Expenses": "Dépenses personnelles",
+            "Add New Expense": "Ajouter une nouvelle dépense",
+            "Edit": "Modifier",
+            "Delete": "Supprimer",
             "Description:": "Description:",
             "Date:": "Date:",
             "Amount:": "Montante:",
             "Category:": "Catégorie:",
+            "Description": "Description",
+            "Date": "Date",
+            "Amount": "Montante",
+            "Category": "Catégorie",
+            "Total Amount:": "Montant total:",
         };
         Object.assign(translations, terms);
     }
 
-    const translateFn = (str) => {
+    const translateFn = (str, ctx) => {
         return translations[str] || str;
     }
 
     // Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/app.html
+    const urlParams = new URLSearchParams(window.location.search);
+    const debug = urlParams.get('debug');
     const app = new App({
         getTemplate,
         plugins: [BusPlugin, ORMPlugin, HotkeyPlugin],
-        // dev: env.debug || session.test_mode,
+        dev: debug || false,
         // warnIfNoStaticProps: true, // !session.test_mode,
         name: ExpenseTracker.constructor.name,
         // translatableAttributes: ["data-tooltip"],

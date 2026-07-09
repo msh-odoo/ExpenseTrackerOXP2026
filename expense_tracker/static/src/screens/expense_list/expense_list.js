@@ -11,7 +11,7 @@ export class PersonalExpenseList extends Component {
     // Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/props.html
     // Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/types_validation.html
     props = props({
-        expenses: t.signal(t.array().optional()),
+        expenses: t.array().optional(),
         ignoreCreate: t.boolean().optional(),
         class: t.string().optional(),
     });
