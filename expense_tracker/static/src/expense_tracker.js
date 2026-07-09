@@ -6,6 +6,7 @@ import { rpc } from "@expense_tracker/core/rpc";
 import { BusPlugin } from "@expense_tracker/plugins/bus_plugin";
 import { ScreenManagerPlugin } from "@expense_tracker/plugins/screen_manager_plugin";
 
+// Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/component.html
 export class ExpenseTracker extends Component {
     static template = "expense_tracker.root";
     static components = { Header, Container };

@@ -27,6 +27,7 @@ export class ExpensesByCategory extends Component {
         // MSH: Note: Also coult not implement real world example of untrack in this application
         // we can explain it on documentation itself: https://odoo.github.io/owl/documentation/v3/owl/reference/effects.html#untrack
 
+        // Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/computed_values.html#tracking-only-happens-before-the-first-await
         asyncComputed(async () => {
             const res = await this.model.load_category_expenses(this.selectedCategory());
             this.state.expenses = res;

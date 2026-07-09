@@ -9,6 +9,7 @@ import { FormViewStatic } from '../../components/formview_static/formview_static
 class ExpenseForm extends Component {
     static template = "expense_tracker.ExpenseForm";
     static components = { FormViewStatic };
+    // Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/signals.html
     props = props({
         id: t.signal(t.number().optional()),
     });
@@ -21,6 +22,7 @@ class ExpenseForm extends Component {
         this.title = "Expense";
         this.modelName = "personal.expense";
         this.footer = signal(null);
+        // Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/refs.html
         this.form = signal.ref(HTMLElement);
         const options = {
             model: this.modelName,
@@ -34,7 +36,6 @@ class ExpenseForm extends Component {
         });
         const updateState = computed(() => {
             if (this.props.id && this.props.id()) {
-                debugger;
                 this.state.data = this.model.load_expense_form_data(options);
             }
         });
@@ -42,21 +43,12 @@ class ExpenseForm extends Component {
         useListener(this.form, "click", this._onBounceEffect.bind(this));
 
         onMounted(() => {
-            // debugger;
             this.form().querySelector("input.form-control").focus();
         });
 
         onPatched(() => {
             this.form().querySelector("input.form-control").focus();
         });
-
-        // useEffect(() => {
-        //     if (!this.form()) {
-        //         return;
-        //     }
-        //     useListener(this.form(), "click", this._onBounceEffect.bind(this), {});
-        //     return () => {};
-        // });
     }
 
     /**

@@ -9,6 +9,7 @@ export class FormView extends Component {
     setup() {
         super.setup();
         this.signals = {};
+        // Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/refs.html
         this.formElement = signal(null);
         const { record } = this.props.data;
         this.state = proxy({ data: record });

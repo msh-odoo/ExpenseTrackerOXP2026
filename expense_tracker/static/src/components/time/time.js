@@ -10,8 +10,10 @@ export class Time extends Component {
         const busPlugin = plugin(BusPlugin);
 
         const start = new Date();
+        // Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/reactivity.html
         this.elapsedSeconds = signal(Math.floor((Date.now() - start) / 1000));
 
+        // Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/reactivity.html
         this.time = computed(() => {
             let delta = this.elapsedSeconds();
             const days = Math.floor(delta / 86400); delta -= days * 86400;

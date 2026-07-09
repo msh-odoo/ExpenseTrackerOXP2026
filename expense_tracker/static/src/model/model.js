@@ -54,6 +54,7 @@ export class Model {
     }
 }
 
+// Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/hooks.html
 /**
  * @template {typeof Model} T
  * @param {T} ModelClass

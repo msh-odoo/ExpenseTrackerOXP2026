@@ -12,6 +12,7 @@ export class ExpenseCategoriesList extends Component {
 
     setup() {
         this.model = useModel(ExpenseTrackerModel, this.modelParams);
+        // Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/proxies.html
         this.state = proxy({ categories: [], selectedCategories: [] });
         this.modelName = "expense.category";
         this.checkboxInteraction = false;

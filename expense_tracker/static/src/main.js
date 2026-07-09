@@ -36,6 +36,7 @@ function parseHash() {
 // In the mount options, it's also possible to add other interresting
 // configuration: https://github.com/odoo/owl/blob/master/doc/reference/app.md#configuration
 
+// Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/utils.html
 owl.whenReady(async () => {
     const db = new DB(); // TODO: MSH: Convert it to plugin
     const env = { db, rpc };
@@ -43,6 +44,7 @@ owl.whenReady(async () => {
     // fr_FR translations
     const hash = parseHash();
 
+    // Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/translations.html
     const translations = {};
     if (hash.lang) {
         const terms = {
@@ -58,7 +60,7 @@ owl.whenReady(async () => {
         return translations[str] || str;
     }
 
-    // await startServices(env);
+    // Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/app.html
     const app = new App({
         getTemplate,
         plugins: [BusPlugin, ORMPlugin, HotkeyPlugin],

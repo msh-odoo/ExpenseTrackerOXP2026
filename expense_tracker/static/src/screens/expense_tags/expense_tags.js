@@ -9,6 +9,7 @@ export class TagsList extends Component {
 
     setup() {
         this.model = useModel(ExpenseTrackerModel, this.modelParams);
+        // Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/signals.html
         this.newName = signal('');
         this.newColor = signal('');
         this.state = proxy({

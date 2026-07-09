@@ -3,6 +3,7 @@
 
     <t t-name="expense_tracker.FormView">
         <div class="d-flex flex-column o_content_modal_rounded_shades p-5" t-ref="this.formElement" style="margin:7% 5%">
+            <!-- Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/slots.html -->
             <t t-call-slot="title"></t>
             <hr />
             <div class="m-auto mt-4" style="width:70%">
@@ -12,12 +13,14 @@
                         <t t-out="this.fieldInfo.string"/>
                     </label>
                     <div class="col-sm-9">
+                        <!-- Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/form_bindings.html -->
                         <input type="text" class="form-control text-white"
                             t-model="this.signals[recordKey]"
                             t-att-value="this.state.data[recordKey]" required="true"/>
                     </div>
                 </div>
                 <div>
+                    <!-- Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/event_handling.html -->
                     <button class="btn btn-primary" t-on-click="() => this.props.newCategory(this.state.data)"><span class="fs-3">Save</span></button>
                 </div>
             </div>
