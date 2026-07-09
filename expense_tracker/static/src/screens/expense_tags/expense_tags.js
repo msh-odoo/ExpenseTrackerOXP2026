@@ -1,11 +1,13 @@
-import { Component, proxy, props, onWillStart, onPatched, signal } from '@expense_tracker/owl';
+import { Component, proxy, props, OwlError, onWillStart, onPatched, onError, signal, t } from '@expense_tracker/owl';
 import { screensRegistry } from '@expense_tracker/registries';
 import { useModel } from "../../model/model";
 import { ExpenseTrackerModel } from "../../model/expense_tracker_model";
 
 export class TagsList extends Component {
     static template = 'expense_tracker.TagsList';
-    props = props();
+    props = props({
+        ignoreCreate: t.boolean().optional(),
+    });
 
     setup() {
         this.model = useModel(ExpenseTrackerModel, this.modelParams);
@@ -23,7 +25,20 @@ export class TagsList extends Component {
 
         onWillStart(async () => {
             const res = await this.model.load_tags(this.props);
+            // this.state.tags = true;
             this.state.tags = res;
+        });
+
+        onError((error) => {
+            debugger;
+            if (error instanceof OwlError) {
+                // error originated from Owl (invalid template, missing registry key,
+                // failed validation, lifecycle misuse, ...)
+                alert(`OwlError: ${error.message}`);
+            } else {
+                alert("Something went wrong, please contact your administrator.");
+                // error from user code or the runtime (TypeError, custom errors, ...)
+            }
         });
 
         // TODO: MSH: onWillUpdateProps is removed, should be managed with signal and computed combination
