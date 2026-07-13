@@ -1,9 +1,7 @@
 import { Container } from "@expense_tracker/components/container/container";
-import { Component, proxy, plugin, providePlugins } from "@expense_tracker/owl";
+import { Component, plugin, providePlugins } from "@expense_tracker/owl";
 import { Dashboard } from "@expense_tracker/screens/expense_dashboard/expense_dashboard";
 import { Header } from "@expense_tracker/components/header/header";
-import { rpc } from "@expense_tracker/core/rpc";
-import { BusPlugin } from "@expense_tracker/plugins/bus_plugin";
 import { ScreenManagerPlugin } from "@expense_tracker/plugins/screen_manager_plugin";
 
 // Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/component.html
@@ -16,7 +14,5 @@ export class ExpenseTracker extends Component {
         providePlugins([ScreenManagerPlugin]);
         this.sm = plugin(ScreenManagerPlugin);
         this.sm.initCurrentScreen({ name: "Dashboard", component: Dashboard });
-        // busPlugin.bus.addEventListener("add_dialog", this.onAddDialog.bind(this));
     }
-
 }

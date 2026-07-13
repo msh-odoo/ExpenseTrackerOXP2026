@@ -1,10 +1,22 @@
-import { Component, computed, props, proxy, onWillStart, onMounted, onPatched, useEffect, signal, plugin, t, useListener } from '@expense_tracker/owl';
-import { screensRegistry } from '@expense_tracker/registries';
+import {
+    Component,
+    computed,
+    props,
+    proxy,
+    onWillStart,
+    onMounted,
+    onPatched,
+    signal,
+    plugin,
+    t,
+    useListener,
+} from "@expense_tracker/owl";
+import { screensRegistry } from "@expense_tracker/registries";
 import { useModel } from "../../model/model";
 import { BusPlugin } from "@expense_tracker/plugins/bus_plugin";
 import { ScreenManagerPlugin } from "@expense_tracker/plugins/screen_manager_plugin";
 import { ExpenseTrackerModel } from "../../model/expense_tracker_model";
-import { FormViewStatic } from '../../components/formview_static/formview_static';
+import { FormViewStatic } from "../../components/formview_static/formview_static";
 
 class ExpenseForm extends Component {
     static template = "expense_tracker.ExpenseForm";
@@ -30,11 +42,10 @@ class ExpenseForm extends Component {
             fields: ["id", "name", "user_id", "date", "amount", "category_id", "payment_method_id"],
         };
         onWillStart(async () => {
-            let res = {};
-                res = await this.model.load_expense_form_data(options);
+            const res = await this.model.load_expense_form_data(options);
             this.state.data = res;
         });
-        const updateState = computed(() => {
+        computed(() => {
             if (this.props.id && this.props.id()) {
                 this.state.data = this.model.load_expense_form_data(options);
             }
@@ -56,16 +67,18 @@ class ExpenseForm extends Component {
      */
     checkFormValid() {
         let isValid = true;
-        this.form().querySelectorAll(".form-control").forEach((elem) => {
-            if (elem.required && !elem.value) {
-                isValid = false;
-            }
-        });
+        this.form()
+            .querySelectorAll(".form-control")
+            .forEach((elem) => {
+                if (elem.required && !elem.value) {
+                    isValid = false;
+                }
+            });
         this.state.isValidForm = isValid;
     }
 
     markFormInvalid() {
-        this.form.el.classList.toggle('o_invalid', !this.state.isValidForm);
+        this.form.el.classList.toggle("o_invalid", !this.state.isValidForm);
     }
 
     _onBounceEffect() {
@@ -87,21 +100,21 @@ class ExpenseForm extends Component {
         };
         if (this.state.data.record) {
             this._updateExpense(newExpense).then(() => {
-                this.sm.changeScreen({ screen_name: 'ExpenseList', props: {}});
+                this.sm.changeScreen({ screen_name: "ExpenseList", props: {} });
             });
         } else {
             if (this.state.isValidForm) {
                 this._createExpense(newExpense).then(() => {
-                    this.sm.changeScreen({ screen_name: 'ExpenseList', props: {}});
+                    this.sm.changeScreen({ screen_name: "ExpenseList", props: {} });
                 });
             }
         }
     }
-    async _createExpense(expense){
+    async _createExpense(expense) {
         return await this.model.orm.create("personal.expense", [expense]);
     }
-    async _updateExpense(expense){
-        return await this.model.orm.write("personal.expense", [parseInt(this.props.id())], expense)
+    async _updateExpense(expense) {
+        return await this.model.orm.write("personal.expense", [parseInt(this.props.id())], expense);
     }
 }
 

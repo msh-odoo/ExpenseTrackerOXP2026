@@ -1,10 +1,20 @@
-import { Component, proxy, props, OwlError, onWillStart, onPatched, onError, signal, t } from '@expense_tracker/owl';
-import { screensRegistry } from '@expense_tracker/registries';
+import {
+    Component,
+    proxy,
+    props,
+    OwlError,
+    onWillStart,
+    onPatched,
+    onError,
+    signal,
+    t,
+} from "@expense_tracker/owl";
+import { screensRegistry } from "@expense_tracker/registries";
 import { useModel } from "../../model/model";
 import { ExpenseTrackerModel } from "../../model/expense_tracker_model";
 
 export class TagsList extends Component {
-    static template = 'expense_tracker.TagsList';
+    static template = "expense_tracker.TagsList";
     props = props({
         ignoreCreate: t.boolean().optional(),
     });
@@ -12,13 +22,13 @@ export class TagsList extends Component {
     setup() {
         this.model = useModel(ExpenseTrackerModel, this.modelParams);
         // Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/signals.html
-        this.newName = signal('');
-        this.newColor = signal('');
+        this.newName = signal("");
+        this.newColor = signal("");
         this.state = proxy({
             tags: [],
             isAddingNewTag: false,
             newTag: { name: this.newName, color: this.newColor },
-            lastAddedTagId: null // Track the last added tag ID
+            lastAddedTagId: null, // Track the last added tag ID
         });
         this.modelName = "expense.tag";
         this.formElement = signal(null);
@@ -30,7 +40,6 @@ export class TagsList extends Component {
         });
 
         onError((error) => {
-            debugger;
             if (error instanceof OwlError) {
                 // error originated from Owl (invalid template, missing registry key,
                 // failed validation, lifecycle misuse, ...)
@@ -48,7 +57,9 @@ export class TagsList extends Component {
 
         onPatched(() => {
             if (this.state.lastAddedTagId !== null) {
-                const lastTagElement = this.formEl.el.querySelector(`#tag-${this.state.lastAddedTagId}`);
+                const lastTagElement = this.formEl.el.querySelector(
+                    `#tag-${this.state.lastAddedTagId}`,
+                );
                 if (lastTagElement) {
                     lastTagElement.classList.add("table-info");
                     setTimeout(() => {
@@ -68,10 +79,12 @@ export class TagsList extends Component {
         const { newTag, tags } = this.state;
         const { name, color } = newTag;
         if (name && color) {
-            const tagId = await this.model.orm.create("expense.tag", [{
-                name: name,
-                color: color,
-            }]);
+            const tagId = await this.model.orm.create("expense.tag", [
+                {
+                    name: name,
+                    color: color,
+                },
+            ]);
             if (tagId) {
                 this.state.tags = [
                     ...tags,
@@ -81,7 +94,7 @@ export class TagsList extends Component {
                         color: parseInt(color),
                     },
                 ];
-                this.state.newTag = { name: '', color: '' };
+                this.state.newTag = { name: "", color: "" };
                 this.state.isAddingNewTag = false;
 
                 // Set last added tag ID for highlighting
@@ -92,7 +105,7 @@ export class TagsList extends Component {
 
     _onCancelNewTag() {
         this.state.isAddingNewTag = false;
-        this.state.newTag = { name: '', color: '' };
+        this.state.newTag = { name: "", color: "" };
     }
 }
 

@@ -1,5 +1,5 @@
-import { asyncComputed, Component, proxy, props, onWillStart, plugin, providePlugins, signal } from '@expense_tracker/owl';
-import { screensRegistry } from '@expense_tracker/registries';
+import { asyncComputed, Component, proxy, props, onWillStart, signal } from "@expense_tracker/owl";
+import { screensRegistry } from "@expense_tracker/registries";
 import { useModel } from "../../model/model";
 
 import { PersonalExpenseList } from "../expense_list/expense_list";
@@ -13,7 +13,7 @@ export class ExpensesByCategory extends Component {
     setup() {
         this.model = useModel(ExpenseTrackerModel, this.modelParams);
         this.categories = signal.Array([]);
-        this.selectedCategory = signal('all');
+        this.selectedCategory = signal("all");
         this.state = proxy({ expenses: [] });
         // MSH: Note: I was trying to implement abortSignal example but could not do it
         // abortSignal works if component is destroyed while fetch is on flight(it is still not completed) 

@@ -1,5 +1,3 @@
-/* @odoo-module */
-
 import { Model } from "../model/model";
 
 export class ExpenseTrackerModel extends Model {
@@ -15,7 +13,8 @@ export class ExpenseTrackerModel extends Model {
      * @param {SearchParams} searchParams
      */
     async load_categories(searchParams) {
-        return await this.orm.searchRead("expense.category",
+        return await this.orm.searchRead(
+            "expense.category",
             [],
             ["name", "icon", "description"],
             {},
@@ -26,11 +25,7 @@ export class ExpenseTrackerModel extends Model {
      * @param {SearchParams} searchParams
      */
     async load_tags(searchParams) {
-        return await this.orm.searchRead("expense.tag",
-            [],
-            ["name", "color"],
-            {},
-        );
+        return await this.orm.searchRead("expense.tag", [], ["name", "color"], {});
     }
 
     /**
@@ -54,22 +49,22 @@ export class ExpenseTrackerModel extends Model {
     }
 
     /**
-     * @param {Object} params
-     */
-    // async get_expense_category_data(params) {
-    //     return await this.rpc("/expense/get_expense_category_data", {
-    //         id: params.id,
-    //         isNew: params.isNew,
-    //     });
-    // }
-
-    /**
      * @param {SearchParams} searchParams
      */
     async load_expenses(searchParams) {
-        return await this.orm.searchRead("personal.expense",
+        return await this.orm.searchRead(
+            "personal.expense",
             [["active", "=", true]],
-            ["name", "user_id", "date", "amount", "category_id", "icon", "payment_method_id", "tag_ids"],
+            [
+                "name",
+                "user_id",
+                "date",
+                "amount",
+                "category_id",
+                "icon",
+                "payment_method_id",
+                "tag_ids",
+            ],
             { limit: 20 },
         );
     }
@@ -82,12 +77,22 @@ export class ExpenseTrackerModel extends Model {
             return [];
         }
         const domain = [];
-        if (categoryId !== 'all') {
+        if (categoryId !== "all") {
             domain.push(["category_id", "=", categoryId]);
         }
-        return await this.orm.searchRead("personal.expense",
+        return await this.orm.searchRead(
+            "personal.expense",
             domain,
-            ["name", "user_id", "date", "amount", "category_id", "icon", "payment_method_id", "tag_ids"],
+            [
+                "name",
+                "user_id",
+                "date",
+                "amount",
+                "category_id",
+                "icon",
+                "payment_method_id",
+                "tag_ids",
+            ],
             { limit: 20 },
         );
     }
@@ -98,9 +103,4 @@ export class ExpenseTrackerModel extends Model {
     hasData() {
         return this.data.some((data) => data.rows.length > 0);
     }
-
-    //--------------------------------------------------------------------------
-    // Protected
-    //--------------------------------------------------------------------------
-
 }

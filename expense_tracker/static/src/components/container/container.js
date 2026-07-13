@@ -1,5 +1,4 @@
-
-import { Component, props, types as t, } from "@expense_tracker/owl";
+import { Component, props, types as t } from "@expense_tracker/owl";
 
 export class Container extends Component {
     static template = "expense_tracker.container";

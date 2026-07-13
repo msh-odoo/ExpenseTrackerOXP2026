@@ -1,5 +1,5 @@
-import { Component, proxy, props, onWillStart, plugin, providePlugins } from '@expense_tracker/owl';
-import { screensRegistry } from '@expense_tracker/registries';
+import { Component, proxy, props, onWillStart, plugin } from "@expense_tracker/owl";
+import { screensRegistry } from "@expense_tracker/registries";
 import { useModel } from "../../model/model";
 
 import { BusPlugin } from "@expense_tracker/plugins/bus_plugin";
@@ -30,19 +30,25 @@ export class ExpenseCategoriesList extends Component {
     }
 
     _onClickAddCategory(ev) {
-        this.sm.changeScreen({ screen_name: 'ExpenseCategoryForm', props: { model: "expense.category", isNew: true }});
+        this.sm.changeScreen({
+            screen_name: "ExpenseCategoryForm",
+            props: { model: "expense.category", isNew: true },
+        });
     }
 
     _onClickCategory(ev) {
         if (!this.checkboxInteraction && this.state.selectedCategories.length === 0) {
-            this.sm.changeScreen({ screen_name: 'ExpenseCategoryForm', props: { model: "expense.category", id: ev.currentTarget.getAttribute("data-id") }});
+            this.sm.changeScreen({
+                screen_name: "ExpenseCategoryForm",
+                props: { model: "expense.category", id: ev.currentTarget.getAttribute("data-id") },
+            });
         }
         this.checkboxInteraction = false;
     }
 
     _onCategorySelection(ev) {
         this.checkboxInteraction = true;
-        const recordId =  parseInt(ev.currentTarget.getAttribute("data-id"));
+        const recordId = parseInt(ev.currentTarget.getAttribute("data-id"));
         if (ev.currentTarget.checked) {
             if (!this.state.selectedCategories.includes(recordId)) {
                 this.state.selectedCategories.push(recordId);

@@ -1,7 +1,5 @@
 import { Plugin } from "@expense_tracker/owl";
 import { rpc } from "@expense_tracker/core/rpc";
-// import { user } from "@web/core/user";
-// import { Domain } from "@web/core/domain";
 
 /**
  * This ORM service is the standard way to interact with the ORM in python from

@@ -1,10 +1,15 @@
-
-import { Component, effect, ErrorBoundary, onWillStart, proxy, plugin, providePlugins, signal } from "@expense_tracker/owl";
+import {
+    Component,
+    effect,
+    ErrorBoundary,
+    onWillStart,
+    proxy,
+    plugin,
+    signal,
+} from "@expense_tracker/owl";
 import { screensRegistry } from "@expense_tracker/registries";
 import { PersonalExpenseList } from "../expense_list/expense_list";
 import { BusPlugin } from "@expense_tracker/plugins/bus_plugin";
-import { ORMPlugin } from "@expense_tracker/plugins/orm_plugin";
-import { ExpenseTrackerModelPlugin } from "../../model/expense_tracker_model";
 import { useModel } from "../../model/model";
 import { ExpenseTrackerModel } from "../../model/expense_tracker_model";
 import { ScreenManagerPlugin } from "@expense_tracker/plugins/screen_manager_plugin";
@@ -24,14 +29,15 @@ export class Dashboard extends Component {
         // Show full error in console
         effect(() => {
             const e = this.error();
-            if (e) console.error("widget failed:", e);
+            if (e) {
+                console.error("widget failed:", e);
+            }
         });
 
         onWillStart(async () => {
-            const res = await this.model.load_expenses(this.props)
-                .catch((error) => {
-                    this.error.set(error);
-                });
+            const res = await this.model.load_expenses(this.props).catch((error) => {
+                this.error.set(error);
+            });
             this.state.expenses = res;
         });
         // TODO: MSH: onWillUpdateProps is removed, should be managed with signal and computed combination
@@ -44,22 +50,28 @@ export class Dashboard extends Component {
     }
 
     _onQuickCreateExpense() {
-        this.sm.changeScreen({ screen_name: 'ExpenseForm', props: { model: "personal.expense", isNew: true }});
-        this.busPlugin.bus.trigger('change_active_menu', 'expenses' );
+        this.sm.changeScreen({
+            screen_name: "ExpenseForm",
+            props: { model: "personal.expense", isNew: true },
+        });
+        this.busPlugin.bus.trigger("change_active_menu", "expenses");
     }
 
     _onQuickCreateCategory() {
-        this.sm.changeScreen({ screen_name: 'ExpenseCategoryForm', props: { model: "expense.category", isNew: true }});
-        this.busPlugin.bus.trigger('change_active_menu', 'categories' );
+        this.sm.changeScreen({
+            screen_name: "ExpenseCategoryForm",
+            props: { model: "expense.category", isNew: true },
+        });
+        this.busPlugin.bus.trigger("change_active_menu", "categories");
     }
 
     _onExpensesByCategory() {
-        this.sm.changeScreen({ screen_name: 'ExpensesByCategory', props: { model: "personal.expense" }});
-        this.busPlugin.bus.trigger('change_active_menu', 'reports' );
+        this.sm.changeScreen({
+            screen_name: "ExpensesByCategory",
+            props: { model: "personal.expense" },
+        });
+        this.busPlugin.bus.trigger("change_active_menu", "reports");
     }
-
 }
-
-// Dashboard.components = { PersonalExpenseList }
 
 screensRegistry.add("Dashboard", Dashboard);

@@ -1,4 +1,4 @@
-import { Component, signal } from '@expense_tracker/owl';
+import { Component, signal } from "@expense_tracker/owl";
 
 export class FormViewStatic extends Component {
     static template = "expense_tracker.FormViewStatic";
@@ -6,5 +6,4 @@ export class FormViewStatic extends Component {
         this.formElement = signal(null);
         super.setup();
     }
-
 }

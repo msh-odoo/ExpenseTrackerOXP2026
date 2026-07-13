@@ -1,4 +1,3 @@
-
 function jsonrpc(url, params, settings = {}) {
     const XHR = window.XMLHttpRequest;
     const data = {

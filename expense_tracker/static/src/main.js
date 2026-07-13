@@ -1,5 +1,4 @@
-import { App, EventBus } from "@expense_tracker/owl";
-// import { browser } from "@web/core/browser/browser";
+import { App, whenReady } from "@expense_tracker/owl";
 import { rpc } from "@expense_tracker/core/rpc";
 import { DB } from "@expense_tracker/core/db";
 import { getTemplate } from "@expense_tracker/core/templates";
@@ -7,7 +6,6 @@ import { ExpenseTracker } from "@expense_tracker/expense_tracker";
 import { BusPlugin } from "./plugins/bus_plugin";
 import { ORMPlugin } from "./plugins/orm_plugin";
 import { HotkeyPlugin } from "./plugins/hotkey_plugin";
-
 
 function cast(value) {
     return !value || isNaN(value) ? value : Number(value);
@@ -26,7 +24,7 @@ function parseString(str) {
 
 function parseHash() {
     const location = window.location;
-    const { pathname, search, hash } = location;
+    const { hash } = location;
     return hash && hash !== "#" ? parseString(hash.slice(1)) : {};
 }
 
@@ -37,7 +35,7 @@ function parseHash() {
 // configuration: https://github.com/odoo/owl/blob/master/doc/reference/app.md#configuration
 
 // Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/utils.html
-owl.whenReady(async () => {
+whenReady(async () => {
     const db = new DB(); // TODO: MSH: Convert it to plugin
     const env = { db, rpc };
 
@@ -80,13 +78,11 @@ owl.whenReady(async () => {
         Object.assign(translations, terms);
     }
 
-    const translateFn = (str, ctx) => {
-        return translations[str] || str;
-    }
+    const translateFn = (str, ctx) => translations[str] || str;
 
     // Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/app.html
     const urlParams = new URLSearchParams(window.location.search);
-    const debug = urlParams.get('debug');
+    const debug = urlParams.get("debug");
     const app = new App({
         getTemplate,
         plugins: [BusPlugin, ORMPlugin, HotkeyPlugin],
@@ -107,7 +103,7 @@ owl.whenReady(async () => {
  */
 function logError(ev) {
     ev.preventDefault();
-    let error = ev ?.error || ev.reason;
+    let error = ev?.error || ev.reason;
 
     if (error.seen) {
         // If an error causes the mount to crash, Owl will reject the mount promise and throw the
@@ -118,12 +114,16 @@ function logError(ev) {
 
     let errorMessage = error.stack;
     while (error.cause) {
-        errorMessage += "\nCaused by: "
+        errorMessage += "\nCaused by: ";
         errorMessage += error.cause.stack;
         error = error.cause;
     }
     console.error(errorMessage);
 }
 
-window.addEventListener("error", (ev) => {logError(ev)});
-window.addEventListener("unhandledrejection", (ev) => {logError(ev)});
+window.addEventListener("error", (ev) => {
+    logError(ev);
+});
+window.addEventListener("unhandledrejection", (ev) => {
+    logError(ev);
+});

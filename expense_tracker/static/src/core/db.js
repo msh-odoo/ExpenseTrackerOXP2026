@@ -1,6 +1,4 @@
-
 import { EventBus, useEnv } from "@expense_tracker/owl";
-
 
 export class DB extends EventBus {
     constructor(params) {
@@ -20,19 +18,17 @@ export class DB extends EventBus {
     }
 
     filterProducts(categoryID) {
-        const datas = this.load('datas');
+        const datas = this.load("datas");
         const auctions = datas.auctionItems;
-        if (categoryID === 'all') {
+        if (categoryID === "all") {
             return auctions;
         } else {
-            return auctions.filter((auction) => {
-                return auction.categ_id[0] === parseInt(categoryID);
-            });
+            return auctions.filter((auction) => auction.categ_id[0] === parseInt(categoryID));
         }
     }
 
     getProduct(id) {
-        const datas = this.load('datas');
+        const datas = this.load("datas");
         const products = datas.products;
         const product = products.find((product) => product.id === id);
         return product;
@@ -41,7 +37,5 @@ export class DB extends EventBus {
 
 export function useFetchData() {
     const env = useEnv();
-    return () => {
-        return env.rpc("/get_ecommerce_data", {});
-    }
+    return () => env.rpc("/get_ecommerce_data", {});
 }

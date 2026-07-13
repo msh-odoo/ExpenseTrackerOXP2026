@@ -1,6 +1,5 @@
 import { Plugin, signal } from "@expense_tracker/owl";
 import { screensRegistry } from "@expense_tracker/registries";
-// import { Dashboard } from "@expense_tracker/screens/expense_dashboard/expense_dashboard";
 
 export class ScreenManagerPlugin extends Plugin {
     currentScreenName = signal("");
@@ -21,7 +20,7 @@ export class ScreenManagerPlugin extends Plugin {
 
     /**
      * Called when main screen is changed
-     * @param {Event} ev 
+     * @param {Event} ev
      */
     changeScreen(config) {
         const screen = screensRegistry.get(config.screen_name)

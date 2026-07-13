@@ -1,7 +1,5 @@
-import { Plugin, useListener } from "@expense_tracker/owl";
-import { Resource } from "@expense_tracker/owl";
+import { Plugin, Resource, useListener } from "@expense_tracker/owl";
 import { isMacOS } from "@expense_tracker/core/utils";
-
 
 const ALPHANUM_KEYS = "abcdefghijklmnopqrstuvwxyz0123456789".split("");
 const NAV_KEYS = [
@@ -136,7 +134,7 @@ export class HotkeyPlugin extends Plugin {
         // TODO: MSH: note that hotkey is not the right example because here we store key-value pairs,
         // better example would be where we have to store list of items only, because resource is ordered collection of items
         const items = this.hotkeyResource.items();
-        const hotkey = items.find(item => item.key === key);
+        const hotkey = items.find((item) => item.key === key);
         if (hotkey) {
             hotkey.action();
             return true;

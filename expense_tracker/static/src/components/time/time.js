@@ -1,14 +1,17 @@
-
-import { Component, computed, onMounted, onWillUnmount, proxy, plugin, signal } from "@expense_tracker/owl";
+import {
+    Component,
+    computed,
+    onMounted,
+    onWillUnmount,
+    plugin,
+    signal,
+} from "@expense_tracker/owl";
 import { BusPlugin } from "@expense_tracker/plugins/bus_plugin";
 
 export class Time extends Component {
     static template = "expense_tracker.time";
 
     setup() {
-        // const currentDate = new Date();
-        const busPlugin = plugin(BusPlugin);
-
         const start = new Date();
         // Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/reactivity.html
         this.elapsedSeconds = signal(Math.floor((Date.now() - start) / 1000));
@@ -30,20 +33,6 @@ export class Time extends Component {
             }, 1000);
         });
         onWillUnmount(() => clearInterval(intervalId));
-        // const datetime = new Date();
-        // const result = this.interval(currentDate, datetime);
-        // this.state = proxy({ time: {days: result.days, hours: result.hours, minutes: result.minutes, seconds: result.seconds} });
-
-        // let intervalId;
-        // onMounted(() => {
-        //     intervalId = setInterval(() => {
-        //         this.updateTime();
-        //     }, 1000);
-        // });
-
-        // onWillUnmount(() => {
-        //     clearInterval(intervalId);
-        // });
     }
 
     interval(date1, date2) {
@@ -67,7 +56,7 @@ export class Time extends Component {
             days: days,
             hours: hours,
             minutes: minutes,
-            seconds: seconds
+            seconds: seconds,
         };
     }
 
@@ -96,5 +85,4 @@ export class Time extends Component {
         this.state.time.hours = hours;
         this.state.time.days = days;
     }
-
 }
