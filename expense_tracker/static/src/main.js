@@ -87,7 +87,6 @@ whenReady(async () => {
         getTemplate,
         plugins: [BusPlugin, ORMPlugin, HotkeyPlugin],
         dev: debug || false,
-        // warnIfNoStaticProps: true, // !session.test_mode,
         name: ExpenseTracker.constructor.name,
         // translatableAttributes: ["data-tooltip"],
         translateFn,
