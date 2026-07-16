@@ -7,7 +7,7 @@
                     Tags
                 </h2>
                 <button type="button" class="btn btn-primary mx-1" t-on-click="this._onCreateTags">
-                    <span class="fs-3">Add New Tag</span>
+                    <span>Add New Tag</span>
                 </button>
             </div>
             <hr />

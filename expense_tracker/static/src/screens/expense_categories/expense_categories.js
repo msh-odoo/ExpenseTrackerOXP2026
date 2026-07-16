@@ -1,4 +1,4 @@
-import { Component, proxy, props, onWillStart, plugin } from "@expense_tracker/owl";
+import { Component, proxy, useProps, onWillStart, usePlugin } from "@expense_tracker/owl";
 import { screensRegistry } from "@expense_tracker/registries";
 import { useModel } from "../../model/model";
 
@@ -8,7 +8,7 @@ import { ExpenseTrackerModel } from "../../model/expense_tracker_model";
 
 export class ExpenseCategoriesList extends Component {
     static template = "expense_tracker.CategoriesList";
-    props = props();
+    props = useProps();
 
     setup() {
         this.model = useModel(ExpenseTrackerModel, this.modelParams);
@@ -17,8 +17,8 @@ export class ExpenseCategoriesList extends Component {
         this.modelName = "expense.category";
         this.checkboxInteraction = false;
         // providePlugins([BusPlugin]);
-        this.busPlugin = plugin(BusPlugin);
-        this.sm = plugin(ScreenManagerPlugin);
+        this.busPlugin = usePlugin(BusPlugin);
+        this.sm = usePlugin(ScreenManagerPlugin);
 
 
         onWillStart(async () => {

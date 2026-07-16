@@ -1,4 +1,4 @@
-import { Component, proxy, plugin, onMounted } from "@expense_tracker/owl";
+import { Component, proxy, usePlugin, onMounted } from "@expense_tracker/owl";
 import { Time } from "@expense_tracker/components/time/time";
 import { BusPlugin } from "@expense_tracker/plugins/bus_plugin";
 import { HotkeyPlugin } from "@expense_tracker/plugins/hotkey_plugin";
@@ -9,9 +9,9 @@ export class Header extends Component {
     static components = { Time };
 
     setup() {
-        this.busPlugin = plugin(BusPlugin);
-        this.hotkeyPlugin = plugin(HotkeyPlugin);
-        this.sm = plugin(ScreenManagerPlugin);
+        this.busPlugin = usePlugin(BusPlugin);
+        this.hotkeyPlugin = usePlugin(HotkeyPlugin);
+        this.sm = usePlugin(ScreenManagerPlugin);
         this.state = proxy({ activeMenuItem: "home" });
         this.busPlugin.bus.addEventListener("change_active_menu", this.changeActiveMenu.bind(this));
         onMounted(async () => {

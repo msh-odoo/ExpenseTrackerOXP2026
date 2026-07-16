@@ -11,25 +11,25 @@
                 <li class="nav-item">
                     <a class="nav-link active text-white" t-attf-class="{{ this.state.activeMenuItem === 'home' ? 'active' : '' }}" t-on-click.prevent="this.onActivateMenu" data-screen="Dashboard" data-name="home" href="#">
                         <i class="fa fa-home fa-lg" width="16" height="16" aria-hidden="true"></i>
-                        <span class="fs-4" style="margin:0 8px">Home</span>
+                        <span style="margin:0 8px">Home</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white" t-attf-class="{{ this.state.activeMenuItem === 'expenses' ? 'active' : '' }}" t-on-click.prevent="this.onActivateMenu" data-screen="ExpenseList" data-name="expenses" href="#">
                         <i class="fa fa-money fa-lg" width="16" height="16" aria-hidden="true"></i>
-                        <span class="fs-4" style="margin:0 8px">Expenses</span>
+                        <span style="margin:0 8px">Expenses</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white"  t-attf-class="{{ this.state.activeMenuItem === 'categories' ? 'active' : '' }}" t-on-click.prevent="this.onActivateMenu" data-screen="CategoriesList" data-name="categories" href="#">
                         <i class="fa fa-th-large fa-lg" width="16" height="16" aria-hidden="true"></i>
-                        <span class="fs-4" style="margin:0 8px">Categories</span>
+                        <span style="margin:0 8px">Categories</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white" t-attf-class="{{ this.state.activeMenuItem === 'tags' ? 'active' : '' }}" t-on-click.prevent="this.onActivateMenu" data-screen="TagsList" data-name="tags" href="#">
                         <i class="fa fa-tag fa-lg" width="16" height="16" aria-hidden="true"></i>
-                        <span class="fs-4" style="margin:0 8px">Tags</span>
+                        <span style="margin:0 8px">Tags</span>
                     </a>
                 </li>
             </ul>

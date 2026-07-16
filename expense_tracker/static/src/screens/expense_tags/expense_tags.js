@@ -1,7 +1,7 @@
 import {
     Component,
     proxy,
-    props,
+    useProps,
     OwlError,
     onWillStart,
     onPatched,
@@ -15,7 +15,7 @@ import { ExpenseTrackerModel } from "../../model/expense_tracker_model";
 
 export class TagsList extends Component {
     static template = "expense_tracker.TagsList";
-    props = props({
+    props = useProps({
         ignoreCreate: t.boolean().optional(),
     });
 

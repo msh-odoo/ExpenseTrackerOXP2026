@@ -1,13 +1,13 @@
 import {
     Component,
     computed,
-    props,
+    useProps,
     proxy,
     onWillStart,
     onMounted,
     onPatched,
     signal,
-    plugin,
+    usePlugin,
     t,
     useListener,
 } from "@expense_tracker/owl";
@@ -22,11 +22,11 @@ class ExpenseForm extends Component {
     static template = "expense_tracker.ExpenseForm";
     static components = { FormViewStatic };
     // Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/signals.html
-    props = props({
+    props = useProps({
         id: t.signal(t.number().optional()),
     });
-    busPlugin = plugin(BusPlugin);
-    sm = plugin(ScreenManagerPlugin);
+    busPlugin = usePlugin(BusPlugin);
+    sm = usePlugin(ScreenManagerPlugin);
 
     setup() {
         this.model = useModel(ExpenseTrackerModel, this.modelParams);
@@ -38,7 +38,7 @@ class ExpenseForm extends Component {
         this.form = signal.ref(HTMLElement);
         const options = {
             model: this.modelName,
-            id: this.props.id && this.props.id(),
+            id: this.props.id,
             fields: ["id", "name", "user_id", "date", "amount", "category_id", "payment_method_id"],
         };
         onWillStart(async () => {
@@ -96,7 +96,7 @@ class ExpenseForm extends Component {
             name: this.form().querySelector(".o_expense_description").value,
             date: this.form().querySelector(".o_expense_date").value,
             amount: this.form().querySelector(".o_expense_amount").value,
-            category_id: parseInt(this.form().querySelector("o_expense_category").value),
+            category_id: parseInt(this.form().querySelector(".o_expense_category").value),
         };
         if (this.state.data.record) {
             this._updateExpense(newExpense).then(() => {
@@ -114,7 +114,7 @@ class ExpenseForm extends Component {
         return await this.model.orm.create("personal.expense", [expense]);
     }
     async _updateExpense(expense) {
-        return await this.model.orm.write("personal.expense", [parseInt(this.props.id())], expense);
+        return await this.model.orm.write("personal.expense", [parseInt(this.props.id)], expense);
     }
 }
 

@@ -4,8 +4,9 @@ import {
     ErrorBoundary,
     onWillStart,
     proxy,
-    plugin,
+    usePlugin,
     signal,
+    useProps,
 } from "@expense_tracker/owl";
 import { screensRegistry } from "@expense_tracker/registries";
 import { PersonalExpenseList } from "../expense_list/expense_list";
@@ -17,9 +18,10 @@ import { ScreenManagerPlugin } from "@expense_tracker/plugins/screen_manager_plu
 export class Dashboard extends Component {
     static template = "expense_tracker.Dashboard";
     static components = { ErrorBoundary, PersonalExpenseList };
-    busPlugin = plugin(BusPlugin);
-    sm = plugin(ScreenManagerPlugin);
+    busPlugin = usePlugin(BusPlugin);
+    sm = usePlugin(ScreenManagerPlugin);
     error = signal(null);
+    props = useProps();
 
     setup() {
         super.setup();

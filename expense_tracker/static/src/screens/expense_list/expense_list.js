@@ -1,10 +1,10 @@
 import {
     Component,
     onWillStart,
-    props,
+    useProps,
     computed,
     proxy,
-    plugin,
+    usePlugin,
     t,
     useEffect,
 } from "@expense_tracker/owl";
@@ -19,13 +19,13 @@ export class PersonalExpenseList extends Component {
     static template = "expense_tracker.PersonalExpenseList";
     // Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/props.html
     // Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/types_validation.html
-    props = props({
+    props = useProps({
         expenses: t.array().optional(),
         ignoreCreate: t.boolean().optional(),
         class: t.string().optional(),
     });
-    busPlugin = plugin(BusPlugin);
-    sm = plugin(ScreenManagerPlugin);
+    busPlugin = usePlugin(BusPlugin);
+    sm = usePlugin(ScreenManagerPlugin);
     hasSelection = computed(() => this.state.selectedCheckboxes.length);
     totalAmount = computed(() =>
         this.state.expenses.reduce((sum, expense) => sum + expense.amount, 0),

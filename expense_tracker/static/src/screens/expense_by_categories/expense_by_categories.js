@@ -1,4 +1,11 @@
-import { asyncComputed, Component, proxy, props, onWillStart, signal } from "@expense_tracker/owl";
+import {
+    asyncComputed,
+    Component,
+    proxy,
+    useProps,
+    onWillStart,
+    signal,
+} from "@expense_tracker/owl";
 import { screensRegistry } from "@expense_tracker/registries";
 import { useModel } from "../../model/model";
 
@@ -8,7 +15,7 @@ import { ExpenseTrackerModel } from "../../model/expense_tracker_model";
 export class ExpensesByCategory extends Component {
     static template = "expense_tracker.ExpensesByCategory";
     static components = { PersonalExpenseList };
-    props = props();
+    props = useProps();
 
     setup() {
         this.model = useModel(ExpenseTrackerModel, this.modelParams);

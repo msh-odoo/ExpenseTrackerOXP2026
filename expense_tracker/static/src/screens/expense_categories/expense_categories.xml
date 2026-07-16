@@ -8,10 +8,10 @@
                 </h2>
                 <div>
                     <button type="button" class="btn btn-primary mx-1 me-2" t-on-click="this._onClickAddCategory">
-                        <span class="fs-3">Create New Category</span>
+                        <span>Create New Category</span>
                     </button>
                     <button t-if="this.state.selectedCategories.length" type="button" class="btn btn-primary" t-on-click="this.deleteCategory">
-                        <span class="fs-3">Delete Category</span>
+                        <span>Delete Category</span>
                     </button>
                 </div>
             </div>

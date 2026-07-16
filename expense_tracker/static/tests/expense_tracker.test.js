@@ -1,18 +1,11 @@
 import { after, expect, test, describe, mountOnFixture } from "@odoo/hoot";
 import { MainComponentsContainer } from "@web/core/main_components_container";
-import { Component, props, xml } from "@expense_tracker/owl";
+import { Component, EventBus, useProps, xml } from "@expense_tracker/owl";
 import { patch } from "@web/core/utils/patch";
-import {
-    defineModels,
-    fields,
-    models,
-    onRpc,
-    makeMockEnv,
-} from "@web/../tests/web_test_helpers";
+import { defineModels, fields, models, onRpc, makeMockEnv } from "@web/../tests/web_test_helpers";
 
 import { rpc } from "./../src/core/rpc.js";
 import { DB } from "./../src/core/db.js";
-import { EventBus } from "@expense_tracker/owl";
 import { getTemplate } from "@expense_tracker/core/templates";
 
 import { Dashboard } from "./../src/screens/expense_dashboard/expense_dashboard";
@@ -116,7 +109,7 @@ test("dashboard can be rendered", async () => {
         ];
     });
     class MyComponent extends Component {
-        props = props();
+        props = useProps();
         // static props = {};
         static template = xml`<Dashboard />`;
         static components = { Dashboard };

@@ -9,7 +9,7 @@
             <div class="m-auto mt-4" style="width:70%">
                 <div class="mb-3 row d-flex align-items-center" t-foreach="this.record" t-as="recordKey" t-key="recordKey">
                     <t t-set="fieldInfo" t-value="this.props.data.record_fields[recordKey]"/>
-                    <label class="fs-2 col-sm-3 col-form-label">
+                    <label class="col-sm-3 col-form-label">
                         <t t-out="this.fieldInfo.string"/>
                     </label>
                     <div class="col-sm-9">
@@ -21,7 +21,7 @@
                 </div>
                 <div>
                     <!-- Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/event_handling.html -->
-                    <button class="btn btn-primary" t-on-click="() => this.props.newCategory(this.state.data)"><span class="fs-3">Save</span></button>
+                    <button class="btn btn-primary" t-on-click="() => this.props.newCategory(this.state.data)"><span>Save</span></button>
                 </div>
             </div>
         </div>
