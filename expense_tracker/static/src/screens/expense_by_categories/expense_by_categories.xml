@@ -5,7 +5,7 @@
             <select class="form-select o_expense_category" t-on-change="this._onCategoryChange">
                 <option class="text-dark" value="all">All Categories</option>
                 <t t-if="this.categories">
-                    <t t-foreach="this.categories" t-as="category" t-key="category.id">
+                    <t t-foreach="this.categories()" t-as="category" t-key="category.id">
                         <option class="text-dark" t-att-value="category.id"><t t-out="category.name"/></option>
                     </t>
                 </t>

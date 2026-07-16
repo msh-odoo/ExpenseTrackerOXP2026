@@ -42,7 +42,7 @@ export class ExpensesByCategory extends Component {
 
         onWillStart(async () => {
             const res = await this.model.load_categories(this.props);
-            this.categories = res;
+            this.categories.set(res);
         });
     }
 
