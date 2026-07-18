@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="web.TimerField">
+        <div class="text-nowrap d-inline-flex w-100 align-items-baseline position-relative">
+            <span><t t-out="this.getTimeValue.days"/> </span>
+            <span> : <t t-out="this.getTimeValue.hours"/></span>
+            <span> : <t t-out="this.getTimeValue.minutes"/></span>
+            <span t-if="!this.props.noSeconds"> : <t t-out="this.getTimeValue.seconds"/></span>
+        </div>
+    </t>
+
+</templates>
