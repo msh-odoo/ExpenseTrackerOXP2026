@@ -31,10 +31,12 @@ export class ExpensesByCategory extends Component {
         // https://odoo.github.io/owl/documentation/v3/owl/reference/scope.html#cancelling-between-awaits
         // We can use useScope for adding onDestroy callback, where we can do cleanup
 
-        // MSH: Note: Also coult not implement real world example of untrack in this application
+        // MSH: Note: Also could not implement real world example of untrack in this application
         // we can explain it on documentation itself: https://odoo.github.io/owl/documentation/v3/owl/reference/effects.html#untrack
 
         // Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/computed_values.html#tracking-only-happens-before-the-first-await
+        // Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/computed_values.html#async-computed-values
+        // Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/computed_values.html#awaiting-the-current-run
         asyncComputed(async () => {
             const res = await this.model.load_category_expenses(this.selectedCategory());
             this.state.expenses = res;

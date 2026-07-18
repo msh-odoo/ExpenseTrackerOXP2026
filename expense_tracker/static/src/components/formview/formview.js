@@ -12,6 +12,9 @@ export class FormView extends Component {
         // Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/refs.html
         this.formElement = signal(null);
         const { record } = this.props.data;
+        // Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/proxies.html#proxies
+        // Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/signals.html#shallow-wrapping
+        // Note: MSH: if you want deep reactivity use proxy, otherwise collection are shallow
         this.state = proxy({ data: record });
         this.record = Object.keys(record).filter((key) => key !== "id");
         for (const key in record) {
