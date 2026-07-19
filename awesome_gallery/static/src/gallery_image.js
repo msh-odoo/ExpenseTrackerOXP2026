@@ -21,13 +21,7 @@ export class GalleryImage extends Component {
     setup() {
         this.action = useService("action");
         this.tooltip = useService("tooltip");
-
-        // if (this.props.tooltipTemplate) {
-        //     useTooltip("tooltip", {
-        //         info: { record: this.props.record },
-        //         template: this.props.tooltipTemplate,
-        //     });
-        // }
+        this.tooltipInfo = JSON.stringify({ record: this.props.record });
     }
 
     onImageClick(resId) {
