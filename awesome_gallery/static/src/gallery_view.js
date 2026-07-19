@@ -1,3 +1,4 @@
+import { _t } from "@web/core/l10n/translation";
 import { registry } from "@web/core/registry";
 import { GalleryController } from "./gallery_controller";
 import { GalleryArchParser } from "./gallery_arch_parser";
@@ -15,15 +16,37 @@ export const galleryView = {
     Renderer: GalleryRenderer,
 
     props(genericProps, view) {
-        const { ArchParser } = view;
-        const { arch } = genericProps;
-        const archInfo = new ArchParser().parse(arch);
+        let modelParams;
+        if (genericProps.state) {
+            modelParams = genericProps.state.metaData;
+        } else {
+            const { arch, fields, resModel } = genericProps;
+            const parser = new view.ArchParser();
+            const archInfo = parser.parse(arch, fields);
+            modelParams = {
+                disableLinking: Boolean(archInfo.disableLinking),
+                fieldAttrs: archInfo.fieldAttrs,
+                fields: fields,
+                groupBy: archInfo.groupBy,
+                measure: archInfo.measure || "__count",
+                viewMeasures: archInfo.measures,
+                mode: archInfo.mode || "bar",
+                order: archInfo.order || null,
+                resModel: resModel,
+                stacked: "stacked" in archInfo ? archInfo.stacked : true,
+                cumulated: archInfo.cumulated || false,
+                cumulatedStart: archInfo.cumulatedStart || false,
+                title: archInfo.title || _t("Untitled"),
+                archInfo: archInfo,
+            };
+        }
 
         return {
             ...genericProps,
+            modelParams,
             Model: view.Model,
             Renderer: view.Renderer,
-            archInfo,
+            buttonTemplate: view.buttonTemplate,
         };
     },
 };

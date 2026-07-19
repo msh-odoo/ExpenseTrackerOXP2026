@@ -2,8 +2,8 @@
 <templates xml:space="preserve">
 
     <t t-name="awesome_gallery.GalleryController">
-        <Layout display="props.display" className="'h-100 overflow-auto'">
-            <t t-component="props.Renderer" model="model" onImageUpload.bind="onImageUpload" tooltipTemplate="props.archInfo.tooltipTemplate"/>
+        <Layout display="this.props.display" className="'h-100 overflow-auto'">
+            <t t-component="this.props.Renderer" model="this.model" onImageUpload.bind="this.onImageUpload" tooltipTemplate="this.props.modelParams.archInfo.tooltipTemplate"/>
         </Layout>
     </t>
 

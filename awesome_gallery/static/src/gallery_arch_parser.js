@@ -13,7 +13,7 @@ export class GalleryArchParser {
             if (node.tagName === "tooltip-template") {
                 tooltipTemplate = node;
             }
-        })
+        });
         return {
             imageField,
             limit,

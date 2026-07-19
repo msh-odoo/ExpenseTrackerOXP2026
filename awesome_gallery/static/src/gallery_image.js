@@ -1,12 +1,12 @@
-import { Component } from "@odoo/owl";
+import { Component, useProps, signal } from "@odoo/owl";
 import { url } from "@web/core/utils/urls";
 import { GalleryModel } from "./gallery_model";
 import { useService } from "@web/core/utils/hooks";
 import { FileUploader } from "@web/views/fields/file_handler";
-import { useTooltip } from "@web/core/tooltip/tooltip_hook";
+// import { useTooltip } from "@web/core/tooltip/tooltip_hook";
 
 export class GalleryImage extends Component {
-    static components = { FileUploader }
+    static components = { FileUploader };
     static template = "awesome_gallery.GalleryImage";
     static props = {
         record: Object,
@@ -20,13 +20,14 @@ export class GalleryImage extends Component {
 
     setup() {
         this.action = useService("action");
+        this.tooltip = useService("tooltip");
 
-        if (this.props.tooltipTemplate) {
-            useTooltip("tooltip", {
-                info: { record: this.props.record },
-                template: this.props.tooltipTemplate,
-            });
-        }
+        // if (this.props.tooltipTemplate) {
+        //     useTooltip("tooltip", {
+        //         info: { record: this.props.record },
+        //         template: this.props.tooltipTemplate,
+        //     });
+        // }
     }
 
     onImageClick(resId) {
