@@ -3,8 +3,9 @@ import { patch } from "@web/core/utils/patch";
 
 
 patch(GalleryModel.prototype, {
-    setup(orm, resModel, fields, archInfo) {
-        const { previewImage } = archInfo;
+    setup(params) {
+        super.setup(params);
+        const { previewImage } = params.archInfo;
         this.previewImage = previewImage;
     }
 });
