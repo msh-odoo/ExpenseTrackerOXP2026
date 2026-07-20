@@ -4,17 +4,17 @@
     <t t-name="expense_tracker_dashboard.ExpenseDashboard">
         <Layout display="display" className="'o_dashboard h-100'">
             <t t-set-slot="layout-buttons">
-                <button class="btn btn-primary" t-on-click="openExpenseView">Expenses</button>
-                <button class="btn btn-primary" t-on-click="openCategories">Categories</button>
+                <button class="btn btn-primary" t-on-click="this.openExpenseView">Expenses</button>
+                <button class="btn btn-primary" t-on-click="this.openCategories">Categories</button>
             </t>
             <t t-set-slot="control-panel-additional-actions">
-                <button t-on-click="openConfiguration" class="btn p-0 ms-1 border-0">
+                <button t-on-click="this.openConfiguration" class="btn p-0 ms-1 border-0">
                     <i class="fa fa-cog"></i>
                 </button>
             </t>
             <div class="d-flex flex-wrap">
-                <t t-foreach="items" t-as="item" t-key="item.id">
-                    <DashboardItem t-if="!state.disabledItems.includes(item.id)" size="item.size || 1">
+                <t t-foreach="this.items" t-as="item" t-key="item.id">
+                    <DashboardItem t-if="!this.state.disabledItems.includes(item.id)" size="item.size || 1">
                         <t t-set="itemProp" t-value="item.props ? item.props(statistics) : {'data': statistics}"/>
                         <t t-component="item.Component" />
                     </DashboardItem>
@@ -26,13 +26,13 @@
     <t t-name="awesome_dashboard.ConfigurationDialog">
         <Dialog title="'Dashboard items configuration'">
             Which cards do you whish to see ?
-            <t t-foreach="items" t-as="item" t-key="item.id">
+            <t t-foreach="this.items" t-as="item" t-key="item.id">
                 <CheckBox value="item.enabled" onChange="(ev) => this.onChange(ev, item)">
                     <t t-esc="item.description"/>
                 </CheckBox>
             </t>
             <t t-set-slot="footer">
-                <button class="btn btn-primary" t-on-click="done">
+                <button class="btn btn-primary" t-on-click="this.done">
                     Done
                 </button>
             </t>

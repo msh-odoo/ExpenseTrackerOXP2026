@@ -1,6 +1,6 @@
 /** @odoo-module **/
 
-import { Component, useState } from "@odoo/owl";
+import { Component, proxy } from "@odoo/owl";
 import { registry } from "@web/core/registry";
 import { Layout } from "@web/search/layout";
 import { useService } from "@web/core/utils/hooks";
@@ -20,7 +20,7 @@ class ExpenseDashboard extends Component {
             controlPanel: {},
         };
         this.items = registry.category("awesome_dashboard").getAll();
-        this.state = useState({
+        this.state = proxy({
             disabledItems: browser.localStorage.getItem("disabledDashboardItems")?.split(",") || []
         });
     }
@@ -60,7 +60,7 @@ class ConfigurationDialog extends Component {
     static props = ["close", "items", "disabledItems", "onUpdateConfiguration"];
 
     setup() {
-        this.items = useState(this.props.items.map((item) => {
+        this.items = proxy(this.props.items.map((item) => {
             return {
                 ...item,
                 enabled: !this.props.disabledItems.includes(item.id),

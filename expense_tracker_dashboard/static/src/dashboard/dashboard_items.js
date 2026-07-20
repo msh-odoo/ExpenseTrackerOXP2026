@@ -1,6 +1,6 @@
 import { registry } from "@web/core/registry";
 import { PersonalExpenseList } from "@expense_tracker/screens/expense_list/expense_list";
-import { ExpenseCategoriesList } from "@expense_tracker/screens/expense_categories_list/expense_categories_list";
+import { ExpenseCategoriesList } from "@expense_tracker/screens/expense_categories/expense_categories";
 
 const items = [
     {
@@ -21,8 +21,8 @@ const items = [
             title: "Top Categories",
         }),
     },
-]
+];
 
-items.forEach(item => {
+items.forEach((item) => {
     registry.category("awesome_dashboard").add(item.id, item);
 });
