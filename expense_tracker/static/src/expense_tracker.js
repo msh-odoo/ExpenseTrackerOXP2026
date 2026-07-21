@@ -15,4 +15,8 @@ export class ExpenseTracker extends Component {
         this.sm = usePlugin(ScreenManagerPlugin);
         this.sm.initCurrentScreen({ name: "Dashboard", component: Dashboard });
     }
+
+    _onLogoClicked(ev) {
+        this.sm.changeScreen({ screen_name: "Dashboard", props: {} });
+    }
 }

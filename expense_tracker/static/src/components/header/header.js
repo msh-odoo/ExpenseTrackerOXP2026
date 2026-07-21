@@ -19,15 +19,20 @@ export class Header extends Component {
         });
     }
 
-    onClickLogo() {
-        window.location.href = "/expense_tracker";
+    onClickLogo(ev) {
+        const logoClickedEvent = new CustomEvent("logo_clicked", {
+            detail: {},
+            bubbles: true,
+        });
+        ev.currentTarget.dispatchEvent(logoClickedEvent);
+        this.state.activeMenuItem = "home";
     }
 
     onActivateMenu(ev) {
         const menuName = ev.currentTarget.getAttribute("data-name");
         this.state.activeMenuItem = menuName;
         const screenName = ev.currentTarget.getAttribute("data-screen");
-        this.sm.changeScreen({ screen_name: screenName, props: { ignoreCreate: false }});
+        this.sm.changeScreen({ screen_name: screenName, props: { ignoreCreate: false } });
     }
 
     changeActiveMenu(ev) {
