@@ -45,7 +45,6 @@ export class PersonalExpenseList extends Component {
         };
         if (this.props.expenses) {
             useEffect(() => {
-                // Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/effects.html
                 this.state.expenses = this.props.expenses; // subscribe to changes
             });
         } else {

@@ -4,10 +4,9 @@ import {
     useProps,
     proxy,
     onWillStart,
-    onMounted,
-    onPatched,
     signal,
     usePlugin,
+    useEffect,
     t,
     useListener,
 } from "@odoo/owl";
@@ -53,12 +52,12 @@ class ExpenseForm extends Component {
 
         useListener(this.form, "click", this._onBounceEffect.bind(this));
 
-        onMounted(() => {
-            this.form().querySelector("input.form-control").focus();
-        });
-
-        onPatched(() => {
-            this.form().querySelector("input.form-control").focus();
+        this.descriptionInput = signal.ref();
+        useEffect(() => {
+            const el = this.descriptionInput();
+            if (el) {
+                el.focus();
+            }
         });
     }
 

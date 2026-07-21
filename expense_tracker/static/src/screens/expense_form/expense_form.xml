@@ -17,7 +17,7 @@
                         <div class="mb-3 row d-flex align-items-center">
                             <label class="col-sm-3 col-form-label">Description :</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control o_expense_description" t-att-value="this.state.data.record and this.state.data.record.name" required="true"/>
+                                <input t-ref="this.descriptionInput" type="text" class="form-control o_expense_description" t-att-value="this.state.data.record and this.state.data.record.name" required="true"/>
                             </div>
                         </div>
                         <div class="mb-3 row d-flex align-items-center">
