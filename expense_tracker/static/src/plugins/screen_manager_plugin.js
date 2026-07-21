@@ -23,7 +23,7 @@ export class ScreenManagerPlugin extends Plugin {
      * @param {Event} ev
      */
     changeScreen(config) {
-        const screen = screensRegistry.get(config.screen_name)
+        const screen = screensRegistry.get(config.screen_name);
         this.currentScreenName.set(config.screen_name);
         this.currentScreenComponent.set(screen);
         this.currentScreenProps = { ...config.props };

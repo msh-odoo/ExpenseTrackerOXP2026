@@ -78,36 +78,33 @@ class PersonalExpense extends models.Model {
     _name = "personal.expense";
 
     name = fields.Char();
-    user_id = fields.Many2one({relation: "res.users"});
-    date = fields.Date()
-    amount = fields.Float()
-    category_id = fields.Many2one({relation: "expense.category"})
-    icon = fields.Char()
-    payment_method_id = fields.Many2one({relation: "payment.method"})
+    user_id = fields.Many2one({ relation: "res.users" });
+    date = fields.Date();
+    amount = fields.Float();
+    category_id = fields.Many2one({ relation: "expense.category" });
+    icon = fields.Char();
+    payment_method_id = fields.Many2one({ relation: "payment.method" });
     tag_ids = fields.Many2many({ string: "Companies", relation: "expense.tag" });
 }
 
 defineModels([PersonalExpense, ResUsers, ExpenseCategory, PaymentMethod, ExpenseTag]);
 
-
 describe.current.tags("expense");
 
 test("dashboard can be rendered", async () => {
-    onRpc("personal.expense", "search_read", ({ args, kwargs }) => {
-        return [
-            {
-                id: 1,
-                name: "Expense 1",
-                user_id: 1,
-                date: "2022-01-01",
-                amount: 100.0,
-                category_id: 1,
-                icon: "icon1",
-                payment_method_id: 1,
-                tag_ids: [1],
-            },
-        ];
-    });
+    onRpc("personal.expense", "search_read", ({ args, kwargs }) => [
+        {
+            id: 1,
+            name: "Expense 1",
+            user_id: 1,
+            date: "2022-01-01",
+            amount: 100.0,
+            category_id: 1,
+            icon: "icon1",
+            payment_method_id: 1,
+            tag_ids: [1],
+        },
+    ]);
     class MyComponent extends Component {
         props = useProps();
         // static props = {};

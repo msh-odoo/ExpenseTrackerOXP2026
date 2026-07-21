@@ -22,7 +22,6 @@ export class ExpenseCategoriesList extends Component {
         this.busPlugin = usePlugin(BusPlugin);
         this.sm = usePlugin(ScreenManagerPlugin);
 
-
         onWillStart(async () => {
             const res = await this.model.load_categories(this.props);
             this.state.categories = res;
@@ -56,12 +55,14 @@ export class ExpenseCategoriesList extends Component {
                 this.state.selectedCategories.push(recordId);
             }
         } else {
-            this.state.selectedCategories = this.state.selectedCategories.filter(id => id !== recordId);
+            this.state.selectedCategories = this.state.selectedCategories.filter(
+                (id) => id !== recordId,
+            );
         }
     }
     deleteCategory(ev) {
         const recordIds = [...this.state.selectedCategories];
-        this._deleteCategory({ detail: { model: "expense.category", ids: recordIds }});
+        this._deleteCategory({ detail: { model: "expense.category", ids: recordIds } });
     }
 
     async _deleteCategory(ev) {

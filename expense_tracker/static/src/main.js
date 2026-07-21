@@ -1,6 +1,4 @@
 import { App, whenReady } from "@odoo/owl";
-import { rpc } from "@expense_tracker/core/rpc";
-import { DB } from "@expense_tracker/core/db";
 // import { getTemplate } from "@expense_tracker/core/templates";
 import { getTemplate } from "@web/core/templates";
 import { ExpenseTracker } from "@expense_tracker/expense_tracker";

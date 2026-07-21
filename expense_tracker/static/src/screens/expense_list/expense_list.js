@@ -37,7 +37,7 @@ export class PersonalExpenseList extends Component {
         this.sm = usePlugin(ScreenManagerPlugin);
         // TODO: MSH: Convert it to signal.Array for both values, we will use selectedCheckboxes in computed
         // const expenses = signal.Array([]);
-        this.state = proxy({ expenses: [], selectedCheckboxes: []});
+        this.state = proxy({ expenses: [], selectedCheckboxes: [] });
         this.modelName = "personal.expense";
         this.checkboxInteraction = false;
         const options = {
