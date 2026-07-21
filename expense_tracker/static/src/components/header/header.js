@@ -1,4 +1,4 @@
-import { Component, proxy, usePlugin, onMounted } from "@expense_tracker/owl";
+import { Component, proxy, usePlugin, onMounted } from "@odoo/owl";
 import { Time } from "@expense_tracker/components/time/time";
 import { BusPlugin } from "@expense_tracker/plugins/bus_plugin";
 import { HotkeyPlugin } from "@expense_tracker/plugins/hotkey_plugin";

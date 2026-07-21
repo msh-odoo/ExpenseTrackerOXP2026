@@ -1,11 +1,4 @@
-import {
-    asyncComputed,
-    Component,
-    proxy,
-    useProps,
-    onWillStart,
-    signal,
-} from "@expense_tracker/owl";
+import { asyncComputed, Component, proxy, useProps, onWillStart, signal } from "@odoo/owl";
 import { screensRegistry } from "@expense_tracker/registries";
 import { useModel } from "../../model/model";
 

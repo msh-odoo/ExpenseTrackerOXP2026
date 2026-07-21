@@ -1,4 +1,4 @@
-import { Plugin } from "@expense_tracker/owl";
+import { Plugin } from "@odoo/owl";
 import { rpc } from "@expense_tracker/core/rpc";
 
 /**

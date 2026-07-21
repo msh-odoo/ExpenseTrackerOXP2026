@@ -1,4 +1,4 @@
-import { Plugin, signal } from "@expense_tracker/owl";
+import { Plugin, signal } from "@odoo/owl";
 import { screensRegistry } from "@expense_tracker/registries";
 
 export class ScreenManagerPlugin extends Plugin {

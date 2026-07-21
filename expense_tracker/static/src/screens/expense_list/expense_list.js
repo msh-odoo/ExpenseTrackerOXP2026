@@ -4,16 +4,17 @@ import {
     useProps,
     computed,
     proxy,
+    providePlugins,
     usePlugin,
     t,
     useEffect,
-} from "@expense_tracker/owl";
+} from "@odoo/owl";
 import { useModel } from "../../model/model";
 import { BusPlugin } from "@expense_tracker/plugins/bus_plugin";
+import { ORMPlugin } from "@expense_tracker/plugins/orm_plugin";
 import { ScreenManagerPlugin } from "@expense_tracker/plugins/screen_manager_plugin";
 import { screensRegistry } from "@expense_tracker/registries";
 import { ExpenseTrackerModel } from "../../model/expense_tracker_model";
-
 
 export class PersonalExpenseList extends Component {
     static template = "expense_tracker.PersonalExpenseList";
@@ -24,15 +25,16 @@ export class PersonalExpenseList extends Component {
         ignoreCreate: t.boolean().optional(),
         class: t.string().optional(),
     });
-    busPlugin = usePlugin(BusPlugin);
-    sm = usePlugin(ScreenManagerPlugin);
     hasSelection = computed(() => this.state.selectedCheckboxes.length);
     totalAmount = computed(() =>
         this.state.expenses.reduce((sum, expense) => sum + expense.amount, 0),
     );
 
     setup() {
+        providePlugins([BusPlugin, ScreenManagerPlugin, ORMPlugin]);
         this.model = useModel(ExpenseTrackerModel, this.modelParams);
+        this.busPlugin = usePlugin(BusPlugin);
+        this.sm = usePlugin(ScreenManagerPlugin);
         // TODO: MSH: Convert it to signal.Array for both values, we will use selectedCheckboxes in computed
         // const expenses = signal.Array([]);
         this.state = proxy({ expenses: [], selectedCheckboxes: []});

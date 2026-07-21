@@ -7,7 +7,7 @@ import {
     usePlugin,
     signal,
     useProps,
-} from "@expense_tracker/owl";
+} from "@odoo/owl";
 import { screensRegistry } from "@expense_tracker/registries";
 import { PersonalExpenseList } from "../expense_list/expense_list";
 import { BusPlugin } from "@expense_tracker/plugins/bus_plugin";

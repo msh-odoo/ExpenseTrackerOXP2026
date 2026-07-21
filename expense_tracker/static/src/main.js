@@ -1,7 +1,8 @@
-import { App, whenReady } from "@expense_tracker/owl";
+import { App, whenReady } from "@odoo/owl";
 import { rpc } from "@expense_tracker/core/rpc";
 import { DB } from "@expense_tracker/core/db";
-import { getTemplate } from "@expense_tracker/core/templates";
+// import { getTemplate } from "@expense_tracker/core/templates";
+import { getTemplate } from "@web/core/templates";
 import { ExpenseTracker } from "@expense_tracker/expense_tracker";
 import { BusPlugin } from "./plugins/bus_plugin";
 import { ORMPlugin } from "./plugins/orm_plugin";
@@ -36,8 +37,11 @@ function parseHash() {
 
 // Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/utils.html
 whenReady(async () => {
-    const db = new DB(); // TODO: MSH: Convert it to plugin
-    const env = { db, rpc };
+    if (!document.querySelector(".o_expense_tracker")) {
+        return;
+    }
+    // const db = new DB(); // TODO: MSH: Convert it to plugin
+    // const env = { db, rpc };
 
     // fr_FR translations
     const hash = parseHash();

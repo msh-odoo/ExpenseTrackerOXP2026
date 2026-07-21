@@ -5,7 +5,7 @@ import {
     onWillUnmount,
     plugin,
     signal,
-} from "@expense_tracker/owl";
+} from "@odoo/owl";
 import { BusPlugin } from "@expense_tracker/plugins/bus_plugin";
 
 export class Time extends Component {

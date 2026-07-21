@@ -1,4 +1,4 @@
-import { Component, proxy, usePlugin, onWillStart } from "@expense_tracker/owl";
+import { Component, proxy, usePlugin, onWillStart } from "@odoo/owl";
 import { useModel } from "../../model/model";
 import { screensRegistry } from "@expense_tracker/registries";
 import { BusPlugin } from "@expense_tracker/plugins/bus_plugin";

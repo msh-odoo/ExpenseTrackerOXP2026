@@ -1,4 +1,4 @@
-import { EventBus, useEnv } from "@expense_tracker/owl";
+import { EventBus, useEnv } from "@odoo/owl";
 
 export class DB extends EventBus {
     constructor(params) {

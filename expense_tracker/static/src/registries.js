@@ -1,4 +1,4 @@
-import { Component, Registry, t } from "@expense_tracker/owl";
+import { Component, Registry, t } from "@odoo/owl";
 
 // Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/registries.html
 export const screensRegistry = new Registry({

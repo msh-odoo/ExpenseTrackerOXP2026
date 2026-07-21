@@ -1,4 +1,4 @@
-import { usePlugin } from "@expense_tracker/owl";
+import { usePlugin } from "@odoo/owl";
 import { rpc } from "@expense_tracker/core/rpc";
 import { ORMPlugin } from "../plugins/orm_plugin";
 import { BusPlugin } from "../plugins/bus_plugin";

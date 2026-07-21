@@ -1,6 +1,6 @@
 import { after, expect, test, describe, mountOnFixture } from "@odoo/hoot";
 import { MainComponentsContainer } from "@web/core/main_components_container";
-import { Component, EventBus, useProps, xml } from "@expense_tracker/owl";
+import { Component, EventBus, useProps, xml } from "@odoo/owl";
 import { patch } from "@web/core/utils/patch";
 import { defineModels, fields, models, onRpc, makeMockEnv } from "@web/../tests/web_test_helpers";
 

@@ -10,7 +10,7 @@ import {
     usePlugin,
     t,
     useListener,
-} from "@expense_tracker/owl";
+} from "@odoo/owl";
 import { screensRegistry } from "@expense_tracker/registries";
 import { useModel } from "../../model/model";
 import { BusPlugin } from "@expense_tracker/plugins/bus_plugin";

@@ -1,9 +1,10 @@
-import { Component, proxy, useProps, onWillStart, usePlugin } from "@expense_tracker/owl";
+import { Component, proxy, useProps, onWillStart, usePlugin, providePlugins } from "@odoo/owl";
 import { screensRegistry } from "@expense_tracker/registries";
 import { useModel } from "../../model/model";
 
-import { BusPlugin } from "@expense_tracker/plugins/bus_plugin";
-import { ScreenManagerPlugin } from "@expense_tracker/plugins/screen_manager_plugin";
+import { BusPlugin } from "../../plugins/bus_plugin";
+import { ScreenManagerPlugin } from "../../plugins/screen_manager_plugin";
+import { ORMPlugin } from "../../plugins/orm_plugin";
 import { ExpenseTrackerModel } from "../../model/expense_tracker_model";
 
 export class ExpenseCategoriesList extends Component {
@@ -11,6 +12,7 @@ export class ExpenseCategoriesList extends Component {
     props = useProps();
 
     setup() {
+        providePlugins([BusPlugin, ScreenManagerPlugin, ORMPlugin]);
         this.model = useModel(ExpenseTrackerModel, this.modelParams);
         // Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/proxies.html
         this.state = proxy({ categories: [], selectedCategories: [] });

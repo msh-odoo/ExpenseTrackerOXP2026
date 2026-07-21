@@ -1,4 +1,4 @@
-import { Component, useProps, types as t } from "@expense_tracker/owl";
+import { Component, useProps, types as t } from "@odoo/owl";
 
 export class Container extends Component {
     static template = "expense_tracker.container";

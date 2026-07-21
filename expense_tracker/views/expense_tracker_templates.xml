@@ -9,7 +9,9 @@
                             debug: "<t t-out="debug"/>",
                         };
                     </script>
-                    <t t-call-assets="expense_tracker.assets_expense"/>
+                    <!-- <t t-call-assets="expense_tracker.assets_expense"/> -->
+                    <t t-call-assets="web.assets_backend" t-css="false"/>
+                    <t t-call-assets="web.assets_backend" media="screen" t-js="false"/>
                 </head>
                 <body class="o_expense_tracker">
                 </body>

@@ -8,7 +8,7 @@ import {
     onError,
     signal,
     t,
-} from "@expense_tracker/owl";
+} from "@odoo/owl";
 import { screensRegistry } from "@expense_tracker/registries";
 import { useModel } from "../../model/model";
 import { ExpenseTrackerModel } from "../../model/expense_tracker_model";

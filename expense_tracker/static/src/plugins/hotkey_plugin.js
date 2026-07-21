@@ -1,4 +1,4 @@
-import { Plugin, Resource, useListener } from "@expense_tracker/owl";
+import { Plugin, Resource, useListener } from "@odoo/owl";
 import { isMacOS } from "@expense_tracker/core/utils";
 
 const ALPHANUM_KEYS = "abcdefghijklmnopqrstuvwxyz0123456789".split("");
