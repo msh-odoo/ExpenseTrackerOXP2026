@@ -1,4 +1,4 @@
-import { usePlugin } from "@odoo/owl";
+import { usePlugin, useScope } from "@odoo/owl";
 import { rpc } from "@expense_tracker/core/rpc";
 import { ORMPlugin } from "../plugins/orm_plugin";
 import { BusPlugin } from "../plugins/bus_plugin";
@@ -64,6 +64,7 @@ export class Model {
  * @returns {InstanceType<T>}
  */
 export function useModel(ModelClass, params = {}, options = {}) {
+    const scope = useScope();
     const ormPlugin = usePlugin(ORMPlugin);
     const busPlugin = usePlugin(BusPlugin);
     const model = new ModelClass(params, { rpc, orm: ormPlugin, bus: busPlugin.bus });

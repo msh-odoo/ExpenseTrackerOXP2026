@@ -1,4 +1,4 @@
-import { asyncComputed, Component, proxy, useProps, onWillStart, signal } from "@odoo/owl";
+import { asyncComputed, Component, proxy, useProps, onWillStart, signal, toRaw } from "@odoo/owl";
 import { screensRegistry } from "@expense_tracker/registries";
 import { useModel } from "../../model/model";
 
@@ -13,6 +13,8 @@ export class ExpensesByCategory extends Component {
     setup() {
         this.model = useModel(ExpenseTrackerModel, this.modelParams);
         this.categories = signal.Array([]);
+        // this.testNestedSignal = signal.Object({ aa: { bb: "Hello" } });
+        // this.testNestedProxy = proxy({ aa: { bb: "Hello" } });
         this.selectedCategory = signal("all");
         this.state = proxy({ expenses: [] });
         // MSH: Note: I was trying to implement abortSignal example but could not do it
@@ -31,6 +33,11 @@ export class ExpensesByCategory extends Component {
         // Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/computed_values.html#async-computed-values
         // Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/computed_values.html#awaiting-the-current-run
         asyncComputed(async () => {
+            // const signalObj = this.testNestedSignal();
+            // const proxyObj = this.testNestedProxy;
+            // debugger;
+            // signalObj.aa;
+            // proxyObj.aa;
             const res = await this.model.load_category_expenses(this.selectedCategory());
             this.state.expenses = res;
         });
