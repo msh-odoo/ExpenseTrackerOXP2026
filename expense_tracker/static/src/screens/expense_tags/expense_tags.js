@@ -22,12 +22,10 @@ export class TagsList extends Component {
     setup() {
         this.model = useModel(ExpenseTrackerModel, this.modelParams);
         // Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/signals.html
-        this.newName = signal("");
-        this.newColor = signal("");
         this.state = proxy({
             tags: [],
             isAddingNewTag: false,
-            newTag: { name: this.newName, color: this.newColor },
+            newTag: { name: "", color: "" },
             lastAddedTagId: null, // Track the last added tag ID
         });
         this.modelName = "expense.tag";
@@ -50,14 +48,9 @@ export class TagsList extends Component {
             }
         });
 
-        // TODO: MSH: onWillUpdateProps is removed, should be managed with signal and computed combination
-        // onWillUpdateProps((nextProps) => {
-        //     this.state.tags = this.model.load_tags(nextProps);
-        // });
-
         onPatched(() => {
             if (this.state.lastAddedTagId !== null) {
-                const lastTagElement = this.formEl.el.querySelector(
+                const lastTagElement = this.formElement().querySelector(
                     `#tag-${this.state.lastAddedTagId}`,
                 );
                 if (lastTagElement) {
@@ -75,7 +68,7 @@ export class TagsList extends Component {
         this.state.isAddingNewTag = true;
     }
 
-    async _onFieldFocusOut() {
+    async _saveTag() {
         const { newTag, tags } = this.state;
         const { name, color } = newTag;
         if (name && color) {
@@ -101,6 +94,17 @@ export class TagsList extends Component {
                 this.state.lastAddedTagId = tagId[0];
             }
         }
+    }
+
+    _onKeyup(ev) {
+        if (ev.key !== "Enter") {
+            return;
+        }
+        this._saveTag();
+    }
+
+    async _onFocusin(ev) {
+        this._saveTag();
     }
 
     _onCancelNewTag() {

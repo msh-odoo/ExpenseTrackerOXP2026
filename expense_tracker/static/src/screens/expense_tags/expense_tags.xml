@@ -17,6 +17,7 @@
                         <tr class="table-success">
                             <th>Name</th>
                             <th>Color</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -24,19 +25,21 @@
                             <tr t-att-id="'tag-' + tag.id">
                                 <td><t t-out="tag.name"/></td>
                                 <td><t t-out="tag.color"/></td>
+                                <td></td>
                             </tr>
                         </t>
                         <t t-if="this.state.isAddingNewTag">
-                            <tr>
+                            <tr t-on-keyup="this._onKeyup">
                                 <td>
-                                    <input type="text" t-model="this.newName" placeholder="Tag Name"
-                                           class="form-control text-white"
-                                           t-on-focusout="this._onFieldFocusOut"/>
+                                    <input type="text" tabindex="1" t-model.proxy="this.state.newTag.name" placeholder="Tag Name"
+                                        class="form-control text-white"/>
                                 </td>
                                 <td>
-                                    <input type="number" t-model="this.newColor" placeholder="Tag Color"
-                                           class="form-control text-white"
-                                           t-on-focusout="this._onFieldFocusOut"/>
+                                    <input type="number" tabindex="2" t-model.proxy="this.state.newTag.color" placeholder="Tag Color"
+                                        class="form-control text-white"/>
+                                </td>
+                                <td>
+                                    <span tabindex="3" class="fa fa-save" t-on-focusin="this._onFocusin"/>
                                 </td>
                             </tr>
                             <button type="button" t-on-click="this._onCancelNewTag" class="btn btn-secondary mt-2">Cancel</button>
