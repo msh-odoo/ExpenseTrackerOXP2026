@@ -4,6 +4,7 @@ import { ExpenseTracker } from "@expense_tracker/expense_tracker";
 import { BusPlugin } from "./plugins/bus_plugin";
 import { ORMPlugin } from "./plugins/orm_plugin";
 import { HotkeyPlugin } from "./plugins/hotkey_plugin";
+import { DialogPlugin } from "./core/dialog/dialog_plugin";
 import { translateFn } from "./translate";
 
 // The following code ensures that owl mount the component when ready.
@@ -25,7 +26,7 @@ whenReady(async () => {
     const debug = urlParams.get("debug");
     const app = new App({
         getTemplate,
-        plugins: [BusPlugin, ORMPlugin, HotkeyPlugin],
+        plugins: [BusPlugin, ORMPlugin, HotkeyPlugin, DialogPlugin],
         dev: debug || false,
         name: ExpenseTracker.constructor.name,
         // translatableAttributes: ["data-tooltip"],

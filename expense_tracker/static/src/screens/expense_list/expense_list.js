@@ -12,6 +12,8 @@ import {
 import { useModel } from "../../model/model";
 import { BusPlugin } from "@expense_tracker/plugins/bus_plugin";
 import { ORMPlugin } from "@expense_tracker/plugins/orm_plugin";
+import { DialogPlugin } from "@expense_tracker/core/dialog/dialog_plugin";
+import { DeleteDialog } from "./delete_dialog";
 import { ScreenManagerPlugin } from "@expense_tracker/plugins/screen_manager_plugin";
 import { screensRegistry } from "@expense_tracker/registries";
 import { ExpenseTrackerModel } from "../../model/expense_tracker_model";
@@ -38,6 +40,7 @@ export class PersonalExpenseList extends Component {
         providePlugins([BusPlugin, ScreenManagerPlugin, ORMPlugin]);
         this.model = useModel(this.modelParams);
         this.busPlugin = usePlugin(BusPlugin);
+        this.dialogPlugin = usePlugin(DialogPlugin);
         this.sm = usePlugin(ScreenManagerPlugin);
         // TODO: MSH: Convert it to signal.Array for both values, we will use selectedCheckboxes in computed
         // const expenses = signal.Array([]);
@@ -95,6 +98,7 @@ export class PersonalExpenseList extends Component {
     deleteExpense(ev) {
         const recordIds = [...this.state.selectedCheckboxes];
         this.busPlugin.bus.trigger("delete_record", { model: "personal.expense", ids: recordIds });
+        this.dialogPlugin.add(DeleteDialog, {});
     }
     async _deleteRecord(ev) {
         try {
