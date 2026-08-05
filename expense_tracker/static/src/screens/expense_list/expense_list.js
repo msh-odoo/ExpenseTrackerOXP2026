@@ -25,6 +25,9 @@ export class PersonalExpenseList extends Component {
         ignoreCreate: t.boolean().optional(),
         class: t.string().optional(),
     });
+    config = {
+        model: ExpenseTrackerModel,
+    };
     hasSelection = computed(() => this.state.selectedCheckboxes.length);
     totalAmount = computed(() =>
         this.state.expenses.reduce((sum, expense) => sum + expense.amount, 0),
@@ -32,7 +35,7 @@ export class PersonalExpenseList extends Component {
 
     setup() {
         providePlugins([BusPlugin, ScreenManagerPlugin, ORMPlugin]);
-        this.model = useModel(ExpenseTrackerModel, this.modelParams);
+        this.model = useModel(this.modelParams);
         this.busPlugin = usePlugin(BusPlugin);
         this.sm = usePlugin(ScreenManagerPlugin);
         // TODO: MSH: Convert it to signal.Array for both values, we will use selectedCheckboxes in computed

@@ -26,9 +26,12 @@ class ExpenseForm extends Component {
     });
     busPlugin = usePlugin(BusPlugin);
     sm = usePlugin(ScreenManagerPlugin);
+    config = {
+        model: ExpenseTrackerModel,
+    };
 
     setup() {
-        this.model = useModel(ExpenseTrackerModel, this.modelParams);
+        this.model = useModel(this.modelParams);
         this.state = proxy({ data: {}, isValidForm: true });
         this.title = "Expense";
         this.modelName = "personal.expense";

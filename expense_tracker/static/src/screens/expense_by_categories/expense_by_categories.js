@@ -9,9 +9,12 @@ export class ExpensesByCategory extends Component {
     static template = "expense_tracker.ExpensesByCategory";
     static components = { PersonalExpenseList };
     props = useProps();
+    config = {
+        model: ExpenseTrackerModel,
+    };
 
     setup() {
-        this.model = useModel(ExpenseTrackerModel, this.modelParams);
+        this.model = useModel(this.modelParams);
         this.categories = signal.Array([]);
         // this.testNestedSignal = signal.Object({ aa: { bb: "Hello" } });
         // this.testNestedProxy = proxy({ aa: { bb: "Hello" } });

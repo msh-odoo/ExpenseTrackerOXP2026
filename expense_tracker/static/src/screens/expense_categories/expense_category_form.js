@@ -9,9 +9,12 @@ import { FormView } from "../../components/formview/formview";
 class ExpenseCategoryForm extends Component {
     static template = "expense_tracker.ExpenseCategoryForm";
     static components = { FormView };
+    config = {
+        model: ExpenseTrackerModel,
+    };
 
     setup() {
-        this.model = useModel(ExpenseTrackerModel, this.modelParams);
+        this.model = useModel(this.modelParams);
         this.state = proxy({
             data: {
                 record: { name: "", icon: "", description: "" },

@@ -22,10 +22,13 @@ export class Dashboard extends Component {
     sm = usePlugin(ScreenManagerPlugin);
     error = signal(null);
     props = useProps();
+    config = {
+        model: ExpenseTrackerModel,
+    };
 
     setup() {
         super.setup();
-        this.model = useModel(ExpenseTrackerModel, this.modelParams);
+        this.model = useModel(this.modelParams);
         this.state = proxy({ expenses: [] });
 
         // Show full error in console

@@ -63,8 +63,9 @@ export class Model {
  * @param {Function} [options.beforeFirstLoad]
  * @returns {InstanceType<T>}
  */
-export function useModel(ModelClass, params = {}, options = {}) {
+export function useModel(params = {}, options = {}) {
     const scope = useScope();
+    const ModelClass = scope.component.config.model || Model;
     const ormPlugin = usePlugin(ORMPlugin);
     const busPlugin = usePlugin(BusPlugin);
     const model = new ModelClass(params, { rpc, orm: ormPlugin, bus: busPlugin.bus });

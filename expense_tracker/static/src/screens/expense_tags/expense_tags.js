@@ -18,9 +18,12 @@ export class TagsList extends Component {
     props = useProps({
         ignoreCreate: t.boolean().optional(),
     });
+    config = {
+        model: ExpenseTrackerModel,
+    };
 
     setup() {
-        this.model = useModel(ExpenseTrackerModel, this.modelParams);
+        this.model = useModel(this.modelParams);
         // Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/signals.html
         this.state = proxy({
             tags: [],

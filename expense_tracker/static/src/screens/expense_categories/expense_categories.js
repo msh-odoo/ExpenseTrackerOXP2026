@@ -10,10 +10,13 @@ import { ExpenseTrackerModel } from "../../model/expense_tracker_model";
 export class ExpenseCategoriesList extends Component {
     static template = "expense_tracker.CategoriesList";
     props = useProps();
+    config = {
+        model: ExpenseTrackerModel,
+    };
 
     setup() {
         providePlugins([BusPlugin, ScreenManagerPlugin, ORMPlugin]);
-        this.model = useModel(ExpenseTrackerModel, this.modelParams);
+        this.model = useModel(this.modelParams);
         // Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/proxies.html
         this.state = proxy({ categories: [], selectedCategories: [] });
         this.modelName = "expense.category";
