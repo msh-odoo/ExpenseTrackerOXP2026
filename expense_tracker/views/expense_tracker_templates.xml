@@ -3,15 +3,14 @@
           <template id="expense_tracker.root" name="Expense Tracker">
             <html>
                 <head>
-                    <script id="web.layout.odooscript" type="text/javascript">
-                        var odoo = {
-                            csrf_token: "<t t-out="request.csrf_token(None)"/>",
-                            debug: "<t t-out="debug"/>",
-                        };
-                    </script>
                     <!-- <t t-call-assets="expense_tracker.assets_expense"/> -->
                     <t t-call-assets="web.assets_backend" t-css="false"/>
                     <t t-call-assets="web.assets_backend" media="screen" t-js="false"/>
+                    <script id="web.layout.odooscript" type="text/javascript">
+                        odoo.__session_info__ = <t t-out="json.dumps(session_info)"/>;
+                        odoo.csrf_token = "<t t-out="request.csrf_token(None)"/>";
+                        odoo.debug = "<t t-out="debug"/>";
+                    </script>
                 </head>
                 <body class="o_expense_tracker">
                 </body>

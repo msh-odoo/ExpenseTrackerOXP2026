@@ -1,4 +1,4 @@
-import { Component, usePlugin, providePlugins, xml } from "@odoo/owl";
+import { Component, usePlugin, providePlugins } from "@odoo/owl";
 import { Container } from "@expense_tracker/components/container/container";
 import { Dashboard } from "@expense_tracker/screens/expense_dashboard/expense_dashboard";
 import { Header } from "@expense_tracker/components/header/header";
@@ -6,9 +6,8 @@ import { ScreenManagerPlugin } from "@expense_tracker/plugins/screen_manager_plu
 
 // Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/component.html
 export class ExpenseTracker extends Component {
-    // static template = "expense_tracker.root";
-    static template = xml`<div>Expense Tracker</div>`;
-    // static components = { Header, Container };
+    static template = "expense_tracker.root";
+    static components = { Header, Container };
 
     setup() {
         super.setup();

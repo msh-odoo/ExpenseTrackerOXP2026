@@ -21,6 +21,7 @@
         # ],
         # 'expense_tracker.assets_expense': [
         'web.assets_backend': [
+            # ('include', 'web.assets_backend'),
             # 'web/static/src/scss/functions.scss',
             # 'web/static/src/scss/utils.scss',
             # ('include', 'web._assets_primary_variables'),
@@ -42,12 +43,20 @@
             # 'expense_tracker/static/lib/owl.js',
             # 'expense_tracker/static/lib/odoo_module.js',
             'expense_tracker/static/src/**/*',
+            # 'expense_tracker/static/src/core/utils.js',
+            # 'expense_tracker/static/src/core/rpc.js',
+            # 'expense_tracker/static/src/plugins/bus_plugin.js',
+            # 'expense_tracker/static/src/plugins/hotkey_plugin.js',
+            # 'expense_tracker/static/src/plugins/orm_plugin.js',
+            # 'expense_tracker/static/src/expense_tracker.js',
+            # 'expense_tracker/static/src/translate.js',
+            # 'expense_tracker/static/src/main.js',
         ],
         # Assets for test framework and setup
         'expense_tracker.assets_unit_tests_setup': [
-            'web/static/src/module_loader.js',
+            # 'web/static/src/module_loader.js',
 
-            'expense_tracker/static/lib/**/*',
+            # 'expense_tracker/static/lib/**/*',
 
             'web/static/lib/hoot/**/*',
             'web/static/lib/hoot-dom/**/*',

@@ -8,7 +8,8 @@ class ExpenseTracker(http.Controller):
         """
         Renders the owl ecommerce page
         """
-        return request.render('expense_tracker.root')
+        session_info = self.env["ir.http"].session_info()
+        return request.render('expense_tracker.root', {"session_info": session_info})
 
     @http.route(['/expense/get_expense_form_data/<string:model>/<int:id>',
     '/expense/get_expense_form_data/<string:model>/'], type='jsonrpc', auth='user')
