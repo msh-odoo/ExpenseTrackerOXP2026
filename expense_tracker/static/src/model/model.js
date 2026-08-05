@@ -3,7 +3,7 @@ import { rpc } from "@expense_tracker/core/rpc";
 import { ORMPlugin } from "../plugins/orm_plugin";
 import { BusPlugin } from "../plugins/bus_plugin";
 
-export class Model {
+export class BaseModel {
     /**
      * @param {Object} env
      * @param {Object} options
@@ -57,7 +57,6 @@ export class Model {
 // Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/hooks.html
 /**
  * @template {typeof Model} T
- * @param {T} ModelClass
  * @param {Object} params
  * @param {Object} [options]
  * @param {Function} [options.beforeFirstLoad]
@@ -65,7 +64,7 @@ export class Model {
  */
 export function useModel(params = {}, options = {}) {
     const scope = useScope();
-    const ModelClass = scope.component.config.model || Model;
+    const ModelClass = scope.component.config.model || BaseModel;
     const ormPlugin = usePlugin(ORMPlugin);
     const busPlugin = usePlugin(BusPlugin);
     const model = new ModelClass(params, { rpc, orm: ormPlugin, bus: busPlugin.bus });

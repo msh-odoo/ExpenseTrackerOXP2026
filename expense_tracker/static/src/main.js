@@ -1,31 +1,10 @@
 import { App, whenReady } from "@odoo/owl";
-// import { getTemplate } from "@expense_tracker/core/templates";
 import { getTemplate } from "@web/core/templates";
 import { ExpenseTracker } from "@expense_tracker/expense_tracker";
 import { BusPlugin } from "./plugins/bus_plugin";
 import { ORMPlugin } from "./plugins/orm_plugin";
 import { HotkeyPlugin } from "./plugins/hotkey_plugin";
-
-function cast(value) {
-    return !value || isNaN(value) ? value : Number(value);
-}
-
-function parseString(str) {
-    const parts = str.split("&");
-    const result = {};
-    for (const part of parts) {
-        const [key, value] = part.split("=");
-        const decoded = decodeURIComponent(value || "");
-        result[key] = cast(decoded);
-    }
-    return result;
-}
-
-function parseHash() {
-    const location = window.location;
-    const { hash } = location;
-    return hash && hash !== "#" ? parseString(hash.slice(1)) : {};
-}
+import { translateFn } from "./translate";
 
 // The following code ensures that owl mount the component when ready.
 // `templates` contains templates contained in the bundles.
@@ -40,47 +19,6 @@ whenReady(async () => {
     }
     // const db = new DB(); // TODO: MSH: Convert it to plugin
     // const env = { db, rpc };
-
-    // fr_FR translations
-    const hash = parseHash();
-
-    // Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/translations.html
-    const translations = {};
-    if (hash.lang) {
-        const terms = {
-            "Home": "Accueil",
-            "Expenses": "Dépenses",
-            "Categories": "Catégories",
-            "Tags": "Étiquettes",
-            "Error:": "Erreur:",
-            "Retry": "Réessayer",
-            "Dashboard": "Tableau de bord",
-            "Quick Access": "Accès rapide",
-            "New Expense": "Nouvelle dépense",
-            "New Category": "Nouvelle catégorie",
-            "Expenses by Category": "Dépenses par catégorie",
-            "Personal Expenses": "Dépenses personnelles",
-            "Create Expense": "Créer une dépense",
-            "Delete Expense": "Supprimer la dépense",
-            "Expense Tracker": "Suivi des dépenses",
-            "Personal Expenses": "Dépenses personnelles",
-            "Add New Expense": "Ajouter une nouvelle dépense",
-            "Edit": "Modifier",
-            "Delete": "Supprimer",
-            "Description:": "Description:",
-            "Date:": "Date:",
-            "Amount:": "Montante:",
-            "Category:": "Catégorie:",
-            "Description": "Description",
-            "Date": "Date",
-            "Amount": "Montante",
-            "Category": "Catégorie",
-            "Total Amount:": "Montant total:",
-        };
-        Object.assign(translations, terms);
-    }
-
-    const translateFn = (str, ctx) => translations[str] || str;
 
     // Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/app.html
     const urlParams = new URLSearchParams(window.location.search);

@@ -1,6 +1,6 @@
-import { Model } from "../model/model";
+import { BaseModel } from "../model/model";
 
-export class ExpenseTrackerModel extends Model {
+export class ExpenseTrackerModel extends BaseModel {
     /**
      * @override
      */

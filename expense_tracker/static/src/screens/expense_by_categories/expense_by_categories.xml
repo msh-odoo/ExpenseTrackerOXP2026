@@ -11,6 +11,6 @@
                 </t>
             </select>
         </div>
-        <PersonalExpenseList class="'expense-by-categories'" expenses="this.state.expenses" ignoreCreate="true" />
+        <PersonalExpenseList class="'expense-by-categories mt-4'" expenses="this.state.expenses" ignoreCreate="true" title="this.title" />
     </t>
 </templates>

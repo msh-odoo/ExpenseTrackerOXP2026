@@ -1,9 +1,10 @@
-import { asyncComputed, Component, proxy, useProps, onWillStart, signal, toRaw } from "@odoo/owl";
+import { asyncComputed, Component, proxy, useProps, onWillStart, signal, t } from "@odoo/owl";
 import { screensRegistry } from "@expense_tracker/registries";
 import { useModel } from "../../model/model";
 
 import { PersonalExpenseList } from "../expense_list/expense_list";
 import { ExpenseTrackerModel } from "../../model/expense_tracker_model";
+import { _t } from "@expense_tracker/translate";
 
 export class ExpensesByCategory extends Component {
     static template = "expense_tracker.ExpensesByCategory";
@@ -16,6 +17,7 @@ export class ExpensesByCategory extends Component {
     setup() {
         this.model = useModel(this.modelParams);
         this.categories = signal.Array([]);
+        this.title = _t("Expenses by Category");
         // this.testNestedSignal = signal.Object({ aa: { bb: "Hello" } });
         // this.testNestedProxy = proxy({ aa: { bb: "Hello" } });
         this.selectedCategory = signal("all");
@@ -53,6 +55,7 @@ export class ExpensesByCategory extends Component {
 
     _onCategoryChange(ev) {
         if (ev.currentTarget.value === "all") {
+            this.title = _t("Expenses by Category All");
             this.selectedCategory.set("all");
         } else {
             const categoryId = parseInt(ev.currentTarget.value);
