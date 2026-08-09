@@ -40,10 +40,15 @@ export class Dashboard extends Component {
         });
 
         onWillStart(async () => {
-            const res = await this.model.load_expenses(this.props).catch((error) => {
+            const prom = new Promise((resolve, reject) => {
+                setTimeout(() => resolve(), 4000);
+            });
+            const expenses = this.model.load_expenses(this.props).catch((error) => {
                 this.error.set(error);
             });
-            this.state.expenses = res;
+            return Promise.all([prom, expenses]).then(([promRes, res]) => {
+                this.state.expenses = res;
+            });
         });
         // TODO: MSH: onWillUpdateProps is removed, should be managed with signal and computed combination
         // Maybe we just need to define props as signal and it will be done, like we did for PersonalExpenseList where we used signal props + useEffect

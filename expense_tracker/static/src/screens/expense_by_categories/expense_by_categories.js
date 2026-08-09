@@ -1,4 +1,4 @@
-import { asyncComputed, Component, proxy, useProps, onWillStart, signal, t } from "@odoo/owl";
+import { asyncComputed, Component, proxy, useProps, onWillStart, signal } from "@odoo/owl";
 import { screensRegistry } from "@expense_tracker/registries";
 import { useModel } from "../../model/model";
 
@@ -43,13 +43,20 @@ export class ExpensesByCategory extends Component {
             // debugger;
             // signalObj.aa;
             // proxyObj.aa;
+            const prom = new Promise((resolve, reject) => {
+                setTimeout(() => resolve(), 4000);
+            });
             const res = await this.model.load_category_expenses(this.selectedCategory());
-            this.state.expenses = res;
+            return Promise.all([prom, res]).then(([promRes, res1]) => {
+                this.state.expenses = res;
+            });
         });
 
-        onWillStart(async () => {
-            const res = await this.model.load_categories(this.props);
-            this.categories.set(res);
+        onWillStart(() => {
+            const res = this.model.load_categories(this.props);
+            return res.then((res1) => {
+                this.categories.set(res1);
+            });
         });
     }
 

@@ -12,27 +12,22 @@ export class ExpenseTrackerModel extends BaseModel {
     /**
      * @param {SearchParams} searchParams
      */
-    async load_categories(searchParams) {
-        return await this.orm.searchRead(
-            "expense.category",
-            [],
-            ["name", "icon", "description"],
-            {},
-        );
+    load_categories(searchParams) {
+        return this.orm.searchRead("expense.category", [], ["name", "icon", "description"], {});
     }
 
     /**
      * @param {SearchParams} searchParams
      */
-    async load_tags(searchParams) {
-        return await this.orm.searchRead("expense.tag", [], ["name", "color"], {});
+    load_tags(searchParams) {
+        return this.orm.searchRead("expense.tag", [], ["name", "color"], {});
     }
 
     /**
      * @param {Object} params
      */
-    async load_expense_form_data(params) {
-        return await this.rpc(`/expense/get_expense_form_data/${params.model}/${params.id || ""}`, {
+    load_expense_form_data(params) {
+        return this.rpc(`/expense/get_expense_form_data/${params.model}/${params.id || ""}`, {
             isNew: params.isNew,
             fields: params.fields,
         });
@@ -41,8 +36,8 @@ export class ExpenseTrackerModel extends BaseModel {
     /**
      * @param {Object} params
      */
-    async load_data(params) {
-        return await this.rpc(`/expense/get_form_data/${params.model}/${params.id || ""}`, {
+    load_data(params) {
+        return this.rpc(`/expense/get_form_data/${params.model}/${params.id || ""}`, {
             isNew: params.isNew,
             fields: params.fields,
         });
@@ -51,8 +46,8 @@ export class ExpenseTrackerModel extends BaseModel {
     /**
      * @param {SearchParams} searchParams
      */
-    async load_expenses(searchParams) {
-        return await this.orm.searchRead(
+    load_expenses(searchParams) {
+        return this.orm.searchRead(
             "personal.expense",
             [["active", "=", true]],
             [
@@ -72,7 +67,7 @@ export class ExpenseTrackerModel extends BaseModel {
     /**
      * @param {Integer} categoryId
      */
-    async load_category_expenses(categoryId) {
+    load_category_expenses(categoryId) {
         if (!categoryId) {
             return [];
         }
@@ -80,7 +75,7 @@ export class ExpenseTrackerModel extends BaseModel {
         if (categoryId !== "all") {
             domain.push(["category_id", "=", categoryId]);
         }
-        return await this.orm.searchRead(
+        return this.orm.searchRead(
             "personal.expense",
             domain,
             [

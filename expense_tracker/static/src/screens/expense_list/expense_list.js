@@ -55,9 +55,10 @@ export class PersonalExpenseList extends Component {
                 this.state.expenses = this.props.expenses; // subscribe to changes
             });
         } else {
-            onWillStart(async () => {
-                const res = await this.model.load_expenses(options);
-                this.state.expenses = res;
+            onWillStart(() => {
+                return this.model.load_expenses(options).then((res) => {
+                    this.state.expenses = res;
+                });
             });
         }
 
