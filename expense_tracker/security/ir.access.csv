@@ -1,0 +1,4 @@
+id,name,model_id,group_id/id,operation,domain
+access_personal_expense_user,access.personal.expense.user,personal.expense,base.group_user,crud,
+access_expense_category_user,access.expense.category.user,expense.category,base.group_user,crud
+access_expense_tag_user,access.expense.tag.user,expense.tag,base.group_user,crud

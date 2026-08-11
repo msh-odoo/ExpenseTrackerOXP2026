@@ -1,0 +1,23 @@
+<odoo>
+    <data>
+        <template id="expense_tracker.root" name="Expense Tracker">
+            <html>
+                <head>
+                    <meta charset="utf-8"/>
+                    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+                    <title t-esc="title or 'Odoo'"/>
+                    <link type="image/x-icon" rel="shortcut icon" t-att-href="x_icon or '/web/static/img/favicon.ico'"/>
+                    <t t-call-assets="web.assets_backend" t-css="false"/>
+                    <t t-call-assets="web.assets_backend" media="screen" t-js="false"/>
+                    <script id="web.layout.odooscript" type="text/javascript">
+                        odoo.__session_info__ = <t t-out="json.dumps(session_info)"/>;
+                        odoo.csrf_token = "<t t-out="request.csrf_token(None)"/>";
+                        odoo.debug = "<t t-out="debug"/>";
+                    </script>
+                </head>
+                <body class="o_expense_tracker">
+                </body>
+            </html>
+        </template>
+    </data>
+</odoo>
