@@ -1,7 +1,8 @@
-import { Component, xml } from "@odoo/owl";
+import { Component, usePlugin, providePlugins } from "@odoo/owl";
 import { Header } from "./components/header/header";
 import { Container } from "./components/container/container";
 import { PersonalExpenseList } from "./screens/expense_list/expense_list";
+import { ScreenManagerPlugin } from "@expense_tracker/plugins/screen_manager_plugin";
 
 export class ExpenseTracker extends Component {
     static template = "expense_tracker.root";
@@ -9,17 +10,12 @@ export class ExpenseTracker extends Component {
 
     setup() {
         super.setup();
-        this.mainScreen = { name: 'Expense List', component: PersonalExpenseList };
-        this.mainScreenProps = {};
+        providePlugins([ScreenManagerPlugin]);
+        this.sm = usePlugin(ScreenManagerPlugin);
+        this.sm.initCurrentScreen({ name: "PersonalExpenseList", component: PersonalExpenseList });
     }
 
-    /**
-     * Used to give the `state.mobileSearchBarIsShown` value to main screen props
-     */
-    get mainScreenPropsFielded() {
-        return Object.assign({
-            hasButtons: true,
-            showFooter: false,
-        }, this.mainScreenProps);
+    _onLogoClicked(ev) {
+        this.sm.changeScreen({ screen_name: "Dashboard", props: {} });
     }
 }

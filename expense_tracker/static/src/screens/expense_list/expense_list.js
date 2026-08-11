@@ -1,5 +1,6 @@
-import { Component, useProps, t } from "@odoo/owl";
+import { Component, useProps, t, usePlugin } from "@odoo/owl";
 import { screensRegistry } from "@expense_tracker/registries";
+import { ScreenManagerPlugin } from "@expense_tracker/plugins/screen_manager_plugin";
 
 export class PersonalExpenseList extends Component {
     static template = "expense_tracker.PersonalExpenseList";
@@ -8,12 +9,22 @@ export class PersonalExpenseList extends Component {
         ignoreCreate: t.boolean().optional(),
     });
 
+    setup() {
+        this.sm = usePlugin(ScreenManagerPlugin);
+    }
+
     _onCreateExpense(ev) {
-        console.log("Create Expense Clicked");
+        this.sm.changeScreen({
+            screen_name: "ExpenseForm",
+            props: { model: "personal.expense", isNew: true },
+        });
     }
 
     _onClickExpense(ev) {
-        console.log("Clicked on Expense Row");
+        this.sm.changeScreen({
+            screen_name: "ExpenseForm",
+            props: { model: "personal.expense", id: ev.currentTarget.getAttribute("data-id") },
+        });
     }
 
     _onDeleteExpense(ev) {
