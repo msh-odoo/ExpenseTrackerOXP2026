@@ -1,8 +1,10 @@
-import { Component, signal, useListener, useEffect } from '@odoo/owl';
+import { Component, signal, proxy, onWillStart, useListener, useEffect } from '@odoo/owl';
 import { screensRegistry } from "@expense_tracker/registries";
+import { FormViewStatic } from "../../components/formview_static/formview_static";
 
 class ExpenseForm extends Component {
     static template = "expense_tracker.ExpenseForm";
+    static components = { FormViewStatic }
 
     setup() {
         this.title = "Expense";
