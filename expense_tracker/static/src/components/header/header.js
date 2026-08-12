@@ -17,4 +17,13 @@ export class Header extends Component {
         const screenName = ev.currentTarget.getAttribute("data-screen");
         this.sm.changeScreen({ screen_name: screenName, props: { ignoreCreate: false } });
     }
+
+    onClickLogo(ev) {
+        const logoClickedEvent = new CustomEvent("logo_clicked", {
+            detail: {},
+            bubbles: true,
+        });
+        ev.currentTarget.dispatchEvent(logoClickedEvent);
+        this.state.activeMenuItem = "home";
+    }
 }

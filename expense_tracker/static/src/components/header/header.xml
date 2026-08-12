@@ -4,7 +4,7 @@
     <t t-name="expense_tracker.header">
         <div class="d-flex flex-column flex-shrink-0 p-3 text-white" style="width: 280px;">
             <div class="d-flex align-items-center justify-content-center">
-                <img class="cursor-pointer rounded-circle" src="/web/image/res.partner/3/avatar_128" t-on-click="onClickLogo"/>
+                <img class="cursor-pointer rounded-circle" src="/web/image/res.partner/3/avatar_128" t-on-click="this.onClickLogo"/>
             </div>
             <hr />
             <ul class="nav nav-pills flex-column mb-auto">
