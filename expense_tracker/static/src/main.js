@@ -3,6 +3,7 @@ import { BusPlugin } from "./plugins/bus_plugin";
 import { ORMPlugin } from "./plugins/orm_plugin";
 import { getTemplate } from "@web/core/templates";
 import { ExpenseTracker } from "@expense_tracker/expense_tracker";
+import { translateFn } from "./translate";
 
 whenReady(async () => {
     if (!document.querySelector(".o_expense_tracker")) {
@@ -17,6 +18,7 @@ whenReady(async () => {
         plugins: [BusPlugin, ORMPlugin],
         dev: debug || false,
         name: ExpenseTracker.constructor.name,
+        translateFn,
     });
     const root = app.createRoot(ExpenseTracker, {});
     await root.mount(document.body);
