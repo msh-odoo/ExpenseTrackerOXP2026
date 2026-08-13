@@ -40,13 +40,15 @@ export class Dashboard extends Component {
         });
 
         onWillStart(async () => {
-            return this.model.load_expenses(this.props)
-                .then((res) => {
-                    this.state.expenses = res;
-                })
-                .catch((error) => {
-                    this.error.set(error);
-                });
+            const prom = new Promise((resolve, reject) => {
+                setTimeout(() => resolve(), 4000);
+            });
+            const expenses = this.model.load_expenses(this.props).catch((error) => {
+                this.error.set(error);
+            });
+            return Promise.all([prom, expenses]).then(([promRes, res]) => {
+                this.state.expenses = res;
+            });
         });
     }
 
