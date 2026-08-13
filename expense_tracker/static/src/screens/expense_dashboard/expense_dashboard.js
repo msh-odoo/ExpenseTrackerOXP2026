@@ -61,7 +61,7 @@ export class Dashboard extends Component {
             screen_name: "ExpenseForm",
             props: { model: "personal.expense", isNew: true },
         });
-        this.busPlugin.bus.trigger("change_active_menu", "expenses");
+        this.busPlugin.bus.trigger("change_active_menu", { activeMenu: "expenses" });
     }
 
     _onQuickCreateCategory() {
@@ -69,7 +69,7 @@ export class Dashboard extends Component {
             screen_name: "ExpenseCategoryForm",
             props: { model: "expense.category", isNew: true },
         });
-        this.busPlugin.bus.trigger("change_active_menu", "categories");
+        this.busPlugin.bus.trigger("change_active_menu", { activeMenu: "categories" });
     }
 
     _onExpensesByCategory() {
@@ -77,7 +77,7 @@ export class Dashboard extends Component {
             screen_name: "ExpensesByCategory",
             props: { model: "personal.expense" },
         });
-        this.busPlugin.bus.trigger("change_active_menu", "reports");
+        this.busPlugin.bus.trigger("change_active_menu", { activeMenu: "categories" });
     }
 }
 
