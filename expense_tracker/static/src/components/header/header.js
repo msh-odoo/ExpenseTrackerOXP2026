@@ -1,5 +1,6 @@
-import { Component, proxy, usePlugin } from "@odoo/owl";
+import { Component, proxy, usePlugin, onMounted } from "@odoo/owl";
 import { ScreenManagerPlugin } from "@expense_tracker/plugins/screen_manager_plugin";
+import { HotkeyPlugin } from "@expense_tracker/plugins/hotkey_plugin";
 import { Time } from "../timer/timer";
 
 export class Header extends Component {
@@ -8,7 +9,11 @@ export class Header extends Component {
 
     setup() {
         this.sm = usePlugin(ScreenManagerPlugin);
+        this.hotkeyPlugin = usePlugin(HotkeyPlugin);
         this.state = proxy({ activeMenuItem: "home" });
+        onMounted(async () => {
+            this.hotkeyPlugin.addHotkey("alt+h", () => (this.state.activeMenuItem = "home"));
+        });
     }
 
     onActivateMenu(ev) {

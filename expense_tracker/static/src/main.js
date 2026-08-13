@@ -1,6 +1,7 @@
 import { App, whenReady } from "@odoo/owl";
 import { BusPlugin } from "./plugins/bus_plugin";
 import { ORMPlugin } from "./plugins/orm_plugin";
+import { HotkeyPlugin } from "./plugins/hotkey_plugin";
 import { getTemplate } from "@web/core/templates";
 import { ExpenseTracker } from "@expense_tracker/expense_tracker";
 import { translateFn } from "./translate";
@@ -15,7 +16,7 @@ whenReady(async () => {
     const debug = urlParams.get("debug");
     const app = new App({
         getTemplate,
-        plugins: [BusPlugin, ORMPlugin],
+        plugins: [BusPlugin, ORMPlugin, HotkeyPlugin],
         dev: debug || false,
         name: ExpenseTracker.constructor.name,
         translateFn,
