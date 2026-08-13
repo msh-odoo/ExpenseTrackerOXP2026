@@ -4,7 +4,7 @@
         <div t-att-class="this.props.styleclass" class="rounded-6 shadow p-4 o_content_modal_rounded_shades height-container expense_list">
             <div class="mb-4 d-flex justify-content-between">
                 <h2 class="text-white">
-                    Expenses
+                    <t t-out="this.title"/>
                 </h2>
                 <div t-if="!this.props.ignoreCreate">
                     <button type="button" class="btn btn-primary me-2" t-on-click="this._onCreateExpense">

@@ -13,6 +13,7 @@ export class PersonalExpenseList extends Component {
         ignoreCreate: t.boolean().optional(),
         styleclass: t.string().optional(),
     });
+    title = useProps.static("title", t.string().optional("Personal Expenses"));
     config = {
         model: ExpenseTrackerModel,
     };
