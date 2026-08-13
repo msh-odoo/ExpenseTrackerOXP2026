@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="expense_tracker.DeleteDialog">
+        <Dialog id="this.props.id" title.translate="Delete Expense" contentClass="'o-delete-modal'" >
+            <div class="h-100 d-flex flex-column justify-content-center align-items-center gap-1">
+                <i class="oi-2x text-muted" data-icon="trash"></i>
+                <strong>Are you sure you want to delete this expense?</strong>
+            </div>
+            <t t-set-slot="footer">
+                <button class="btn" t-on-click="this.props.confirm" t-out="this.props.confirmLabel or 'OK'"/>
+                <button t-if="this.props.cancel" class="btn btn-secondary" t-on-click="this.props.cancel" t-out="this.props.cancelLabel or 'Cancel'"/>
+            </t>
+        </Dialog>
+    </t>
+</templates>
