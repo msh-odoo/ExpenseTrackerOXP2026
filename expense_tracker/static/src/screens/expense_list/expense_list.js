@@ -48,7 +48,7 @@ export class PersonalExpenseList extends Component {
         if (!this.checkboxInteraction && this.state.selectedCheckboxes.length === 0) {
             this.sm.changeScreen({
                 screen_name: "ExpenseForm",
-                props: { model: "personal.expense", id: ev.currentTarget.getAttribute("data-id") },
+                props: { model: "personal.expense", id: parseInt(ev.currentTarget.getAttribute("data-id")) },
             });
         }
         this.checkboxInteraction = false;
@@ -78,7 +78,7 @@ export class PersonalExpenseList extends Component {
     _onClickExpense(ev) {
         this.sm.changeScreen({
             screen_name: "ExpenseForm",
-            props: { model: "personal.expense", id: ev.currentTarget.getAttribute("data-id") },
+            props: { model: "personal.expense", id: parseInt(ev.currentTarget.getAttribute("data-id")) },
         });
     }
 
