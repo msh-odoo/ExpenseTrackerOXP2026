@@ -2,7 +2,7 @@
 <templates xml:space="preserve">
     <t t-name="expense_tracker.ExpenseForm">
         <div class="expense-form">
-            <FormViewStatic data="this.state.data">
+            <FormViewStatic>
                 <t t-set-slot="title">
                     <div class="">
                         <h1 class="text-white"><t t-out="this.title"/></h1>
@@ -44,13 +44,13 @@
                                 </select>
                             </div>
                         </div>
-                        <t t-set-slot="footer">
-                            <div class="w-100" t-ref="this.footer">
-                                <button type="button" class="btn btn-primary" t-on-click="this._onClickSubmitForm">
-                                    <span>Save</span>
-                                </button>
-                            </div>
-                        </t>
+                    </div>
+                </t>
+                <t t-set-slot="footer">
+                    <div class="w-100" t-ref="this.footer">
+                        <button type="button" class="btn btn-primary" t-on-click="this._onClickSubmitForm">
+                            <span>Save</span>
+                        </button>
                     </div>
                 </t>
             </FormViewStatic>

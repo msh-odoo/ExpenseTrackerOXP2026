@@ -9,7 +9,7 @@ class ExpenseForm extends Component {
     static template = "expense_tracker.ExpenseForm";
     static components = { FormViewStatic }
     props = useProps({
-        id: t.signal(t.number().optional()),
+        id: t.number().optional(),
     });
     sm = usePlugin(ScreenManagerPlugin);
     config = {
