@@ -16,8 +16,7 @@
         'data/expense_demo.xml',
     ],
     'assets': {
-        'expense_tracker.assets_expense': [
-            ('include', 'web.assets_backend'),
+        'web.assets_backend': [
             'expense_tracker/static/src/**/*',
         ],
     },
