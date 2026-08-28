@@ -1,4 +1,4 @@
-import { Component, proxy, onWillStart, useProps, usePlugin, t } from "@odoo/owl";
+import { Component, proxy, onWillStart, useEffect, useProps, usePlugin, t } from "@odoo/owl";
 import { ScreenManagerPlugin } from "@expense_tracker/plugins/screen_manager_plugin";
 import { screensRegistry } from "@expense_tracker/registries";
 import { useModel } from "../../models/model";
@@ -9,6 +9,7 @@ export class PersonalExpenseList extends Component {
     props = useProps({
         expenses: t.array().optional(),
         ignoreCreate: t.boolean().optional(),
+        styleclass: t.string().optional(),
     });
     config = {
         model: ExpenseTrackerModel,
@@ -23,7 +24,9 @@ export class PersonalExpenseList extends Component {
             model: this.modelName,
         };
         if (this.props.expenses) {
-            this.state.expenses = this.props.expenses;
+            useEffect(() => {
+                this.state.expenses = this.props.expenses; // subscribe to changes
+            });
         } else {
             onWillStart(() => {
                 return this.model.load_expenses(options).then((res) => {
