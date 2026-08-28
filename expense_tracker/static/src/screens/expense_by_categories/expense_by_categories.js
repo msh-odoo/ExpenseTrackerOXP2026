@@ -4,6 +4,7 @@ import { useModel } from "../../models/model";
 
 import { PersonalExpenseList } from "../expense_list/expense_list";
 import { ExpenseTrackerModel } from "../../models/expense_tracker_model";
+import { _t } from "@expense_tracker/translate";
 
 export class ExpensesByCategory extends Component {
     static template = "expense_tracker.ExpensesByCategory";
@@ -16,7 +17,7 @@ export class ExpensesByCategory extends Component {
     setup() {
         this.model = useModel(this.modelParams);
         this.categories = signal.Array([]);
-        this.title = "Expenses by Category";
+        this.title = _t("Expenses by Category");
         this.selectedCategory = signal("all");
         this.state = proxy({ expenses: [] });
 
@@ -35,7 +36,7 @@ export class ExpensesByCategory extends Component {
 
     _onCategoryChange(ev) {
         if (ev.currentTarget.value === "all") {
-            this.title = "Expenses by Category All";
+            this.title = _t("Expenses by Category All");
             this.selectedCategory.set("all");
         } else {
             const categoryId = parseInt(ev.currentTarget.value);

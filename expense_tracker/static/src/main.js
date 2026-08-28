@@ -4,6 +4,7 @@ import { ExpenseTracker } from "@expense_tracker/expense_tracker";
 import { HotkeyPlugin } from "./plugins/hotkey_plugin";
 import { ORMPlugin } from "./plugins/orm_plugin";
 import { ScreenManagerPlugin } from "@expense_tracker/plugins/screen_manager_plugin";
+import { translateFn } from "./translate";
 
 whenReady(async () => {
     if (!document.querySelector(".o_expense_tracker")) {
@@ -17,6 +18,7 @@ whenReady(async () => {
         plugins: [HotkeyPlugin, ORMPlugin, ScreenManagerPlugin],
         dev: debug || false,
         name: ExpenseTracker.constructor.name,
+        translateFn,
     });
     const root = app.createRoot(ExpenseTracker, {});
     await root.mount(document.body);
