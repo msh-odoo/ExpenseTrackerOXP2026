@@ -26,15 +26,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="cursor-pointer" t-on-click="this._onClickExpense">
-                        <td t-if="!this.props.ignoreCreate">
-                            <input type="checkbox" class="form-check-input"/>
-                        </td>
-                        <td><t t-out="'Lunch at Leela Hotel'"/></td>
-                        <td><t t-out="'2024/08/21'"/></td>
-                        <td><t t-out="'2000.00'"/></td>
-                        <td><t t-out="'Food'"/></td>
-                    </tr>
+                    <t t-foreach="this.state.expenses" t-as="expense" t-key="expense.id">
+                        <tr t-att-data-id="expense.id" t-on-click="this._onClickExpenseRow" class="cursor-pointer">
+                            <td t-if="!this.props.ignoreCreate">
+                                <input type="checkbox" class="form-check-input" t-att-data-id="expense.id" t-on-click="this._onCheckboxChange"/>
+                            </td>
+                            <td><t t-out="expense.name"/></td>
+                            <td><t t-out="expense.date"/></td>
+                            <td><t t-out="expense.amount"/></td>
+                            <td><t t-out="expense.category_id[1]"/></td>
+                        </tr>
+                    </t>
                 </tbody>
                 <tfoot>
                     <tr class="table-dark">

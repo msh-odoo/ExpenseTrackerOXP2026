@@ -1,6 +1,7 @@
 import { App, whenReady } from "@odoo/owl";
 import { getTemplate } from "@web/core/templates";
 import { ExpenseTracker } from "@expense_tracker/expense_tracker";
+import { ORMPlugin } from "./plugins/orm_plugin";
 import { ScreenManagerPlugin } from "@expense_tracker/plugins/screen_manager_plugin";
 
 whenReady(async () => {
@@ -12,7 +13,7 @@ whenReady(async () => {
     const debug = urlParams.get("debug");
     const app = new App({
         getTemplate,
-        plugins: [ScreenManagerPlugin],
+        plugins: [ORMPlugin, ScreenManagerPlugin],
         dev: debug || false,
         name: ExpenseTracker.constructor.name,
     });
