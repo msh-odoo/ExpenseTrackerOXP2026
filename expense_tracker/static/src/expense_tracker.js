@@ -1,7 +1,7 @@
 import { Component, xml } from "@odoo/owl";
 import { Header } from "./components/header/header";
 import { Container } from "./components/container/container";
-import { PersonalExpenseList } from "./screens/expense_list/expense_list";
+import { screensRegistry } from "@expense_tracker/registries";
 
 export class ExpenseTracker extends Component {
     static template = "expense_tracker.root";
@@ -9,7 +9,8 @@ export class ExpenseTracker extends Component {
 
     setup() {
         super.setup();
-        this.mainScreen = { name: 'Expense List', component: PersonalExpenseList };
+        const screen = screensRegistry.get("ExpenseList");
+        this.mainScreen = { name: screen.constructor.name, component: screen };
         this.mainScreenProps = {};
     }
 
