@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="expense_tracker.FormView">
+        <div class="d-flex flex-column o_content_modal_rounded_shades p-5" t-ref="this.formElement">
+            <!-- Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/slots.html -->
+            <t t-call-slot="title"></t>
+            <hr />
+            <div class="m-auto mt-4" style="width:70%">
+                <div class="mb-3 row d-flex align-items-center" t-foreach="this.record" t-as="recordKey" t-key="recordKey">
+                    <t t-set="fieldInfo" t-value="this.props.data.record_fields[recordKey]"/>
+                    <label class="col-sm-3 col-form-label">
+                        <t t-out="fieldInfo.string"/>
+                    </label>
+                    <div class="col-sm-9">
+                        <!-- Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/form_bindings.html -->
+                        <input type="text" class="form-control text-white"
+                            t-model="this.signals[recordKey]"
+                            t-att-value="this.state.data[recordKey]" required="true"/>
+                    </div>
+                </div>
+                <div>
+                    <!-- Doc: https://odoo.github.io/owl/documentation/v3/owl/reference/event_handling.html -->
+                    <button class="btn btn-primary" t-on-click="() => this.props.newCategory(this.state.data)"><span>Save</span></button>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

@@ -1,11 +1,13 @@
 import { Component, computed, onWillStart, proxy, signal, useListener, useEffect, useProps, usePlugin, t } from '@odoo/owl';
 import { screensRegistry } from "@expense_tracker/registries";
 import { ScreenManagerPlugin } from "@expense_tracker/plugins/screen_manager_plugin";
+import { FormViewStatic } from "../../components/formview_static/formview_static";
 import { ExpenseTrackerModel } from "../../models/expense_tracker_model";
 import { useModel } from "../../models/model";
 
 class ExpenseForm extends Component {
     static template = "expense_tracker.ExpenseForm";
+    static components = { FormViewStatic }
     props = useProps({
         id: t.number().optional(),
     });
