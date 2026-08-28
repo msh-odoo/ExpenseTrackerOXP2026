@@ -31,7 +31,7 @@ export class Dashboard extends Component {
             screen_name: "ExpenseForm",
             props: { model: "personal.expense", isNew: true },
         });
-        this.busPlugin.bus.trigger("change_active_menu", "expenses");
+        this.busPlugin.bus.trigger("change_active_menu", { activeMenu: "expenses" });
     }
 
     _onQuickCreateCategory() {

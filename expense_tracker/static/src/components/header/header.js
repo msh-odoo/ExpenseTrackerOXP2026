@@ -1,7 +1,29 @@
-import { Component } from "@odoo/owl";
+import { Component, proxy, usePlugin } from "@odoo/owl";
+import { ScreenManagerPlugin } from "@expense_tracker/plugins/screen_manager_plugin";
+import { BusPlugin } from "@expense_tracker/plugins/bus_plugin";
+import { Time } from "../timer/timer";
 
 export class Header extends Component {
     static template = "expense_tracker.header";
+    static components = { Time };
+
+    setup() {
+        this.busPlugin = usePlugin(BusPlugin);
+        this.sm = usePlugin(ScreenManagerPlugin);
+        this.state = proxy({ activeMenuItem: "home" });
+        this.busPlugin.bus.addEventListener("change_active_menu", this.onChangeActiveMenu.bind(this));
+    }
+
+    onChangeActiveMenu(ev) {
+        this.state.activeMenuItem = ev.detail.activeMenu;
+    }
+
+    onActivateMenu(ev) {
+        const menuName = ev.currentTarget.getAttribute("data-name");
+        this.state.activeMenuItem = menuName;
+        const screenName = ev.currentTarget.getAttribute("data-screen");
+        this.sm.changeScreen({ screen_name: screenName, props: { ignoreCreate: false } });
+    }
 
     onClickLogo(ev) {
         const logoClickedEvent = new CustomEvent("logo_clicked", {
@@ -9,5 +31,6 @@ export class Header extends Component {
             bubbles: true,
         });
         ev.currentTarget.dispatchEvent(logoClickedEvent);
+        this.state.activeMenuItem = "home";
     }
 }
