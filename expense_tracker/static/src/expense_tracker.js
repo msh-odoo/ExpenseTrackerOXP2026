@@ -2,8 +2,8 @@ import { Component, usePlugin, xml } from "@odoo/owl";
 import { Header } from "./components/header/header";
 import { Container } from "./components/container/container";
 import { screensRegistry } from "@expense_tracker/registries";
-import { PersonalExpenseList } from "./screens/expense_list/expense_list";
 import { ScreenManagerPlugin } from "@expense_tracker/plugins/screen_manager_plugin";
+import { Dashboard } from "./screens/expense_dashboard/expense_dashboard";
 
 export class ExpenseTracker extends Component {
     static template = "expense_tracker.root";
@@ -12,7 +12,7 @@ export class ExpenseTracker extends Component {
     setup() {
         super.setup();
         this.sm = usePlugin(ScreenManagerPlugin);
-        this.sm.initCurrentScreen({ name: "PersonalExpenseList", component: PersonalExpenseList });
+        this.sm.initCurrentScreen({ name: "Dashboard", component: Dashboard });
     }
 
     /**
