@@ -13,6 +13,24 @@ export class PersonalExpenseList extends Component {
         this.sm = usePlugin(ScreenManagerPlugin);
     }
 
+    _onCreateExpense(ev) {
+        this.sm.changeScreen({
+            screen_name: "ExpenseForm",
+            props: { model: "personal.expense", isNew: true },
+        });
+    }
+
+    _onClickExpense(ev) {
+        this.sm.changeScreen({
+            screen_name: "ExpenseForm",
+            props: { model: "personal.expense", id: ev.currentTarget.getAttribute("data-id") },
+        });
+    }
+
+    _onDeleteExpense(ev) {
+        console.log("Deleting Expense Clicked");
+    }
+
 }
 
 screensRegistry.add("ExpenseList", PersonalExpenseList);

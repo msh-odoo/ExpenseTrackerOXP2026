@@ -5,12 +5,14 @@ import {
 } from "@odoo/owl";
 import { screensRegistry } from "@expense_tracker/registries";
 import { PersonalExpenseList } from "../expense_list/expense_list";
+import { BusPlugin } from "@expense_tracker/plugins/bus_plugin";
 import { ScreenManagerPlugin } from "@expense_tracker/plugins/screen_manager_plugin";
 
 export class Dashboard extends Component {
     static template = "expense_tracker.Dashboard";
     static components = { ErrorBoundary, PersonalExpenseList };
     sm = usePlugin(ScreenManagerPlugin);
+    busPlugin = usePlugin(BusPlugin);
 
     setup() {
         this.state = {
@@ -29,6 +31,7 @@ export class Dashboard extends Component {
             screen_name: "ExpenseForm",
             props: { model: "personal.expense", isNew: true },
         });
+        this.busPlugin.bus.trigger("change_active_menu", "expenses");
     }
 
     _onQuickCreateCategory() {
