@@ -35,7 +35,11 @@ export class Dashboard extends Component {
     }
 
     _onQuickCreateCategory() {
-        console.log("Quick Create Category to implement")
+        this.sm.changeScreen({
+            screen_name: "ExpenseCategoryForm",
+            props: { model: "expense.category", isNew: true },
+        });
+        this.busPlugin.bus.trigger("change_active_menu", { activeMenu: "categories" });
     }
 
     _onExpensesByCategory() {
