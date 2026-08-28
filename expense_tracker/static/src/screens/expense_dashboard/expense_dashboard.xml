@@ -9,7 +9,7 @@
             </h1>
             <div class="content-area">
                 <div>
-                    <PersonalExpenseList class="'expense-dashboard'" expenses="this.state.expenses" ignoreCreate="true"/>
+                    <PersonalExpenseList styleclass="'expense-dashboard'" expenses="this.state.expenses" ignoreCreate="true"/>
                 </div>
                 <div class="rounded-6 shadow p-4 o_content_modal_rounded_shades mt-5">
                     <div>

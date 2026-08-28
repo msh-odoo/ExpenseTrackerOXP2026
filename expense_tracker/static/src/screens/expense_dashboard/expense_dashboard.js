@@ -1,29 +1,38 @@
 import {
     Component,
     ErrorBoundary,
+    onWillStart,
+    proxy,
     usePlugin,
 } from "@odoo/owl";
 import { screensRegistry } from "@expense_tracker/registries";
 import { PersonalExpenseList } from "../expense_list/expense_list";
 import { BusPlugin } from "@expense_tracker/plugins/bus_plugin";
 import { ScreenManagerPlugin } from "@expense_tracker/plugins/screen_manager_plugin";
+import { useModel } from "../../models/model";
+import { ExpenseTrackerModel } from "../../models/expense_tracker_model";
 
 export class Dashboard extends Component {
     static template = "expense_tracker.Dashboard";
     static components = { ErrorBoundary, PersonalExpenseList };
     sm = usePlugin(ScreenManagerPlugin);
     busPlugin = usePlugin(BusPlugin);
+    config = {
+        model: ExpenseTrackerModel,
+    };
 
     setup() {
-        this.state = {
-            expenses: [
-                {
-                    description: "Lunch at Leela Hotel",
-                    date: "2024-06-01",
-                    amount: 2000.0,
-                },
-            ],
-        };
+        this.model = useModel(this.modelParams);
+        this.state = proxy({ expenses: [] });
+        onWillStart(async () => {
+            return this.model.load_expenses(this.props)
+                .then((res) => {
+                    this.state.expenses = res;
+                })
+                .catch((error) => {
+                    this.error.set(error);
+                });
+        });
     }
 
     _onQuickCreateExpense() {
@@ -43,7 +52,11 @@ export class Dashboard extends Component {
     }
 
     _onExpensesByCategory() {
-        console.log("Expenses by Category to implement")
+        this.sm.changeScreen({
+            screen_name: "ExpensesByCategory",
+            props: { model: "personal.expense" },
+        });
+        this.busPlugin.bus.trigger("change_active_menu", "reports");
     }
 }
 
