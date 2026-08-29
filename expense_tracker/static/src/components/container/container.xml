@@ -3,9 +3,16 @@
 
     <t t-name="expense_tracker.container">
         <div class="o_container py-5 m-5" style="padding: 0 5%">
-            <main>
-                <t t-component="this.props.component" t-props="this.props.mainScreenProps" t-key="this.props.tname" />
-            </main>
+            <Suspense>
+                <t t-set-slot="fallback">
+                    <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+                        Loading...
+                    </div>
+                </t>
+                <main>
+                    <t t-component="this.props.component" t-props="this.props.mainScreenProps" t-key="this.props.tname" />
+                </main>
+            </Suspense>
         </div>
     </t>
 </templates>
