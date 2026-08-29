@@ -1,6 +1,8 @@
 import { Component, proxy, onWillStart, useEffect, useProps, usePlugin, t } from "@odoo/owl";
 import { ScreenManagerPlugin } from "@expense_tracker/plugins/screen_manager_plugin";
 import { screensRegistry } from "@expense_tracker/registries";
+import { DialogPlugin } from "@expense_tracker/core/dialog/dialog_plugin";
+import { DeleteDialog } from "./delete_dialog";
 import { useModel } from "../../models/model";
 import { ExpenseTrackerModel } from "../../models/expense_tracker_model";
 
@@ -18,6 +20,7 @@ export class PersonalExpenseList extends Component {
     setup() {
         this.model = useModel();
         this.sm = usePlugin(ScreenManagerPlugin);
+        this.dialogPlugin = usePlugin(DialogPlugin);
         this.state = proxy({ expenses: [], selectedCheckboxes: [] });
         this.modelName = "personal.expense";
         const options = {
@@ -68,7 +71,26 @@ export class PersonalExpenseList extends Component {
     }
 
     _onDeleteExpense(ev) {
-        console.log("Deleting Expense Clicked");
+        const recordIds = [...this.state.selectedCheckboxes];
+        this.dialogRemove = this.dialogPlugin.add(DeleteDialog, {
+            confirm: (ev) => {
+                const id = ev.currentTarget.getAttribute("id");
+                this._deleteRecord(id)
+            },
+            cancel: () => this.dialogRemove(),
+        });
+    }
+
+    async _deleteRecord(id) {
+        try {
+            await this.model.orm.unlink([id]);
+            const options = { model: this.modelName };
+            const res = await this.model.load_expenses(options);
+            this.state.expenses = res;
+            this.state.selectedCheckboxes = [];
+        } catch (error) {
+            console.error("Error deleting expense:", error);
+        }
     }
 
 }

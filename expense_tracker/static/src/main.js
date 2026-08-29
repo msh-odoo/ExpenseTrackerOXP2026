@@ -1,6 +1,7 @@
 import { App, whenReady } from "@odoo/owl";
 import { getTemplate } from "@web/core/templates";
 import { ExpenseTracker } from "@expense_tracker/expense_tracker";
+import { DialogPlugin } from "./core/dialog/dialog_plugin";
 import { HotkeyPlugin } from "./plugins/hotkey_plugin";
 import { ORMPlugin } from "./plugins/orm_plugin";
 import { ScreenManagerPlugin } from "@expense_tracker/plugins/screen_manager_plugin";
@@ -15,7 +16,7 @@ whenReady(async () => {
     const debug = urlParams.get("debug");
     const app = new App({
         getTemplate,
-        plugins: [HotkeyPlugin, ORMPlugin, ScreenManagerPlugin],
+        plugins: [DialogPlugin, HotkeyPlugin, ORMPlugin, ScreenManagerPlugin],
         dev: debug || false,
         name: ExpenseTracker.constructor.name,
         translateFn,
