@@ -1,4 +1,4 @@
-import { Component, onMounted, proxy, usePlugin } from "@odoo/owl";
+import { Component, onMounted, proxy, useApp, usePlugin } from "@odoo/owl";
 import { ScreenManagerPlugin } from "@expense_tracker/plugins/screen_manager_plugin";
 import { BusPlugin } from "@expense_tracker/plugins/bus_plugin";
 import { HotkeyPlugin } from "@expense_tracker/plugins/hotkey_plugin";
@@ -14,6 +14,7 @@ export class Header extends Component {
         this.hotkeyPlugin = usePlugin(HotkeyPlugin);
         this.state = proxy({ activeMenuItem: "home" });
         this.busPlugin.bus.addEventListener("change_active_menu", this.onChangeActiveMenu.bind(this));
+        this.app = useApp();
         onMounted(async () => {
             this.hotkeyPlugin.addHotkey("alt+h", () => (this.state.activeMenuItem = "home"));
         });
@@ -37,5 +38,9 @@ export class Header extends Component {
         });
         ev.currentTarget.dispatchEvent(logoClickedEvent);
         this.state.activeMenuItem = "home";
+    }
+
+    get isDebug() {
+        return !!this.app.dev;
     }
 }

@@ -19,6 +19,9 @@
         'web.assets_backend': [
             'expense_tracker/static/src/**/*',
         ],
+        'web.assets_unit_tests': [
+            'expense_tracker/static/tests/**/*',
+        ],
     },
     'installable': True,
     'application': True,

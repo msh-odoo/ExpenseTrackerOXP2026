@@ -19,5 +19,23 @@
                 </body>
             </html>
         </template>
+
+        <template id="expense_tracker.unit_tests_suite">
+            <t t-set="head">
+                <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+
+                <script type="text/javascript">
+                    odoo.__session_info__ = <t t-out="json.dumps(session_info)"/>;
+                </script>
+
+                <t t-call-assets="web.assets_unit_tests_setup" />
+                <t t-call-assets="web.assets_unit_tests" defer_load="True" />
+                <!-- <t t-call-assets="expense_tracker.assets_unit_tests" defer_load="True" /> -->
+            </t>
+            <t t-call="web.layout"
+                html_data="{'style': 'height: 100%;'}"
+                title.translate="Web Unit Tests"
+                head="head"/>
+        </template>
     </data>
 </odoo>

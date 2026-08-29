@@ -5,6 +5,11 @@ from odoo.tools.misc import hmac
 
 class ExpenseTracker(http.Controller):
 
+    @http.route('/expense/tests', type='http', auth='user', readonly=True)
+    def unit_tests_suite(self, mod=None, **kwargs):
+        session_info = self.env["ir.http"].session_info()
+        return request.render('expense_tracker.unit_tests_suite', { "session_info": session_info })
+    
     @http.route(['/expense_tracker'], type='http', auth='user')
     def expense_tracker(self, **kwargs):
         """

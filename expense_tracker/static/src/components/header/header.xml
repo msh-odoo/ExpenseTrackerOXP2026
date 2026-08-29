@@ -34,8 +34,9 @@
                 </li>
             </ul>
             <hr />
-            <div class="login_since">
+            <div class="d-flex login_since">
                 <Time/>
+                <a t-if="this.isDebug" class="ml8" href="/expense/tests">Run Tests</a>
             </div>
         </div>
     </t>
