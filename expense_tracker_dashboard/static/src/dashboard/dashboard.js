@@ -3,7 +3,6 @@ import { registry } from "@web/core/registry";
 import { Layout } from "@web/search/layout";
 import { useService } from "@web/core/utils/hooks";
 import { DashboardItem } from "./dashboard_item/dashboard_item";
-import { items } from "./dashboard_items";
 import { ORMPlugin } from "@expense_tracker/plugins/orm_plugin"
 import { ScreenManagerPlugin } from "@expense_tracker/plugins/screen_manager_plugin"
 import { DialogPlugin } from "@expense_tracker/core/dialog/dialog_plugin";
@@ -18,8 +17,7 @@ class ExpenseDashboard extends Component {
         this.display = {
             controlPanel: {},
         };
-        this.items = items;
-        debugger;
+        this.items = registry.category("awesome_dashboard").getAll();
     }
 
     openExpenseView() {
