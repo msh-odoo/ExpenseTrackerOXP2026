@@ -4,6 +4,9 @@
         <div class="d-flex expense_tracker_app" t-on-logo_clicked="this._onLogoClicked">
             <Header/>
             <Container tname="this.sm.currentScreenName()" component="this.sm.currentScreenComponent()" mainScreenProps="this.sm.currentScreenPropsFielded"/>
+            <Portal target="this.document.body">
+                <MainComponentsContainer />
+            </Portal>
         </div>
     </t>
 </templates>
