@@ -32,4 +32,4 @@ class ExpenseDashboard extends Component {
     }
 }
 
-registry.category("actions").add("expense_tracker_dashboard.dashboard", ExpenseDashboard);
+registry.category("lazy_components").add("ExpenseDashboard", ExpenseDashboard);
