@@ -7,5 +7,6 @@ export class GalleryRenderer extends Component {
     static components = { GalleryImage };
     props = useProps({
         model: t.instanceOf(GalleryModel),
+        onImageUpload: t.function(),
     });
 }
