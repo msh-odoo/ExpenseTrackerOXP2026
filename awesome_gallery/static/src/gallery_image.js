@@ -11,10 +11,13 @@ export class GalleryImage extends Component {
         record: t.object(),
         model: t.instanceOf(GalleryModel),
         onImageUpload: t.function(),
+        tooltipTemplate: t.string().optional(),
     });
 
     setup() {
         this.action = useService("action");
+        this.tooltip = useService("tooltip");
+        this.tooltipInfo = JSON.stringify({ record: this.props.record });
         this._onFileUploadedBounded = this._onFileUploaded.bind(this);
     }
 
