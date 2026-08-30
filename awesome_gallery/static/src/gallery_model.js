@@ -21,6 +21,7 @@ export class GalleryModel {
                 specification: {
                     [this.imageField]: {},
                     ...( this.tooltipField ? {[this.tooltipField]: {}}: {}),
+                    write_date: {}
                 },
                 context: {
                     bin_size: true,
@@ -51,4 +52,19 @@ export class GalleryModel {
                 this.records = records;
         }
     }
+
+    async uploadImage(record_id, image_binary, domain) {
+        await this.orm.webSave(
+            this.resModel,
+            [record_id],
+            {
+                [this.imageField]: image_binary,
+            },
+            {
+                specification: {},
+            }
+        )
+        await this.load(domain);
+    }
+
 }

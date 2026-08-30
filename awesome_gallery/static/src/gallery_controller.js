@@ -25,6 +25,7 @@ export class GalleryController extends Component {
                 this.props.archInfo,
             )
         );
+        this.onImageUploadBounded = this.onImageUpload.bind(this);
         this.domain = signal(this.props.domain);
 
         usePager(() => {
@@ -47,6 +48,10 @@ export class GalleryController extends Component {
         onWillStart(async () => {
             return loadProm.currentPromise();
         });
+    }
+
+    async onImageUpload(record_id, image_binary) {
+        this.model.uploadImage(record_id, image_binary, this.props.domain);
     }
 
 }
