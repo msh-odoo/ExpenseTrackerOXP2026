@@ -2,11 +2,12 @@ import { Component, asyncComputed, onWillStart, proxy, signal, useProps, t } fro
 import { Layout } from "@web/search/layout";
 import { standardViewProps } from "@web/views/standard_view_props";
 import { useService } from "@web/core/utils/hooks";
-import { KeepLast } from "@web/core/utils/concurrency";
+import { GalleryModel } from "./gallery_model";
+import { GalleryRenderer } from "./gallery_renderer";
 
 export class GalleryController extends Component {
     static template = "awesome_gallery.GalleryController";
-    static components = { Layout };
+    static components = { Layout, GalleryRenderer };
     props = useProps({
         ...standardViewProps,
         archInfo: t.object(),
@@ -15,31 +16,21 @@ export class GalleryController extends Component {
 
     setup() {
         this.orm = useService("orm");
-        this.images = proxy({ data: [] });
-        this.keeplast = new KeepLast();
-        this.domain = signal(this.props.domain);
-        onWillStart(async () => {
-            const { records } = await this.loadImages(this.domain());
-            this.images.data = records;
-        });
-
-        asyncComputed(async () => {
-            const { records } = await this.loadImages(this.domain());
-            this.images.data = records;
-        });
-    }
-
-    loadImages(domain) {
-        return this.keeplast.add(
-            this.orm.webSearchRead(this.props.resModel, domain, {
-                limit: this.props.archInfo.limit,
-                specification: {
-                    [this.props.archInfo.imageField]: {},
-                },
-                context: {
-                    bin_size: true,
-                }
-            })
+        this.model = proxy(
+            new GalleryModel(
+                this.orm,
+                this.props.resModel,
+                this.props.archInfo,
+            )
         );
+        this.domain = signal(this.props.domain);
+        const loadProm = asyncComputed(async () => {
+            await this.model.load(this.domain());
+        });
+
+        onWillStart(async () => {
+            return loadProm.currentPromise();
+        });
     }
+
 }
