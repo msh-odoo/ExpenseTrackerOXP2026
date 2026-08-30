@@ -2,6 +2,7 @@ import { Component, asyncComputed, onWillStart, proxy, signal, useProps, t } fro
 import { Layout } from "@web/search/layout";
 import { standardViewProps } from "@web/views/standard_view_props";
 import { useService } from "@web/core/utils/hooks";
+import { usePager } from "@web/search/pager_hook";
 
 export class GalleryController extends Component {
     static template = "awesome_gallery.GalleryController";
@@ -25,6 +26,20 @@ export class GalleryController extends Component {
             )
         );
         this.domain = signal(this.props.domain);
+
+        usePager(() => {
+            return {
+                offset: this.model.pager.offset,
+                limit: this.model.pager.limit,
+                total: this.model.recordsLength,
+                onUpdate: async ({ offset, limit }) => {
+                    this.model.pager.offset = offset;
+                    this.model.pager.limit = limit;
+                    await this.model.load(this.domain());
+                },
+            };
+        });
+
         const loadProm = asyncComputed(async () => {
             await this.model.load(this.domain());
         });
