@@ -1,11 +1,15 @@
 import { registry } from "@web/core/registry";
 import { GalleryController } from "./gallery_controller";
 import { GalleryArchParser } from "./gallery_arch_parser";
+import { GalleryModel } from "./gallery_model";
+import { GalleryRenderer } from "./gallery_renderer";
 
 export const galleryView = {
     type: "gallery",
     Controller: GalleryController,
     ArchParser: GalleryArchParser,
+    Model: GalleryModel,
+    Renderer: GalleryRenderer,
 
     props(genericProps, view) {
         const { ArchParser } = view;
@@ -14,6 +18,8 @@ export const galleryView = {
 
         return {
             ...genericProps,
+            Model: view.Model,
+            Renderer: view.Renderer,
             archInfo,
         };
     },

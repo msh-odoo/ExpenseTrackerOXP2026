@@ -3,7 +3,7 @@
 
     <t t-name="awesome_gallery.GalleryController">
         <Layout display="this.props.display">
-            <GalleryRenderer model="this.model"/>
+            <t t-component="this.props.Renderer" model="this.model"/>
         </Layout>
     </t>
 
