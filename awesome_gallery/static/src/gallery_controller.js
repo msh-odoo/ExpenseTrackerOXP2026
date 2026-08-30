@@ -2,22 +2,22 @@ import { Component, asyncComputed, onWillStart, proxy, signal, useProps, t } fro
 import { Layout } from "@web/search/layout";
 import { standardViewProps } from "@web/views/standard_view_props";
 import { useService } from "@web/core/utils/hooks";
-import { GalleryModel } from "./gallery_model";
-import { GalleryRenderer } from "./gallery_renderer";
 
 export class GalleryController extends Component {
     static template = "awesome_gallery.GalleryController";
-    static components = { Layout, GalleryRenderer };
+    static components = { Layout };
     props = useProps({
         ...standardViewProps,
         archInfo: t.object(),
+        Model: t.function(),
+        Renderer: t.function(),
     });
 
 
     setup() {
         this.orm = useService("orm");
         this.model = proxy(
-            new GalleryModel(
+            new this.props.Model(
                 this.orm,
                 this.props.resModel,
                 this.props.archInfo,
