@@ -12,6 +12,7 @@
         'views/expense_tracker_templates.xml',
     ],
     'demo': [
+        'data/expense_icon_demo.xml',
         'data/expense_category_demo.xml',
         'data/expense_demo.xml',
     ],

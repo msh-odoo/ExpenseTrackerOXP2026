@@ -20,7 +20,7 @@ class ExpenseCategoryForm extends Component {
                 record: { name: "", icon: "", description: "" },
                 record_fields: {
                     name: { string: "Name" },
-                    icon: { string: "Icon" },
+                    icon_id: { string: "Icon" },
                     description: { string: "Description" },
                 },
             },
@@ -41,7 +41,7 @@ class ExpenseCategoryForm extends Component {
         const options = {
             model: this.modelName,
             id: id,
-            fields: ["name", "icon", "description"],
+            fields: ["name", "icon_id", "description"],
         };
         const res = await this.model.load_data(options);
         this.state.data = res;
@@ -51,14 +51,14 @@ class ExpenseCategoryForm extends Component {
         if (newCategory.id) {
             await this.model.orm.write("expense.category", [newCategory.id], {
                 name: newCategory.name,
-                icon: newCategory.icon,
+                icon_id: newCategory.icon_id,
                 description: newCategory.description,
             });
         } else {
             await this.model.orm.create("expense.category", [
                 {
                     name: newCategory.name,
-                    icon: newCategory.icon,
+                    icon_id: newCategory.icon_id,
                     description: newCategory.description,
                 },
             ]);

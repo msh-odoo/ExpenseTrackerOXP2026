@@ -66,7 +66,7 @@ class ExpenseTracker(http.Controller):
         if kw.get("id"):
             category = request.env["expense.category"].sudo().search_read(
                 [("id", "=", kw.get("id"))],
-                ["name", "icon", "description"]
+                ["name", "icon_id", "description"]
             )
         else:
             category = request.env["expense.category"].default_get([])
