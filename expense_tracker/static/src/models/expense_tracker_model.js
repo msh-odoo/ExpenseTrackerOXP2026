@@ -13,7 +13,7 @@ export class ExpenseTrackerModel extends BaseModel {
      * @param {SearchParams} searchParams
      */
     load_categories(searchParams) {
-        return this.orm.searchRead("expense.category", [], ["name", "icon", "description"], {});
+        return this.orm.searchRead("expense.category", [], ["name", "icon_id", "description"], {});
     }
 
     /**
