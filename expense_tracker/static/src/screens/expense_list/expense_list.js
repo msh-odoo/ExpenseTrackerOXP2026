@@ -74,16 +74,16 @@ export class PersonalExpenseList extends Component {
         const recordIds = [...this.state.selectedCheckboxes];
         this.dialogRemove = this.dialogPlugin.add(DeleteDialog, {
             confirm: (ev) => {
-                const id = ev.currentTarget.getAttribute("id");
-                this._deleteRecord(id)
+                this._deleteRecord(recordIds);
+                this.dialogRemove();
             },
             cancel: () => this.dialogRemove(),
         });
     }
 
-    async _deleteRecord(id) {
+    async _deleteRecord(ids) {
         try {
-            await this.model.orm.unlink([id]);
+            await this.model.orm.unlink(this.modelName, ids);
             const options = { model: this.modelName };
             const res = await this.model.load_expenses(options);
             this.state.expenses = res;
