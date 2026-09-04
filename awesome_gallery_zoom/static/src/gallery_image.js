@@ -1,8 +1,12 @@
+import { useProps } from "@odoo/owl";
 import { GalleryImage } from "@awesome_gallery/gallery_image";
 import { patch } from "@web/core/utils/patch";
 import { exprToBoolean } from "@web/core/utils/strings";
 import { imageUrl } from "@web/core/utils/urls";
-import { isBinarySize } from "@web/core/utils/binary";
+
+function isBinSize(value) {
+    return /^\d+(\.\d*)? [^0-9]+$/.test(value);
+}
 
 export const fileTypeMagicWordMap = {
     "/": "jpg",
@@ -15,6 +19,7 @@ const placeholder = "/web/static/img/placeholder.png";
 
 patch(GalleryImage.prototype, {
     setup() {
+        this.props = useProps();
         super.setup();
         this.previewImage = exprToBoolean(this.props.model.previewImage);
     },
@@ -33,14 +38,13 @@ patch(GalleryImage.prototype, {
         if (!this.props.record[this.props.model.imageField]) {
             return placeholder;
         }
-        if (isBinarySize(this.props.record[this.props.model.imageField])) {
-            this.lastURL = imageUrl(
-                this.props.model.resModel,
-                this.props.record.id,
-                imageFieldName,
-                { unique: this.rawCacheKey }
-            );
-        } else {
+        this.lastURL = imageUrl(
+            this.props.model.resModel,
+            this.props.record.id,
+            imageFieldName,
+            { unique: this.rawCacheKey }
+        );
+        if (!this.lastURL) {
             // Use magic-word technique for detecting image type
             const magic = fileTypeMagicWordMap[this.props.record[this.props.model.imageField][0]] || "png";
             this.lastURL = `data:image/${magic};base64,${this.props.record[this.props.model.imageField]}`;

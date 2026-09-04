@@ -2,9 +2,9 @@
 <templates xml:space="preserve">
     <t t-name="awesome_gallery.GalleryImage" t-inherit="awesome_gallery.GalleryImage" t-inherit-mode="extension">
         <xpath expr="//div/img" position="attributes">
-            <attribute name="t-att-data-tooltip-template">hasTooltip and tooltipAttributes.template</attribute>
-            <attribute name="t-att-data-tooltip-info">hasTooltip and tooltipAttributes.info</attribute>
-            <attribute name="t-att-data-tooltip-delay">hasTooltip and props.zoomDelay</attribute>
+            <attribute name="t-att-data-tooltip-template">this.hasTooltip and this.tooltipAttributes.template</attribute>
+            <attribute name="t-att-data-tooltip-info">this.hasTooltip and this.tooltipAttributes.info</attribute>
+            <attribute name="t-att-data-tooltip-delay">this.hasTooltip and this.props.zoomDelay</attribute>
         </xpath>
     </t>
 
