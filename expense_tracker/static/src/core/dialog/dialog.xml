@@ -11,15 +11,15 @@
                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" t-attf-class="modal-{{ this.size }}">
                     <div class="modal-content" t-att-class="this.props.contentClass">
                         <header t-if="this.props.header" class="modal-header">
-                            <t t-call-slot="header" close="this.data.close">
+                            <t t-call-slot="header">
                                 <t t-call="expense_tracker.Dialog.header"/>
                             </t>
                         </header>
                         <main class="modal-body" t-attf-class="{{ this.props.bodyClass }}">
-                            <t t-call-slot="default" close="() => this.data.close()" />
+                            <t t-call-slot="default"/>
                         </main>
                         <footer t-if="this.props.footer" class="modal-footer d-empty-none justify-content-around justify-content-md-start flex-wrap gap-2 w-100">
-                            <t t-call-slot="footer" close="() => this.data.close()"/>
+                            <t t-call-slot="footer"/>
                         </footer>
                     </div>
                 </div>
