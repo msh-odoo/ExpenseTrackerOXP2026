@@ -79,6 +79,7 @@ export class HotkeyPlugin extends Plugin {
     setup() {
         this.hotkeyResource = new Resource({ name: "shortcuts" });
         useListener(window, "keydown", this.onKeydown.bind(this));
+        useListener(window, "keyup", this.onKeyup.bind(this));
     }
     /**
      * Handler for keydown events.
@@ -112,8 +113,12 @@ export class HotkeyPlugin extends Plugin {
         }
         this.showHotkeys();
     }
-    addHotkey(hotkey, action) {
-        this.hotkeyResource.add({ key: hotkey, action });
+    onKeyup(ev) {
+        this.hideHotkeys();
+    }
+
+    addHotkey(hotkey, elRef, action) {
+        this.hotkeyResource.add({ key: hotkey, elRef, action });
     }
     /**
      * Dispatches an hotkey to first matching registration.
@@ -144,6 +149,27 @@ export class HotkeyPlugin extends Plugin {
     }
     showHotkeys() {
         const shortcuts = this.hotkeyResource.items();
-        console.table(shortcuts);
+        for (const shortcut of shortcuts) {
+            const el = shortcut.elRef;
+            if (el) {
+                // add overlay with the hotkey text
+                const overlay = document.createElement("div");
+                overlay.setAttribute("data-shortcut-key", shortcut.key);
+                overlay.classList.add("o_hotkey_overlay");
+                el.appendChild(overlay);
+            }
+        }
+    }
+    hideHotkeys() {
+        const shortcuts = this.hotkeyResource.items();
+        for (const shortcut of shortcuts) {
+            const el = shortcut.elRef;
+            if (el) {
+                const overlay = el.querySelector(".o_hotkey_overlay");
+                if (overlay) {
+                    el.removeChild(overlay);
+                }
+            }
+        }
     }
 }

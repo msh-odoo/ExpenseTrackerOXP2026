@@ -114,3 +114,55 @@
 .form-select, .form-control {
     color: white;
 }
+
+.expense_tracker_app .nav-item {
+    position: relative;
+}
+
+// Toggle .o_shortcut_hints_active on <body> in your keydown/keyup handler
+.o_hotkey_overlay {
+    position: absolute; // required so the overlay can anchor to this element
+    top: 50%;
+    left: 50%;
+
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.55);
+        border-radius: inherit; // matches rounded buttons/inputs automatically
+        z-index: 1000;
+        pointer-events: none; // never blocks the actual click/interaction
+        animation: o_shortcut_fade_in 0.12s ease-out;
+    }
+
+    &::after {
+        content: attr(data-shortcut-key);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1001;
+        pointer-events: none;
+
+        min-width: 20px;
+        padding: 2px 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        font-family: monospace;
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 1;
+        color: #fff;
+        white-space: nowrap;
+
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.45);
+        border-radius: 4px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+
+        animation: o_shortcut_pop_in 0.12s ease-out;
+    }
+}
