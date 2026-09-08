@@ -31,7 +31,7 @@
                             <td t-if="!this.props.ignoreCreate">
                                 <input type="checkbox" class="form-check-input"/>
                             </td>
-                            <td><t t-out="expense.description"/></td>
+                            <td><t t-out="expense.name"/></td>
                             <td><t t-out="expense.date"/></td>
                             <td><t t-out="expense.amount"/></td>
                             <td><t t-out="expense.category"/></td>
