@@ -1,4 +1,4 @@
-import { Component, proxy, onWillStart, useEffect, useProps, usePlugin, t } from "@odoo/owl";
+import { Component, computed, proxy, onWillStart, useEffect, useProps, usePlugin, t } from "@odoo/owl";
 import { ScreenManagerPlugin } from "@expense_tracker/plugins/screen_manager_plugin";
 import { screensRegistry } from "@expense_tracker/registries";
 import { DialogPlugin } from "@expense_tracker/core/dialog/dialog_plugin";
@@ -16,6 +16,10 @@ export class PersonalExpenseList extends Component {
     config = {
         model: ExpenseTrackerModel,
     };
+    hasSelection = computed(() => this.state.selectedCheckboxes.length);
+    totalAmount = computed(() =>
+        this.state.expenses.reduce((sum, expense) => sum + expense.amount, 0),
+    );
 
     setup() {
         this.model = useModel();
